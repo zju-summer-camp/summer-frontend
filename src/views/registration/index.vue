@@ -1,14 +1,15 @@
 <template>
   <div class="registration-form">
-    sss
-    <basicInfo />
+    <basic-info />
   </div>
 </template>
 
 <script>
-  import basicInfo from './basicInfo.vue'
+  import basicInfo from './basic-info.vue'
   export default {
     name: 'Registration',
-    components: { basicInfo },
+    components: {
+      'basic-info': basicInfo,
+    },
   }
 </script>
