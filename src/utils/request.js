@@ -16,7 +16,7 @@ import { message } from 'ant-design-vue'
 let loadingInstance
 
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq
  * @description 处理code异常
  * @param {*} code
  * @param {*} msg
@@ -37,7 +37,7 @@ const handleCode = (code, msg) => {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq
  * @description axios初始化
  */
 const instance = axios.create({
@@ -49,7 +49,7 @@ const instance = axios.create({
 })
 
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq
  * @description axios请求拦截器
  */
 instance.interceptors.request.use(
@@ -73,7 +73,7 @@ instance.interceptors.request.use(
 )
 
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq
  * @description axios响应拦截器
  */
 instance.interceptors.response.use(
@@ -92,8 +92,8 @@ instance.interceptors.response.use(
     } else {
       handleCode(code, msg)
       return Promise.reject(
-        'vue-admin-beautiful请求异常拦截:' +
-          JSON.stringify({ url: config.url, code, msg }) || 'Error'
+        '请求异常拦截:' + JSON.stringify({ url: config.url, code, msg }) ||
+          'Error'
       )
     }
   },

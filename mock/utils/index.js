@@ -3,7 +3,7 @@ const { join } = require('path')
 const fs = require('fs')
 
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq
  * @description 随机生成图片url。
  * @param width
  * @param height
@@ -14,7 +14,7 @@ function handleRandomImage(width = 50, height = 50) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq
  * @description 处理所有 controller 模块，npm run serve时在node环境中自动输出controller文件夹下Mock接口，请勿修改。
  * @returns {[]}
  */

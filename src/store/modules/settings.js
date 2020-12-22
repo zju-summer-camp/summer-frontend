@@ -1,5 +1,5 @@
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq
  * @description 所有全局配置的状态管理，如无必要请勿修改
  */
 import defaultSettings from '@/config'

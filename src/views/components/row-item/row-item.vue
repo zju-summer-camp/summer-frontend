@@ -32,7 +32,7 @@
             label: 'default',
             required: true,
             hint: 'hinthinthint',
-            size: '100',
+            size: '200',
           }
         },
       },
@@ -44,8 +44,15 @@
     display: flex;
     padding: 8px;
     align-items: center;
+    background-color: #dfe6e9;
+    width: 350px;
+    min-width: 350px;
+    height: 50px;
+    min-height: 50px;
+    border-radius: 4px;
+    margin: 2px;
     .label {
-      width: 150px;
+      width: 100px;
       padding-right: 8px;
       display: flex;
       justify-content: flex-end;

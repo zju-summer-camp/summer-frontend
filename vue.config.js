@@ -1,5 +1,5 @@
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq
  * @description vue.config.js全局配置
  */
 const path = require('path')
@@ -17,17 +17,10 @@ const {
   build7z,
   donation,
 } = require('./src/config')
-const {
-  webpackBarName,
-  webpackBanner,
-  donationConsole
-} = require('vab-config')
+const { webpackBarName, webpackBanner, donationConsole } = require('vab-config')
 
 if (donation) donationConsole()
-const {
-  version,
-  author
-} = require('./package.json')
+const { version, author } = require('./package.json')
 const Webpack = require('webpack')
 const WebpackBar = require('webpackbar')
 const FileManagerPlugin = require('filemanager-webpack-plugin')
@@ -36,8 +29,8 @@ const date = dayjs().format('YYYY_M_D')
 const time = dayjs().format('YYYY-M-D HH:mm:ss')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const productionGzipExtensions = ['html', 'js', 'css', 'svg']
-process.env.VUE_APP_TITLE = title || 'vue-admin-beautiful'
-process.env.VUE_APP_AUTHOR = author || 'chuzhixin'
+process.env.VUE_APP_TITLE = title || 'zju-summer-camp'
+process.env.VUE_APP_AUTHOR = author || 'sdq'
 process.env.VUE_APP_UPDATE_TIME = time
 process.env.VUE_APP_VERSION = version
 
@@ -109,7 +102,7 @@ module.exports = {
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
       .options({
-        symbolId: 'remix-icon-[name]'
+        symbolId: 'remix-icon-[name]',
       })
       .end()
 
@@ -137,15 +130,17 @@ module.exports = {
         .end()
       config
         .plugin('compression')
-        .use(CompressionWebpackPlugin, [{
-          filename: '[path][base].gz[query]',
-          algorithm: 'gzip',
-          test: new RegExp(
-            '\\.(' + productionGzipExtensions.join('|') + ')$'
-          ),
-          threshold: 8192,
-          minRatio: 0.8,
-        }, ])
+        .use(CompressionWebpackPlugin, [
+          {
+            filename: '[path][base].gz[query]',
+            algorithm: 'gzip',
+            test: new RegExp(
+              '\\.(' + productionGzipExtensions.join('|') + ')$'
+            ),
+            threshold: 8192,
+            minRatio: 0.8,
+          },
+        ])
         .end()
       config.module
         .rule('images')
@@ -161,15 +156,19 @@ module.exports = {
       config.when(process.env.NODE_ENV === 'production', (config) => {
         config
           .plugin('fileManager')
-          .use(FileManagerPlugin, [{
-            onEnd: {
-              delete: [`./${outputDir}/video`, `./${outputDir}/data`],
-              archive: [{
-                source: `./${outputDir}`,
-                destination: `./${outputDir}/${abbreviation}_${outputDir}_${date}.7z`,
-              }, ],
+          .use(FileManagerPlugin, [
+            {
+              onEnd: {
+                delete: [`./${outputDir}/video`, `./${outputDir}/data`],
+                archive: [
+                  {
+                    source: `./${outputDir}`,
+                    destination: `./${outputDir}/${abbreviation}_${outputDir}_${date}.7z`,
+                  },
+                ],
+              },
             },
-          }, ])
+          ])
           .end()
       })
     }
@@ -189,7 +188,7 @@ module.exports = {
             'vab-padding': '10px',
             'vab-header-height': '65px',
             'text-color': '#ecf0f1',
-            'zju-blue': '#003f87'
+            'zju-blue': '#003f87',
           },
         },
       },

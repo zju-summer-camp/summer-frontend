@@ -6,7 +6,7 @@ import store from './store'
 import 'ant-design-vue/dist/antd.css'
 import '@/vab'
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq
  * @description 正式环境默认使用mock，正式项目记得注释后再打包
  */
 if (process.env.NODE_ENV === 'production') {

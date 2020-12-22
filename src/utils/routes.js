@@ -5,7 +5,7 @@ import { isExternal } from '@/utils/validate'
 import { hasRole } from '@/utils/hasRole'
 
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq
  * @description all模式渲染后端返回路由
  * @param constantRoutes
  * @returns {*}
@@ -43,7 +43,7 @@ export function convertRouter(constantRoutes) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq
  * @description 根据roles数组拦截路由
  * @param routes
  * @param baseUrl

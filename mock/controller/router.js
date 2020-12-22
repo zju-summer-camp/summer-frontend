@@ -1,5 +1,5 @@
 /**
- * @author chuzhixin 1204505056@qq.com
+ * @author sdq  
  * @description router全局配置，如有必要可分文件抽离，其中asyncRoutes只有在intelligence模式下才会用到，pro版只支持remixIcon图标
  * hidden:true                    是否显示在菜单中显示路由（默认值：false）
  * alwaysShow:true                当只有一级子路由时是否显示父路由是否显示在菜单中显示路由（默认值：false）
