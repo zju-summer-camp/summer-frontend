@@ -44,7 +44,7 @@
     display: flex;
     padding: 8px;
     align-items: center;
-    background-color: #dfe6e9;
+    background-color: #fdcb6e;
     width: 350px;
     min-width: 350px;
     height: 50px;
@@ -52,11 +52,14 @@
     border-radius: 4px;
     margin: 2px;
     .label {
-      width: 100px;
-      padding-right: 8px;
+      width: 120px;
+      margin-right: 8px;
       display: flex;
+      padding: 4px;
+      border-radius: 4px;
       justify-content: flex-end;
       align-items: center;
+      background-color: #ffda79;
     }
   }
 </style>

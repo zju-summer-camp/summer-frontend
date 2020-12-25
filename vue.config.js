@@ -188,7 +188,7 @@ module.exports = {
             'vab-padding': '10px',
             'vab-header-height': '65px',
             'text-color': '#ecf0f1',
-            'zju-blue': '#003f87',
+            'zju-blue': '#0984e3',
           },
         },
       },

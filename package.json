@@ -23,7 +23,7 @@
     "qs": "^6.9.4",
     "regenerator-runtime": "^0.13.7",
     "remixicon": "^2.5.0",
-    "vue": "^3.0.2",
+    "vue": "^3.0.4",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-router": "^4.0.0-rc.3",
     "vuex": "^4.0.0-rc.1"
