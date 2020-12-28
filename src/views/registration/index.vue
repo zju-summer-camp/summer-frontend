@@ -2,11 +2,21 @@
   <div class="registration">
     <div class="left-nav">
       左边导航栏
-      <!-- <div>
-        <a class="nav-link" href="#contact-details">基本信息</a>
-      </div> -->
+      <div>
+        <span class="nav-link" @click="getMsg()">基本信息</span>
+      </div>
+      <div>
+        <span class="nav-link" @click="getMsg()">基本信息</span>
+      </div>
+      <div>
+        <span class="nav-link" @click="getMsg()">基本信息</span>
+      </div>
+      <div>
+        <span class="nav-link" @click="getMsg()">基本信息</span>
+      </div>
     </div>
     <div class="registration-form">
+      <div class="title">浙江大学暑期夏令营报名表</div>
       <div class="module" id="basic-info">
         <div class="module-title">基本信息</div>
         <div class="module-content">
@@ -168,23 +178,26 @@
       <div class="module" id="education-info">
         <div class="module-title">教育信息</div>
         <div class="module-content">
-          <row-item :config="options.intentional_college_code">
-            <a-input
-              v-model="studentInfo.intentional_college_code"
-              placeholder="请输入本科院校"
-              style="width: 200px"
+          <row-item :config="options.school_type">
+            <a-cascader
+              v-model="studentInfo.school_type"
+              :options="UniversitiesOptions"
+              :display-render="displayRender"
+              expand-trigger="hover"
+              placeholder="Please select"
+              @change="onChange"
             />
           </row-item>
-          <row-item :config="options.intentional_college_name">
+          <row-item :config="options.department">
             <a-input
-              v-model="studentInfo.intentional_college_name"
+              v-model="studentInfo.department"
               placeholder="请输入学校类型"
               style="width: 200px"
             />
           </row-item>
-          <row-item :config="options.intentional_major_code">
+          <row-item :config="options.major">
             <a-input
-              v-model="studentInfo.intentional_major_code"
+              v-model="studentInfo.major"
               placeholder="请输入本科院系"
               style="width: 200px"
             />
@@ -196,17 +209,66 @@
               style="width: 200px"
             />
           </row-item>
-          <row-item :config="options.intentional_study_category">
+          <row-item :config="options.thesis">
             <a-input
-              v-model="studentInfo.intentional_study_category"
+              v-model="studentInfo.thesis"
               placeholder="请输入论文情况"
               style="width: 200px"
             />
           </row-item>
-          <row-item :config="options.intentional_tutor_name">
+          <row-item :config="options.grade_number">
             <a-input
-              v-model="studentInfo.intentional_tutor_name"
+              v-model="studentInfo.grade_number"
               placeholder="请输入同年级人数"
+              style="width: 200px"
+            />
+          </row-item>
+          <row-item :config="options.ranking">
+            <a-input
+              v-model="studentInfo.ranking"
+              placeholder="请输入排名"
+              style="width: 200px"
+            />
+          </row-item>
+          <row-item :config="options.five_semester_ranking">
+            <a-input
+              v-model="studentInfo.five_semester_ranking"
+              placeholder="请输入前五学期排名"
+              style="width: 200px"
+            />
+          </row-item>
+          <row-item :config="options.remarks">
+            <a-input
+              v-model="studentInfo.remarks"
+              placeholder="请输入备注"
+              style="width: 200px"
+            />
+          </row-item>
+          <row-item :config="options.foreign_language_type">
+            <a-input
+              v-model="studentInfo.foreign_language_type"
+              placeholder="请输入外语类型"
+              style="width: 200px"
+            />
+          </row-item>
+          <row-item :config="options.foreign_language_grades">
+            <a-input
+              v-model="studentInfo.foreign_language_grades"
+              placeholder="请输入外语成绩"
+              style="width: 200px"
+            />
+          </row-item>
+          <row-item :config="options.research_direction">
+            <a-input
+              v-model="studentInfo.research_direction"
+              placeholder="请输入研究方向"
+              style="width: 200px"
+            />
+          </row-item>
+          <row-item :config="options.personal_statement">
+            <a-input
+              v-model="studentInfo.personal_statement"
+              placeholder="请输入个人陈述"
               style="width: 200px"
             />
           </row-item>
@@ -223,6 +285,7 @@
     certificateType,
     policalStatus,
   } from '@/const/registration.js'
+  // import { allUniversities } from '@/const/china_mainland_universities.js'
   import rowItem from '@/views/components/row-item/row-item.vue'
 
   export default {
@@ -271,6 +334,43 @@
         nation: nation,
         certificateType: certificateType,
         policalStatus: policalStatus,
+        // allUniversities: allUniversities,
+        UniversitiesOptions: [
+          {
+            value: 'zhejiang',
+            label: 'Zhejiang',
+            children: [
+              {
+                value: 'hangzhou',
+                label: 'Hangzhou',
+                children: [
+                  {
+                    value: 'xihu',
+                    label: 'West Lake',
+                    code: 752100,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            value: 'jiangsu',
+            label: 'Jiangsu',
+            children: [
+              {
+                value: 'nanjing',
+                label: 'Nanjing',
+                children: [
+                  {
+                    value: 'zhonghuamen',
+                    label: 'Zhong Hua Men',
+                    code: 453400,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       }
     },
     methods: {
@@ -278,6 +378,9 @@
         console.log('the date choosed', date, dateString)
         this.studentInfo.birthday = dateString
         console.log(this.studentInfo.birthday)
+      },
+      getMsg() {
+        alert('hello')
       },
     },
   }
@@ -299,8 +402,16 @@
       }
     }
     .registration-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .title {
+        font-size: 20px;
+        font-weight: 800;
+        padding: 20px;
+      }
       .module {
-        background-color: #a29bfe;
+        background-color: #ecf0f1;
         border-radius: 4px;
         padding: 24px;
         margin: 10px;

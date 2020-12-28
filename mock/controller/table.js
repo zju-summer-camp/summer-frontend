@@ -17,6 +17,12 @@ for (let i = 0; i < count; i++) {
       switch: '@boolean',
       percent: '@integer(80,99)',
       'rate|1': [1, 2, 3, 4, 5],
+      article_title: '文章标题标题标题标题',
+      department: '计算机科学与技术学院',
+      article_id: '@id',
+      tutor_team: '@cname',
+      create_time: '@datetime',
+      deadline: '@datetime',
     })
   )
 }

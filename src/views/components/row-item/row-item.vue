@@ -44,7 +44,7 @@
     display: flex;
     padding: 8px;
     align-items: center;
-    background-color: #fdcb6e;
+    background-color: #ecf0f1;
     width: 350px;
     min-width: 350px;
     height: 50px;
@@ -59,7 +59,7 @@
       border-radius: 4px;
       justify-content: flex-end;
       align-items: center;
-      background-color: #ffda79;
+      background-color: #ecf0f1;
     }
   }
 </style>
