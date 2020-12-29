@@ -5,7 +5,7 @@
       <a-col :xs="24" :sm="24" :md="12" :lg="10" :xl="6">
         <div class="login-container-form">
           <div class="login-container-hello">请登录</div>
-          <div class="login-container-title">欢迎来到浙江大学</div>
+          <div class="login-container-title">welcome to zju</div>
           <a-form :model="form" @submit="handleSubmit" @submit.prevent>
             <a-form-item>
               <a-input v-model:value="form.username" placeholder="Username">

@@ -4,23 +4,35 @@
  -->
 <template>
   <div class="info-container">
+    <a-drawer
+      title="Basic Drawer"
+      placement="right"
+      v-model:visible="visible"
+      :after-visible-change="afterVisibleChange"
+      width="933"
+    >
+      <p>{{ article_content }}</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </a-drawer>
     <div class="table-filters">
       <div class="filter-item">
         <span>所属学院</span>
         <a-select v-model="filters.tutor_name" style="width: 150px">
-          <a-select-option :value="xxx">计算机科学与技术学院</a-select-option>
+          <a-select-option value="xxx">计算机科学与技术学院</a-select-option>
         </a-select>
       </div>
       <div class="filter-item">
         <span>导师团队</span>
         <a-select v-model="filters.tutor_name" style="width: 150px">
-          <a-select-option :value="xxx">xxx</a-select-option>
+          <a-select-option value="xxx">xxx</a-select-option>
         </a-select>
       </div>
       <div class="filter-item">
         <span>发布时间</span>
         <a-select v-model="filters.tutor_name" style="width: 150px">
-          <a-select-option :value="xxx">xxx</a-select-option>
+          <a-select-option value="xxx">xxx</a-select-option>
         </a-select>
       </div>
       <a-button type="primary">筛选</a-button>
@@ -34,13 +46,15 @@
         :loading="loading"
         @change="handleTableChange"
       >
-        <template #name="{ text }">
-          <a>{{ text }}</a>
+        <template #name="{ record }">
+          <span class="article-title" @click="showDrawer">
+            {{ record.article_title }}
+          </span>
         </template>
         <template #customTitle>
           <span>
             <smile-outlined />
-            Name
+            项目名称
           </span>
         </template>
         <template #tags="{ text: tags }">
@@ -79,13 +93,12 @@
 </template>
 
 <script>
-  import { getProjectsInfo } from '@/api/info'
   import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue'
   import { getList } from '@/api/table'
+  import { getArticleList } from '@/api/article'
 
   const columns = [
     {
-      title: '项目名称',
       key: 'article_title',
       dataIndex: 'article_title',
       slots: { title: 'customTitle', customRender: 'name' },
@@ -134,6 +147,8 @@
         },
         query: {},
         loading: false,
+        visible: false,
+        article_content: 'no_data',
       }
     },
     mounted() {
@@ -159,10 +174,31 @@
         this.pagination = pager
         this.fetch()
       },
+      showDrawer() {
+        this.getArticleById(2)
+        this.visible = true
+      },
+      afterVisibleChange() {
+        console.log('zhuzhu')
+      },
+      getArticleById(article_id = '0') {
+        getArticleList({
+          pageSize: this.pagination.pageSize,
+          current: this.pagination.current,
+          article_id: article_id,
+        })
+          .then(({ data }) => {
+            console.log('article data', data)
+            this.article_content = data[article_id].description
+          })
+          .catch((err) => {
+            console.log('文章获取接口错误', err)
+          })
+      },
     },
   }
 </script>
-<style lang="less">
+<style lang="less" scoped>
   .info-container {
     display: flex;
     flex-direction: column;
@@ -171,7 +207,7 @@
       width: 80%;
       display: flex;
       flex-direction: row;
-      justify-content: start;
+      justify-content: flex-start;
       align-items: flex-start;
       padding: 20px 4px;
       .filter-item {
@@ -183,6 +219,10 @@
     }
     .table-content {
       width: 80%;
+    }
+    .article-title {
+      cursor: pointer;
+      color: @zju-blue;
     }
   }
 </style>
