@@ -31,9 +31,11 @@
       </div>
       <div class="filter-item">
         <span>发布时间</span>
-        <a-select v-model="filters.tutor_name" style="width: 150px">
-          <a-select-option value="xxx">xxx</a-select-option>
-        </a-select>
+        <a-range-picker
+          v-model:value="filters.date_range"
+          @change="onDateChange"
+          size="200"
+        />
       </div>
       <a-button type="primary">筛选</a-button>
     </div>
@@ -139,6 +141,7 @@
         columns,
         filters: {
           tutor_name: '',
+          date_range: [],
         },
         pagination: {
           showLessItems: true,
@@ -194,6 +197,11 @@
           .catch((err) => {
             console.log('文章获取接口错误', err)
           })
+      },
+      onDateChange(date, dateString) {
+        console.log('the date choosed', date, dateString)
+        this.filters.date_range = dateString
+        console.log(this.filters.date_range)
       },
     },
   }

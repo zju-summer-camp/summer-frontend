@@ -22,19 +22,19 @@
         <div class="module-content">
           <row-item :config="options.name">
             <a-input
-              :value="studentInfo.name"
+              v-model:value="studentInfo.name"
               placeholder="请输入学生姓名"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.gender">
-            <a-radio-group name="radioGroup" :value="studentInfo.gender">
+            <a-radio-group name="radioGroup" v-model:value="studentInfo.gender">
               <a-radio value="1">男</a-radio>
               <a-radio value="2">女</a-radio>
             </a-radio-group>
           </row-item>
           <row-item :config="options.nation">
-            <a-select :value="studentInfo.nation" style="width: 200px">
+            <a-select v-model:value="studentInfo.nation" style="width: 200px">
               <a-select-option
                 v-for="nat in nation"
                 :key="nat.id"
@@ -44,9 +44,23 @@
               </a-select-option>
             </a-select>
           </row-item>
+          <row-item :config="options.polical_status">
+            <a-select
+              v-model:value="studentInfo.polical_status"
+              :style="{ width: '200px' }"
+            >
+              <a-select-option
+                v-for="ps in policalStatus"
+                :key="ps.id"
+                :value="ps.id"
+              >
+                {{ ps.name }}
+              </a-select-option>
+            </a-select>
+          </row-item>
           <row-item :config="options.certificate_type">
             <a-select
-              :value="studentInfo.certificateType"
+              v-model:value="studentInfo.certificateType"
               :style="{ width: '200px' }"
             >
               <a-select-option
@@ -60,31 +74,17 @@
           </row-item>
           <row-item :config="options.certificate_id">
             <a-input
-              :value="studentInfo.certificate_id"
+              v-model:value="studentInfo.certificate_id"
               placeholder="请输入证件号码"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.birthday">
-            <!-- <a-date-picker
-              v-model="studentInfo.birthday"
+            <a-date-picker
+              v-model:value="studentInfo.birthday"
               @change="onBirthdayChange"
               size="200"
-            /> -->
-          </row-item>
-          <row-item :config="options.polical_status">
-            <a-select
-              :value="studentInfo.polical_status"
-              :style="{ width: '200px' }"
-            >
-              <a-select-option
-                v-for="ps in policalStatus"
-                :key="ps.id"
-                :value="ps.id"
-              >
-                {{ ps.name }}
-              </a-select-option>
-            </a-select>
+            />
           </row-item>
         </div>
       </div>
@@ -93,35 +93,35 @@
         <div class="module-content">
           <row-item :config="options.correspondence_address">
             <a-input
-              v-model="studentInfo.correspondence_address"
+              v-model:value="studentInfo.correspondence_address"
               placeholder="请输入通讯地址"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.home_address">
             <a-input
-              v-model="studentInfo.home_address"
+              v-model:value="studentInfo.home_address"
               placeholder="请输入家庭地址"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.postal_code">
             <a-input
-              v-model="studentInfo.postal_code"
+              v-model:value="studentInfo.postal_code"
               placeholder="请输入邮政编码"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.telephone_number">
             <a-input
-              v-model="studentInfo.telephone_number"
+              v-model:value="studentInfo.telephone_number"
               placeholder="请输入电话号码"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.email">
             <a-input
-              v-model="studentInfo.email"
+              v-model:value="studentInfo.email"
               placeholder="请输入电子邮箱"
               style="width: 200px"
             />
@@ -133,42 +133,42 @@
         <div class="module-content">
           <row-item :config="options.intentional_college_code">
             <a-input
-              v-model="studentInfo.intentional_college_code"
+              v-model:value="studentInfo.intentional_college_code"
               placeholder="请输入意向学院代码"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.intentional_college_name">
             <a-input
-              v-model="studentInfo.intentional_college_name"
+              v-model:value="studentInfo.intentional_college_name"
               placeholder="请输入意向学院名称"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.intentional_major_code">
             <a-input
-              v-model="studentInfo.intentional_major_code"
+              v-model:value="studentInfo.intentional_major_code"
               placeholder="请输入意向专业代码"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.intentional_major_name">
             <a-input
-              v-model="studentInfo.intentional_major_name"
+              v-model:value="studentInfo.intentional_major_name"
               placeholder="请输入意向专业名称"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.intentional_study_category">
             <a-input
-              v-model="studentInfo.intentional_study_category"
+              v-model:value="studentInfo.intentional_study_category"
               placeholder="请输入意向攻读类型"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.intentional_tutor_name">
             <a-input
-              v-model="studentInfo.intentional_tutor_name"
+              v-model:value="studentInfo.intentional_tutor_name"
               placeholder="请输入意向导师姓名"
               style="width: 200px"
             />
@@ -180,7 +180,7 @@
         <div class="module-content">
           <row-item :config="options.school_type">
             <a-cascader
-              v-model="studentInfo.school_type"
+              v-model:value="studentInfo.school_type"
               :options="UniversitiesOptions"
               :display-render="displayRender"
               expand-trigger="hover"
@@ -190,89 +190,93 @@
           </row-item>
           <row-item :config="options.department">
             <a-input
-              v-model="studentInfo.department"
+              v-model:value="studentInfo.department"
               placeholder="请输入学校类型"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.major">
             <a-input
-              v-model="studentInfo.major"
+              v-model:value="studentInfo.major"
               placeholder="请输入本科院系"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.intentional_major_name">
             <a-input
-              v-model="studentInfo.intentional_major_name"
+              v-model:value="studentInfo.intentional_major_name"
               placeholder="请输入本科专业"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.thesis">
             <a-input
-              v-model="studentInfo.thesis"
+              v-model:value="studentInfo.thesis"
               placeholder="请输入论文情况"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.grade_number">
             <a-input
-              v-model="studentInfo.grade_number"
+              v-model:value="studentInfo.grade_number"
               placeholder="请输入同年级人数"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.ranking">
             <a-input
-              v-model="studentInfo.ranking"
+              v-model:value="studentInfo.ranking"
               placeholder="请输入排名"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.five_semester_ranking">
             <a-input
-              v-model="studentInfo.five_semester_ranking"
+              v-model:value="studentInfo.five_semester_ranking"
               placeholder="请输入前五学期排名"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.remarks">
             <a-input
-              v-model="studentInfo.remarks"
+              v-model:value="studentInfo.remarks"
               placeholder="请输入备注"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.foreign_language_type">
             <a-input
-              v-model="studentInfo.foreign_language_type"
+              v-model:value="studentInfo.foreign_language_type"
               placeholder="请输入外语类型"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.foreign_language_grades">
             <a-input
-              v-model="studentInfo.foreign_language_grades"
+              v-model:value="studentInfo.foreign_language_grades"
               placeholder="请输入外语成绩"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.research_direction">
             <a-input
-              v-model="studentInfo.research_direction"
+              v-model:value="studentInfo.research_direction"
               placeholder="请输入研究方向"
               style="width: 200px"
             />
           </row-item>
           <row-item :config="options.personal_statement">
             <a-input
-              v-model="studentInfo.personal_statement"
+              v-model:value="studentInfo.personal_statement"
               placeholder="请输入个人陈述"
               style="width: 200px"
             />
           </row-item>
         </div>
+      </div>
+      <div class="module footer">
+        <a-button type="primary">重置</a-button>
+        <a-button type="primary">提交</a-button>
       </div>
     </div>
   </div>
@@ -289,7 +293,7 @@
   import rowItem from '@/views/components/row-item/row-item.vue'
 
   export default {
-    name: 'basic-info',
+    name: 'registration',
     components: {
       'row-item': rowItem,
     },
@@ -412,8 +416,7 @@
       }
       .module {
         background-color: #ecf0f1;
-        border-radius: 4px;
-        padding: 24px;
+        border-radius: 8px;
         margin: 10px;
         width: 800px;
 
@@ -421,14 +424,35 @@
           font-size: 16px;
           color: #333;
           font-weight: 800;
-          margin-bottom: 10px;
-          padding: 4px;
+          padding: 15px 24px;
+          background-color: #dfe6e9;
+          border-radius: 8px 8px 0px 0px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
         }
         .module-content {
+          padding: 5px 24px 24px 24px;
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
           flex-wrap: wrap;
+        }
+        input.ant-input {
+          border-radius: 10px;
+        }
+      }
+
+      .footer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 24px;
+        button {
+          margin: 3px;
+          border-radius: 4px;
+          background-color: @zju-blue;
+          border-color: @zju-blue;
         }
       }
     }

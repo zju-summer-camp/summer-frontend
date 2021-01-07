@@ -110,3 +110,8 @@ pc 端： chrome ie10
 引入 sass 书写样式
 引入 eslint 规范化代码格式
 使用 typescript
+
+## TODO
+
+- [ ] 网站备案
+- [ ] 整一个文本编辑器 编辑按钮跳转至其他页面
