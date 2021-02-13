@@ -5,8 +5,7 @@
       <span class="title">浙江大学夏令营</span>
     </div>
     <div class="nav-wrapper">
-      <el-menu :default-active="activeIndex"  mode="horizontal" @select="handleSelect"
-      active-text-color="#183778">
+      <el-menu :default-active="activeIndex"  mode="horizontal" @select="handleSelect">
         <el-menu-item index="1">首页</el-menu-item>
         <!-- <el-submenu index="2">
           <template slot="title">项目资讯</template>

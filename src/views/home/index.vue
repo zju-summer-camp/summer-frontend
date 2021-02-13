@@ -1,7 +1,7 @@
 <template>
   <div class="home-wrapper">
     <div class="video-wrapper">
-      <video src="../../assets/yourname.mp4" controls="controls" autoplay muted width="90%"></video>
+      <!-- <video src="../../assets/yourname.mp4" controls="controls" width="90%" poster="../../assets/zju.jpg"></video> -->
     </div>
   </div>
 </template>
