@@ -1,0 +1,23 @@
+<template>
+  <div class="home-wrapper">
+    <div class="video-wrapper">
+      <video src="../../assets/yourname.mp4" controls="controls" autoplay muted width="90%"></video>
+    </div>
+  </div>
+</template>
+<script lang="ts">
+
+import { Component, Vue } from 'vue-property-decorator'
+@Component
+export default class Home extends Vue {
+  name = 'ss'
+}
+</script>
+<style lang="less">
+.home-wrapper {
+  .video-wrapper {
+    margin: 50px auto;
+    width: 100%;
+  }
+}
+</style>
