@@ -7,10 +7,6 @@
     <div class="nav-wrapper">
       <el-menu :default-active="activeIndex"  mode="horizontal" @select="handleSelect">
         <el-menu-item index="1">首页</el-menu-item>
-        <!-- <el-submenu index="2">
-          <template slot="title">项目资讯</template>
-          <el-menu-item index="2-1"><router-link to="/regis">项目资讯</router-link></el-menu-item>
-        </el-submenu> -->
         <el-menu-item index="2">项目资讯</el-menu-item>
         <el-menu-item index="3">学生报名</el-menu-item>
       </el-menu>
@@ -22,16 +18,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+  import { Component, Vue, Watch } from 'vue-property-decorator';
 
-@Component({
-
-})
-
+  @Component({
+    
+  })
   export default class NavMenu extends Vue{
 
     activeIndex = '1'
-    activeIndex2 = '1'
 
     handleSelect(key: any, keyPath: any) {
       console.log(key, keyPath);
@@ -46,6 +40,22 @@ import { Component, Vue } from 'vue-property-decorator';
         }
         case '3': {
           window.location.hash = '#/regis'
+          break
+        }
+      }
+    }
+    mounted(){
+      switch(window.location.hash){
+        case '#/':{
+          this.activeIndex = '1'
+          break
+        }
+        case '#/info':{
+          this.activeIndex = '2'
+          break
+        }
+        case '#/regis':{
+          this.activeIndex = '3'
           break
         }
       }

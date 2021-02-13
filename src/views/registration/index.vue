@@ -162,6 +162,7 @@ import {
   certificateType,
   policalStatus,
 } from '@/const/registration.ts'
+import axios from 'axios'
 
 @Component({
 
@@ -339,6 +340,13 @@ export default class Registration extends Vue {
 
   submitForm(formName: any) {
     console.log(formName)
+    axios.get('/submit',{
+      params: this.studentInfo
+    }).then((resp)=>{
+      console.log(resp)
+    }).catch((err)=>{
+      console.log(err)
+    })
   }
   resetForm(formName: any) {
     console.log(formName)

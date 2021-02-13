@@ -1,6 +1,22 @@
 <template>
   <div class="info-wrapper">
-    <div class="filter-wrapper">filters</div>
+    <div class="filter-wrapper">
+      <el-form :inline="true" :model="filters" class="demo-form-inline">
+        <el-form-item label="导师团队">
+          <el-select v-model="filters.tutorTeam" placeholder="请选择导师团队">
+            <el-option label="abaaba" value="shanghai"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="所属院系">
+          <el-select v-model="filters.academy" placeholder="请选择所属院系">
+            <el-option label="计算机科学与技术学院" value="shanghai"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button  @click="getProjectList">查询</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
     <div class="table-wrapper">
       <el-table
         :data="tableData"
@@ -76,6 +92,11 @@ export default class Info extends Vue {
   tableData= []
   currentPage = 1
 
+  filters = {
+    tutorTeam: '',
+    academy: '',
+  }
+
   getProjectList() {
     axios({
       url: '/projectlist',
@@ -115,6 +136,10 @@ export default class Info extends Vue {
 </script>
 <style lang="less">
 .info-wrapper {
+
+  .filter-wrapper {
+    margin: 30px auto 10px auto;
+  }
   .table-wrapper{
     width: 90%;
     margin: 20px auto;
