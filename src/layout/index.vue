@@ -76,18 +76,17 @@
   .layout {
     .header {
       height: 60px;
-      background-color: @zju-blue;
+      background-color: #0f59a4;
       text-align: center;
       vertical-align: -webkit-baseline-middle;
       .menu {
-        background-color: @zju-blue;
+        background-color: #0f59a4;
         color: @text-color;
       }
     }
     .footer {
       height: 60px;
-      background-color: @zju-blue;
-      text-align: center;
+      background-color: #0f59a4;
       vertical-align: -webkit-baseline-middle;
       color: @text-color;
     }

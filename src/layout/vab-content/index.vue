@@ -46,8 +46,7 @@
         @vab-padding
     ) !important;
     padding: @vab-padding;
-    margin: @vab-margin;
-    background: #fff;
+    background: #d8e3e7;
     .error-container {
       height: calc(
         100vh - @vab-header-height - @vab-padding - @vab-padding - @vab-padding -

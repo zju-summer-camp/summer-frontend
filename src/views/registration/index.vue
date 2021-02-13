@@ -1,20 +1,5 @@
 <template>
   <div class="registration">
-    <div class="left-nav">
-      左边导航栏
-      <div>
-        <span class="nav-link" @click="getMsg()">基本信息</span>
-      </div>
-      <div>
-        <span class="nav-link" @click="getMsg()">基本信息</span>
-      </div>
-      <div>
-        <span class="nav-link" @click="getMsg()">基本信息</span>
-      </div>
-      <div>
-        <span class="nav-link" @click="getMsg()">基本信息</span>
-      </div>
-    </div>
     <div class="registration-form">
       <div class="title">浙江大学暑期夏令营报名表</div>
       <div class="module" id="basic-info">
@@ -274,7 +259,7 @@
           </row-item>
         </div>
       </div>
-      <div class="module footer">
+      <div class="module form-footer">
         <a-button type="primary">重置</a-button>
         <a-button type="primary">提交</a-button>
       </div>
@@ -391,6 +376,10 @@
 </script>
 
 <style lang="less" scoped>
+  // @font-face {
+  //   font-family: 'dq-font';
+  //   src: url(../../assets/FangZhenSongTi.ttf);
+  // }
   .registration {
     display: flex;
     justify-content: center;
@@ -410,29 +399,31 @@
       flex-direction: column;
       align-items: center;
       .title {
-        font-size: 20px;
-        font-weight: 800;
+        font-family: 'dq-font';
+        font-size: 30px;
         padding: 20px;
       }
       .module {
-        background-color: #ecf0f1;
         border-radius: 8px;
-        margin: 10px;
+        margin: 20px;
         width: 800px;
-
+        box-shadow: 0 0 4px #6aafe6;
         .module-title {
-          font-size: 16px;
-          color: #333;
-          font-weight: 800;
-          padding: 15px 24px;
-          background-color: #dfe6e9;
-          border-radius: 8px 8px 0px 0px;
+          font-family: 'dq-font';
+          font-size: 18px;
+          font-weight: 600;
+          padding: 10px 16px;
+          border-radius: 8px 8px 0 0;
           display: flex;
           align-items: center;
           justify-content: flex-start;
+          // background-color: #4f383e;
+          border: 1px solid rgb(97, 154, 195);
+          box-shadow: 0 0 4px #6aafe6;
+          // text-shadow: 2px 2px 0px rgb(97, 154, 195);
         }
         .module-content {
-          padding: 5px 24px 24px 24px;
+          padding: 24px;
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
@@ -443,16 +434,16 @@
         }
       }
 
-      .footer {
+      .form-footer {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        padding: 24px;
+        padding: 12px 24px;
+        box-shadow: 0 0 4px #6aafe6;
         button {
           margin: 3px;
           border-radius: 4px;
-          background-color: @zju-blue;
-          border-color: @zju-blue;
+          background-color: rgb(41, 131, 187);
         }
       }
     }
