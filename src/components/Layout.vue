@@ -5,7 +5,7 @@
   </div>
 </template>
 <script lang="ts">
-import NavMenu from '@/components/nav-menu/index.vue'
+import NavMenu from '@/components/NavMenu.vue'
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({

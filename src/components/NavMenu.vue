@@ -1,7 +1,7 @@
 <template>
   <div class="nav-menu-wrapper">
     <div class="logo-wrapper">
-      <img src="../../assets/zju_logo.png">
+      <img src="../assets/zju_logo.png">
       <span class="title">浙江大学夏令营</span>
     </div>
     <div class="nav-wrapper">
@@ -9,6 +9,7 @@
         <el-menu-item index="1">首页</el-menu-item>
         <el-menu-item index="2">项目资讯</el-menu-item>
         <el-menu-item index="3">学生报名</el-menu-item>
+        <el-menu-item index="4">上传资讯</el-menu-item>
       </el-menu>
     </div>
     <div class="login-wrapper">
@@ -42,6 +43,10 @@
           window.location.hash = '#/regis'
           break
         }
+        case '4': {
+          window.location.hash = '#/upload'
+          break
+        }
       }
     }
     mounted(){
@@ -58,6 +63,10 @@
           this.activeIndex = '3'
           break
         }
+        case '#/upload':{
+          this.activeIndex = '4'
+          break
+        }
       }
     }
 
@@ -66,7 +75,7 @@
 <style lang="less">
 @font-face {
   font-family: 'dq-font';
-  src: url(../../assets/FangZhenSongTi.ttf)
+  src: url(../assets/FangZhenSongTi.ttf)
 }
 .nav-menu-wrapper {
   display: flex;

@@ -19,6 +19,11 @@ const routes: Array<RouteConfig> = [
     path: '/info',
     name: 'Info',
     component: () => import('../views/Info.vue')
+  },
+  {
+    path: '/upload',
+    name: 'Upload',
+    component: () => import('../views/Upload.vue')
   }
 ]
 
