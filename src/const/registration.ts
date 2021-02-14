@@ -15,109 +15,109 @@
 // 个人陈述：
 //  研究方向       个人陈述  论文情况
 
-// export const options = {
-//   name: {
-//     label: '姓名',
-//     hint: '请填写姓名',
-//   },
-//   gender: {
-//     label: '性别',
-//     hint: '请填写性别',
-//   },
-//   nation: {
-//     label: '民族',
-//   },
-//   certificateType: {
-//     label: '身份证件类型',
-//   },
-//   certificateId: {
-//     label: '证件号码',
-//   },
-//   birthday: {
-//     label: '出生日期',
-//   },
-//   policalStatus: {
-//     label: '政治面貌',
-//   },
-//   correspondenceAddress: {
-//     label: '通讯地址',
-//   },
-//   homeAddress: {
-//     label: '家庭地址',
-//   },
-//   postalCode: {
-//     label: '邮政编码',
-//   },
-//   telephoneNumber: {
-//     label: '电话号码',
-//   },
-//   email: {
-//     label: '邮箱',
-//   },
-//   intentionalCollegeCode: {
-//     label: '意向学院代码',
-//   },
-//   intentionalCollegeName: {
-//     label: '意向学院名称',
-//   },
-//   intentionalMajorCode: {
-//     label: '意向专业代码',
-//   },
-//   intentionalMajorName: {
-//     label: '意向专业名称',
-//   },
-//   intentionalStudy_category: {
-//     label: '意向攻读类型',
-//   },
-//   intentional_tutor_name: {
-//     label: '意向导师姓名',
-//   },
-//   undergraduate_school: {
-//     label: '本科院校',
-//   },
-//   school_type: {
-//     label: '学校类型',
-//   },
-//   department: {
-//     label: '本科院系',
-//   },
-//   major: {
-//     label: '本科专业',
-//   },
-//   enrollment_time: {
-//     label: '入学时间',
-//   },
-//   graduation_time: {
-//     label: '预计毕业时间',
-//   },
-//   thesis: {
-//     label: '论文情况',
-//   },
-//   grade_number: {
-//     label: '同年级人数',
-//   },
-//   ranking: {
-//     label: '预计专业排名',
-//   },
-//   five_semester_ranking: {
-//     label: '前五学期排名',
-//   },
-//   remarks: {
-//     label: '学生备注',
-//   },
-//   foreign_language_type: {
-//     label: '外语类型',
-//   },
-//   foreign_language_grades: {
-//     label: '外语成绩',
-//   },
-//   research_direction: {
-//     label: '研究方向',
-//   },
-//   personal_statement: {
-//     label: '个人陈述',
-//   },
-// }
+export const options = {
+  name: {
+    label: '姓名',
+    hint: '请填写姓名',
+  },
+  gender: {
+    label: '性别',
+    hint: '请填写性别',
+  },
+  nation: {
+    label: '民族',
+  },
+  certificateType: {
+    label: '身份证件类型',
+  },
+  certificateId: {
+    label: '证件号码',
+  },
+  birthday: {
+    label: '出生日期',
+  },
+  policalStatus: {
+    label: '政治面貌',
+  },
+  correspondenceAddress: {
+    label: '通讯地址',
+  },
+  homeAddress: {
+    label: '家庭地址',
+  },
+  postalCode: {
+    label: '邮政编码',
+  },
+  telephoneNumber: {
+    label: '电话号码',
+  },
+  email: {
+    label: '邮箱',
+  },
+  intentionalCollegeCode: {
+    label: '意向学院代码',
+  },
+  intentionalCollegeName: {
+    label: '意向学院名称',
+  },
+  intentionalMajorCode: {
+    label: '意向专业代码',
+  },
+  intentionalMajorName: {
+    label: '意向专业名称',
+  },
+  intentionalStudyCategory: {
+    label: '意向攻读类型',
+  },
+  intentionalTutorName: {
+    label: '意向导师姓名',
+  },
+  undergraduateSchool: {
+    label: '本科院校',
+  },
+  schoolType: {
+    label: '学校类型',
+  },
+  department: {
+    label: '本科院系',
+  },
+  major: {
+    label: '本科专业',
+  },
+  enrollmentTime: {
+    label: '入学时间',
+  },
+  graduationTime: {
+    label: '预计毕业时间',
+  },
+  thesis: {
+    label: '论文情况',
+  },
+  gradeNumber: {
+    label: '同年级人数',
+  },
+  ranking: {
+    label: '预计专业排名',
+  },
+  fiveSemesterRanking: {
+    label: '前五学期排名',
+  },
+  remarks: {
+    label: '学生备注',
+  },
+  foreignLanguageType: {
+    label: '外语类型',
+  },
+  foreignLanguageGrades: {
+    label: '外语成绩',
+  },
+  researchDirection: {
+    label: '研究方向',
+  },
+  personalStatement: {
+    label: '个人陈述',
+  },
+}
 
 export const nation = [
   { id: '01', name: '汉族' },

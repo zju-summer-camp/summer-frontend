@@ -9,7 +9,7 @@
         <el-menu-item index="1">首页</el-menu-item>
         <el-menu-item index="2">项目资讯</el-menu-item>
         <el-menu-item index="3">学生报名</el-menu-item>
-        <el-menu-item index="4">上传资讯</el-menu-item>
+        <el-menu-item index="4">管理后台</el-menu-item>
       </el-menu>
     </div>
     <div class="login-wrapper">
@@ -44,7 +44,11 @@
           break
         }
         case '4': {
-          window.location.hash = '#/upload'
+          window.location.hash = '#/management'
+          break
+        }
+        default: {
+          window.location.hash = '#/'
           break
         }
       }
@@ -63,8 +67,14 @@
           this.activeIndex = '3'
           break
         }
-        case '#/upload':{
+        case '#/management':
+        case '#/management/a':
+        case '#/management/forms':{
           this.activeIndex = '4'
+          break
+        }
+        default: {
+          this.activeIndex = '1'
           break
         }
       }

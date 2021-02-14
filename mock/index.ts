@@ -19,6 +19,32 @@ const getProjectList = function (options) {
   return projectList
 }
 
+// 获取报名表列表
+const getFormsList = function (options) {
+  const { page, pagination} = JSON.parse(options.body)
+  const projectList = []
+  for (let i = 0; i < pagination; i++) {
+    const projectInfo = {
+      id: Random.id(),
+      name: Random.cname(), //  Random.ctitle( min, max ) 随机产生一个中文标题，长度默认在3-7之间
+      intentionalCollegeName:  '计算机科学与技术学院',
+      intentionalMajorName: Random.ctitle(15, 30),
+      undergraduateSchool: Random.ctitle(15, 30),
+      department:Random.ctitle(15, 30),
+      major:Random.ctitle(15, 30),
+      enrollmentTime: Random.date()
+    }
+    projectList.push(projectInfo)
+  }
+  return projectList
+}
+
+
+
+Mock.mock('/formslist', 'get',(options) => {
+  return getFormsList(options)
+})
+
 Mock.mock('/projectlist', 'get',(options) => {
   return getProjectList(options)
 })

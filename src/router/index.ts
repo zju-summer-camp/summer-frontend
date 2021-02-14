@@ -21,9 +21,24 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/Info.vue')
   },
   {
-    path: '/upload',
-    name: 'Upload',
-    component: () => import('../views/Upload.vue')
+    path: '/management',
+    name: 'Management',
+    component: () => import('../views/management/index.vue'),
+    children: [
+      {
+        path: 'a',
+        component: () => import('../views/Info.vue')
+      },
+      {
+        path: 'forms',
+        component: () => import('../views/management/Forms.vue')
+      }
+    ]
+  },
+  {
+    path: '/*',
+    name: '404',
+    component: Home
   }
 ]
 

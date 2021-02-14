@@ -1,9 +1,10 @@
 <template>
-  <div class="info-wrapper">
+  <!-- 学生报名表列表 -->
+  <div class="forms-wrapper">
     <div class="filter-wrapper">
-      <el-form :inline="true" :model="filters" class="demo-form-inline">
-        <el-form-item label="导师团队">
-          <el-select v-model="filters.tutorTeam" placeholder="请选择导师团队">
+      <el-form :inline="true" :model="filters">
+        <el-form-item label="本科院校">
+          <el-select v-model="filters.undergraduateSchool" placeholder="请选择本科院校">
             <el-option label="abaaba" value="shanghai"></el-option>
           </el-select>
         </el-form-item>
@@ -12,8 +13,13 @@
             <el-option label="计算机科学与技术学院" value="shanghai"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="意向导师">
+          <el-select v-model="filters.intentionalTutorName" placeholder="请选择意向导师">
+            <el-option label="计算机科学与技术学院" value="shanghai"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item>
-          <el-button  @click="getProjectList">查询</el-button>
+          <el-button  @click="getProjectList">筛选</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -23,31 +29,37 @@
         border>
         <el-table-column
           prop="name"
-          label="项目名称"
-          width="160">
+          label="学生姓名"
+          width="80">
         </el-table-column>
         <el-table-column
-          prop="tutorTeam"
-          label="导师团队"
-          width="160">
+          prop="intentionalCollegeName"
+          label="意向学院"
+          width="130">
         </el-table-column>
         <el-table-column
-          prop="academy"
-          label="所属学院"
-          width="140">
+          prop="intentionalMajorName"
+          label="意向专业"
+          width="130">
         </el-table-column>
         <el-table-column
-          prop="overview"
-          label="项目简介">
+          prop="department"
+          label="本科院系"
+          width="130">
         </el-table-column>
         <el-table-column
-          prop="deadline"
-          label="截止日期"
-          width="120">
+          prop="major"
+          label="本科专业"
+          width="130">
         </el-table-column>
         <el-table-column
-          label="操作"
-          width="120">
+          prop="enrollmentTime"
+          label="入学时间"
+          width="130">
+        </el-table-column>
+      
+        <el-table-column
+          label="操作">
           <template slot-scope="scope">
             <div class="operation-wrapper">
               <el-button
@@ -60,7 +72,7 @@
                 @click.native.prevent="projectDetail(scope.$index)"
                 type="text"
                 size="small">
-                报名
+                通过
               </el-button>
             </div>
           </template>
@@ -77,28 +89,43 @@
         :current-page.sync="currentPage">
       </el-pagination>
     </div>
+    <div class="drawer-wrapper">
+      <el-drawer
+        :title="details.title.name"
+        :visible.sync="drawer"
+        :direction="rtl"
+        size="70%">
+        <div class="drawer-content">
+          {{details.title}}
+        </div>
+      </el-drawer>
+    </div>
   </div>
 </template>
 <script lang="ts">
-
 import { Component, Vue } from 'vue-property-decorator'
 import axios from 'axios'
-@Component({
 
-})
-
-export default class Info extends Vue {
-  tableData= []
+@Component
+export default class Forms extends Vue {
+    tableData= []
   currentPage = 1
 
   filters = {
-    tutorTeam: '',
-    academy: '',
+    undergraduateSchool: '',
+    department: '',
+    intentionalCollegeCode: '',
+    intentionalTutorName: '',
+  }
+  drawer = false
+
+  details = {
+    title: ''
   }
 
   getProjectList() {
     axios({
-      url: '/projectlist',
+      url: '/formslist',
       data: {
         page: 1,
         pagination: 10
@@ -111,7 +138,9 @@ export default class Info extends Vue {
 
   // 跳转到项目详情页
   projectDetail(index: number){
-    console.log(this.tableData[index])
+    this.details.title = this.tableData[index]
+    // 可能需要调用接口查询报名表详情，目前先使用表格中的数据
+    this.drawer = true
   }
 
   pageChange(){
@@ -134,7 +163,7 @@ export default class Info extends Vue {
 }
 </script>
 <style lang="less">
-.info-wrapper {
+.forms-wrapper {
   .filter-wrapper {
     margin: 30px auto 10px auto;
   }
