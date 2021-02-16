@@ -35,6 +35,7 @@ export default class Upload extends Vue {
 .management-wrapper {
   position: relative;
   margin-left: 60px;
+  padding: 10px;
 
   .nav-wrapper{
     position: absolute;
