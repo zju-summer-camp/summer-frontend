@@ -1,6 +1,25 @@
 <template>
   <!-- 学生报名表列表 -->
   <div class="forms-wrapper">
+        <div class="title-wrapper">
+      <!-- <div class="title">
+        学生报名表
+      </div> -->
+      <div class="export-wrapper">
+        <el-tooltip class="item" effect="dark" content="批量导出已勾选报名表" placement="top">
+          <el-button
+            @click.native.prevent="exportBatch"
+            size="small" circle icon="el-icon-download">
+          </el-button>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="导出所有报名表" placement="top">
+          <el-button
+            @click.native.prevent="exportAll"
+            size="small" circle icon="el-icon-download">
+          </el-button>
+        </el-tooltip>
+      </div>
+    </div>
     <div class="filter-wrapper">
       <el-form :inline="true" :model="filters">
         <el-form-item label="本科院校">
@@ -23,10 +42,18 @@
         </el-form-item>
       </el-form>
     </div>
+
+    
     <div class="table-wrapper">
       <el-table
         :data="tableData"
-        border>
+        border
+        @selection-change="handleSelectionChange">
+        <el-table-column
+          type="selection"
+          width="60"
+          :style="{'color':'#fff'}">
+        </el-table-column>
         <el-table-column
           prop="name"
           label="学生姓名"
@@ -35,45 +62,57 @@
         <el-table-column
           prop="intentionalCollegeName"
           label="意向学院"
-          width="130">
+          width="150">
         </el-table-column>
         <el-table-column
           prop="intentionalMajorName"
           label="意向专业"
-          width="130">
+          width="150">
         </el-table-column>
         <el-table-column
           prop="department"
-          label="本科院系"
-          width="130">
+          label="本科院系">
         </el-table-column>
         <el-table-column
           prop="major"
           label="本科专业"
-          width="130">
+          width="150">
         </el-table-column>
         <el-table-column
           prop="enrollmentTime"
           label="入学时间"
-          width="130">
+          width="150">
         </el-table-column>
       
         <el-table-column
-          label="操作">
+          label="操作"
+          width="150">
           <template slot-scope="scope">
             <div class="operation-wrapper">
               <el-button
-                @click.native.prevent="projectDetail(scope.$index)"
+                @click.native.prevent="projectDetail(scope.$index,scope)"
                 type="text"
                 size="small">
                 详情
               </el-button>
-              <el-button
-                @click.native.prevent="projectDetail(scope.$index)"
-                type="text"
-                size="small">
-                通过
-              </el-button>
+
+              <el-tooltip class="item" effect="dark" content="导出当前报名表" placement="top">
+                <el-button
+                  @click.native.prevent="exportCurrent(scope.$index,scope)"
+                  type="text"
+                  size="small">
+                  导出
+                </el-button>
+              </el-tooltip>
+              <el-tooltip class="item" effect="dark" :content="scope.row.passed ? '撤销，取消学生进入夏令营资格':'通过，学生获得进入夏令营资格'" placement="top">
+                <el-button
+                  @click.native.prevent="changeStatus(scope.$index,scope)"
+                  type="text"
+                  size="small">
+                  {{scope.row.passed ? '撤销':'通过'}}
+                </el-button>
+              </el-tooltip>
+              
             </div>
           </template>
         </el-table-column>
@@ -93,10 +132,19 @@
       <el-drawer
         :title="details.title.name"
         :visible.sync="drawer"
-        :direction="rtl"
+        direction="rtl"
         size="70%">
         <div class="drawer-content">
           {{details.title}}
+          <div class="operations">
+            <el-tooltip class="item" effect="dark" content="导出当前报名表" placement="top">
+              <el-button
+                @click.native.prevent="exportCurrent"
+                size="small">
+                导出
+              </el-button>
+            </el-tooltip>
+          </div>
         </div>
       </el-drawer>
     </div>
@@ -108,8 +156,9 @@ import axios from 'axios'
 
 @Component
 export default class Forms extends Vue {
-    tableData= []
+  tableData= []
   currentPage = 1
+  multipleSelection = []
 
   filters = {
     undergraduateSchool: '',
@@ -131,16 +180,20 @@ export default class Forms extends Vue {
         pagination: 10
       }
     })
-    .then((resp)=>{
-      this.tableData = resp.data
+    .then((resp: any)=>{
+      this.tableData = resp.data || []
     })
   }
 
   // 跳转到项目详情页
-  projectDetail(index: number){
+  projectDetail(index: number, scope: any){
     this.details.title = this.tableData[index]
     // 可能需要调用接口查询报名表详情，目前先使用表格中的数据
     this.drawer = true
+  }
+  // 修改报名表状态
+  changeStatus(index: number, scope: any){
+    console.log(scope, index)
   }
 
   pageChange(){
@@ -157,6 +210,29 @@ export default class Forms extends Vue {
     this.getProjectList()
   }
 
+  // 导出当前报名表
+  exportCurrent() {
+    console.log("exportCurrent")
+  }
+
+  // 批量导出已勾选报名表
+  exportBatch() {
+    console.log("exportBatch")
+    // 调用后端接口，入参为已勾选报名表id列表
+  }
+
+  // 导出全部有权限的报名表
+  exportAll() {
+    console.log("exportAll")
+    // 调用后端接口，入参为已勾选报名表id列表
+  }
+
+  // 处理多选
+  handleSelectionChange(val: any) {
+    this.multipleSelection = val;
+    console.log("handleSelectionChange", val)
+  }
+
   mounted(){
     this.getProjectList()
   }
@@ -165,7 +241,7 @@ export default class Forms extends Vue {
 <style lang="less">
 .forms-wrapper {
   .filter-wrapper {
-    margin: 30px auto 10px auto;
+    margin: 20px auto 20px auto;
   }
   .table-wrapper{
     width: 90%;
@@ -176,11 +252,34 @@ export default class Forms extends Vue {
       }
     }
   }
+  .title-wrapper {
+    width: 90%;
+    height: 40px;
+    margin: 30px auto 20px auto;
+    // .title {
+    //   height: 60px;
+    //   float: left;
+    //   font-weight: 600;
+    //   font-size: 20px;
+    // }
+    // .export-wrapper {
+    //   height: 60px;
+    //   float: left;
+    // }
+  }
+  
 
   .pagination-wrapper {
     .el-pagination.is-background .el-pager li:not(.disabled).active {
       background-color: #409eff;
       color: #FFFFFF;
+    }
+  }
+  .drawer-wrapper {
+    .drawer-content {
+      .operations{
+        margin: 10px;
+      }
     }
   }
 }

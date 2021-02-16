@@ -32,7 +32,8 @@ const getFormsList = function (options) {
       undergraduateSchool: Random.ctitle(15, 30),
       department:Random.ctitle(15, 30),
       major:Random.ctitle(15, 30),
-      enrollmentTime: Random.date()
+      enrollmentTime: Random.date(),
+      passed: Math.round(Math.random())
     }
     projectList.push(projectInfo)
   }

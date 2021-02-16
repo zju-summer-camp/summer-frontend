@@ -1,28 +1,20 @@
 <template>
   <div class="left-nav-wrapper">
     <el-menu :default-active="activeIndex" class="el-menu-vertical-demo" @select="handleSelect"  :collapse="true">
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-s-data"></i>
-        </template>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-      </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
+      <el-menu-item index="forms">
         <i class="el-icon-document"></i>
       </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-      </el-menu-item>
-      <el-menu-item index="4-1">
+      <el-menu-item index="statistics">
         <i class="el-icon-s-data"></i>
       </el-menu-item>
-      <el-menu-item index="4-2">
-        <i class="el-icon-document"></i>
-      </el-menu-item>
+      <el-submenu index="upload">
+        <template slot="title">
+          <i class="el-icon-s-order"></i>
+        </template>
+        <el-menu-item index="upload">上传资讯</el-menu-item>
+        <el-menu-item index="articles">资讯管理</el-menu-item>
+      </el-submenu>
+
     </el-menu>
   </div>
 </template>
@@ -31,23 +23,23 @@
 import { Component, Vue } from 'vue-property-decorator'
 @Component
 export default class LeftNav extends Vue {
-  activeIndex = '4-1'
+  activeIndex = 'forms'
   handleSelect(key: any, keyPath: any) {
     switch(key){
-      case '4-1': {
-        window.location.hash = '#/management/a'
-        break
-      }
-      case '4-2': {
+      case 'forms': {
         window.location.hash = '#/management/forms'
         break
       }
-      case '4-3': {
-        window.location.hash = '#/regis'
+      case 'statistics': {
+        window.location.hash = '#/management/statistics'
         break
       }
-      case '4-4': {
-        window.location.hash = '#/management'
+      case 'upload': {
+        window.location.hash = '#/management/upload'
+        break
+      }
+      case 'articles': {
+        window.location.hash = '#/management/articles'
         break
       }
       default: {
@@ -60,18 +52,22 @@ export default class LeftNav extends Vue {
   mounted(){
     // 正确高亮展示
     // 再确认下逻辑
-    this.handleSelect(this.activeIndex,'')
+    // this.handleSelect(this.activeIndex,'')
     switch(window.location.hash){
-      case '#/management/a':{
-        this.activeIndex = '4-1'
+      case '#/management/forms':{
+        this.activeIndex = 'forms'
         break
       }
-      case '#/management/forms':{
-        this.activeIndex = '4-2'
+      case '#/management/statistics':{
+        this.activeIndex = 'statistics'
+        break
+      }
+      case '#/management/upload':{
+        this.activeIndex = 'article'
         break
       }
       default: {
-        this.activeIndex = '4-1'
+        this.activeIndex = 'forms'
         break
       }
     }

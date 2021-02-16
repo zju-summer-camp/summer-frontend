@@ -44,7 +44,7 @@
           break
         }
         case '4': {
-          window.location.hash = '#/management'
+          window.location.hash = '#/management/forms'
           break
         }
         default: {
@@ -68,8 +68,9 @@
           break
         }
         case '#/management':
-        case '#/management/a':
-        case '#/management/forms':{
+        case '#/management/upload':
+        case '#/management/forms':
+        case '#/management/statistics': {
           this.activeIndex = '4'
           break
         }

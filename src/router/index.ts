@@ -26,13 +26,22 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/management/index.vue'),
     children: [
       {
-        path: 'a',
-        component: () => import('../views/Info.vue')
+        path: 'statistics',
+        component: () => import('../views/management/Statistics.vue')
       },
       {
         path: 'forms',
         component: () => import('../views/management/Forms.vue')
-      }
+      },
+      {
+        path: 'upload',
+        component: () => import('../views/management/Upload.vue')
+      },
+      {
+        path: 'articles',
+        component: () => import('../views/management/Articles.vue')
+      },
+
     ]
   },
   {

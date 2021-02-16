@@ -17,7 +17,18 @@ import LeftNav from '@/components/LeftNav.vue'
   }
 })
 export default class Upload extends Vue {
-  name = 'ss'
+  mounted(){
+    // 正确高亮展示
+    // 再确认下逻辑
+    // this.handleSelect(this.activeIndex,'')
+    switch(window.location.hash){
+      case '#/management':{
+        window.location.hash = '#/management/forms'
+        break
+      }
+    }
+  }
+  
 }
 </script>
 <style lang="less">
