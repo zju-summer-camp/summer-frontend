@@ -12,17 +12,23 @@
         <el-menu-item index="4">管理后台</el-menu-item>
       </el-menu>
     </div>
-    <div class="login-wrapper">
-      login
+    <div class="buttons-wrapper">
+      <login></login>
+      <register></register>
     </div>
   </div>
 </template>
 
 <script lang="ts">
   import { Component, Vue, Watch } from 'vue-property-decorator';
+  import Login from '@/components/Login.vue'
+  import Register from '@/components/Register.vue'
 
   @Component({
-    
+    components: {
+      Login,
+      Register
+    }
   })
   export default class NavMenu extends Vue{
 
@@ -110,8 +116,12 @@
   .nav-wrapper {
     margin: auto;
   }
-  .login-wrapper {
+  .buttons-wrapper {
+    display: flex;
     margin: 0 20px 0 auto;
+    .button-wrapper {
+      margin-right: 8px;
+    }
   }
 }
 

@@ -20,6 +20,11 @@ const routes: Array<RouteConfig> = [
     name: 'Info',
     component: () => import('../views/Info.vue')
   },
+  // {
+  //   path: '/login',
+  //   name: 'Login',
+  //   component: () => import('../views/Login.vue')
+  // },
   {
     path: '/management',
     name: 'Management',

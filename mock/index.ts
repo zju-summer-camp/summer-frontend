@@ -40,7 +40,43 @@ const getFormsList = function (options) {
   return projectList
 }
 
+const login = function (options) {
+  const { phoneNumber, password } = JSON.parse(options.body)
+  console.log(phoneNumber,password)
+  if (phoneNumber === '1998' && password === '0304') {
+    return {
+      "code": 10011 ,//&& 20011,
+      "message": "Signin success.",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+     }
+  } else {
+    return {
+      "code": 20011,
+      "message": "用户账号或者密码错误"
+    }
+  }
+}
 
+const accounts = function (options) {
+  const { accountId } = JSON.parse(options.body)
+  if (accountId === 1) {
+    return   {
+      "accountId": 1,
+      "phoneNumber": "18867100483",
+      "name": "周侃"
+    }
+  } else {
+    return {
+      "code": 20011,
+      "message": "用户账号或者密码错误"
+    }
+  }
+
+}
+
+Mock.mock('/login', 'get', (options) => {
+  return login(options)
+})
 
 Mock.mock('/formslist', 'get',(options) => {
   return getFormsList(options)
@@ -48,4 +84,8 @@ Mock.mock('/formslist', 'get',(options) => {
 
 Mock.mock('/projectlist', 'get',(options) => {
   return getProjectList(options)
+})
+
+Mock.mock('/accounts', 'get', (options) => {
+  return accounts(options)
 })
