@@ -12,7 +12,11 @@
         <el-menu-item index="4">管理后台</el-menu-item>
       </el-menu>
     </div>
-    <div class="buttons-wrapper">
+    <div class="user-info-wrapper" v-if="logined">
+      {{ userInfo.phoneNumber}}-{{userInfo.name}}
+      <el-button  @click="logOut">退出</el-button>
+    </div>
+    <div class="buttons-wrapper" v-else>
       <login></login>
       <register></register>
     </div>
@@ -32,7 +36,28 @@
   })
   export default class NavMenu extends Vue{
 
-    activeIndex = '1'
+  activeIndex = '1'
+  get logined (){
+    return this.$store.state.accounts.accountId
+  }
+  get userInfo() {
+    return this.$store.state.accounts
+  }
+
+  get showLoginModal(){
+    return this.$store.state.showLoginModal
+  }
+  set showLoginModal(value){
+    this.$store.commit('showLogin', value)
+  }
+
+  showLogin(){
+    this.showLoginModal = true
+  }
+  logOut(){
+    this.$store.commit('reviseAccount', {})
+    this.showLoginModal = true
+  }
 
     handleSelect(key: any, keyPath: any) {
       console.log(key, keyPath);

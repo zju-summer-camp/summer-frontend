@@ -18,6 +18,7 @@
             <el-input v-model="loginData.password" autocomplete="off" placeholder="请输入密码" type="password"></el-input>
           </el-form-item>
         </el-form>
+        <div>没有账号? <span>去注册</span></div>
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitLogin('loginForm')">登 录</el-button>

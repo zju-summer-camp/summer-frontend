@@ -5,13 +5,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    showLoginModal: false,
+    showLoginModal: true,
     showRegisterModal: false,
     login: {
       token: ''
     },
     accountId: 1,
-    accounts: {}
+    accounts: {
+      accountId: '',
+      phoneNumber: '',
+      name: ''
+    }
   },
   mutations: {
     showLogin(state, payload) {

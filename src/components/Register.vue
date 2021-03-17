@@ -17,7 +17,7 @@
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitRegister('registerForm')">登 录</el-button>
+        <el-button type="primary" @click="submitRegister('registerForm')">注 册</el-button>
         <el-button type="primary" @click="dontShowRegister">取 消</el-button>
       </span>
     </el-dialog>
