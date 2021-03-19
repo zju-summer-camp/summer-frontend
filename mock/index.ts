@@ -43,7 +43,7 @@ const getFormsList = function (options) {
 const login = function (options) {
   const { phoneNumber, password } = JSON.parse(options.body)
   console.log(phoneNumber,password)
-  if (phoneNumber === '1998' && password === '0304') {
+  if (phoneNumber === '1111' && password === '1111') {
     return {
       "code": 10011 ,//&& 20011,
       "message": "Signin success.",
@@ -52,7 +52,7 @@ const login = function (options) {
   } else {
     return {
       "code": 20011,
-      "message": "用户账号或者密码错误"
+      "message": "用户账号或者密码错误，请重试"
     }
   }
 }
@@ -63,7 +63,8 @@ const accounts = function (options) {
     return   {
       "accountId": 1,
       "phoneNumber": "18867100483",
-      "name": "周侃"
+      "name": "周侃",
+      "character": 3,
     }
   } else {
     return {

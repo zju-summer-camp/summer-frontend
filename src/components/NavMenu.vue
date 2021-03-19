@@ -13,13 +13,19 @@
       </el-menu>
     </div>
     <div class="user-info-wrapper" v-if="logined">
-      {{ userInfo.phoneNumber}}-{{userInfo.name}}
-      <el-button  @click="logOut">退出</el-button>
+      <span class="user-text">
+        {{ userInfo.phoneNumber}}-{{userInfo.name}}
+      </span>
+      <span @click="logOut" class="link-text">退出</span>    
     </div>
     <div class="buttons-wrapper" v-else>
-      <login></login>
-      <register></register>
+      <!-- 按钮不会被点击，只是摆设hh -->
+      <el-button  @click="showLogin">登录</el-button>
+      <el-button  @click="showRegister">注册</el-button>
     </div>
+    <!-- 登录与注册modal框 -->
+    <login></login>
+    <register></register>
   </div>
 </template>
 
@@ -37,6 +43,17 @@
   export default class NavMenu extends Vue{
 
   activeIndex = '1'
+
+  // 登录
+  showLogin(){
+    this.$store.commit('showLogin', true)
+  }
+
+  // 注册
+  showRegister(){
+    this.$store.commit('showRegister', true)
+  }
+
   get logined (){
     return this.$store.state.accounts.accountId
   }
@@ -44,19 +61,10 @@
     return this.$store.state.accounts
   }
 
-  get showLoginModal(){
-    return this.$store.state.showLoginModal
-  }
-  set showLoginModal(value){
-    this.$store.commit('showLogin', value)
-  }
 
-  showLogin(){
-    this.showLoginModal = true
-  }
   logOut(){
     this.$store.commit('reviseAccount', {})
-    this.showLoginModal = true
+    this.showLogin()
   }
 
     handleSelect(key: any, keyPath: any) {
@@ -123,6 +131,19 @@
   display: flex;
   border-bottom: 1px solid #dcdfe6;
   align-items: center;
+  .user-text {
+    color: #2d2e36;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .link-text {
+    color: #2775b6;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 8px;
+  }
 
   .logo-wrapper {
     display: flex;

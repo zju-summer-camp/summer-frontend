@@ -14,7 +14,6 @@
         <el-menu-item index="upload">上传资讯</el-menu-item>
         <el-menu-item index="articles">资讯管理</el-menu-item>
       </el-submenu>
-
     </el-menu>
   </div>
 </template>

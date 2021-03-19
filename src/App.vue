@@ -6,6 +6,14 @@
 <script>
 import Layout from './components/Layout.vue'
 export default {
+  mounted() {
+    window.addEventListener('unload', this.saveState)
+  },
+  methods: {
+    saveState() {
+      sessionStorage.setItem('state', JSON.stringify(this.$store.state))
+    }
+  },
   components: {
     Layout
   }
