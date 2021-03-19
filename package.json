@@ -38,6 +38,7 @@
     "sass-loader": "^7.0.3",
     "typescript": "~3.9.3",
     "vue-cli-plugin-element": "~1.0.1",
+    "vue-debounce-decorator": "^1.0.1",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
