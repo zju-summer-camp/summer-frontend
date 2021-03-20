@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue, Watch } from 'vue-property-decorator';
+  import { Component, Vue } from 'vue-property-decorator';
   import Login from '@/components/Login.vue'
   import Register from '@/components/Register.vue'
 
@@ -67,7 +67,7 @@
     this.showLogin()
   }
 
-    handleSelect(key: any, keyPath: any) {
+    handleSelect(key: string, keyPath: string) {
       console.log(key, keyPath);
       switch(key){
         case '1': {

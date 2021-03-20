@@ -40,7 +40,7 @@
           v-model="itemConfig.value"
           :class="{'error-input': itemConfig.error}"
         />
-        <slot />
+        <component v-if="itemConfig.type === 'component'" :is="itemConfig.component" :itemConfig="itemConfig" :formConfig="formConfig"></component>
       </div>
       <div class="error-wrapper" v-if="itemConfig.error">{{itemConfig.error}}</div>
     </div>
@@ -50,14 +50,7 @@
 <script lang="ts">
   import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
   import { Debounce } from 'vue-debounce-decorator'
-  interface ItemConf {
-    hint?: string;
-    label: string;
-    required?: boolean;
-    value: any;
-    rules?: any;
-    [propName: string]: any;
-  }
+
 
   @Component({
   })
@@ -66,12 +59,8 @@
   @Watch('itemConfig.value')
   @Debounce(500)
   onValueChange(newVal: any){
-    console.log(newVal)
-    this.itemConfig.rules && this.itemConfig.rules.forEach((rule: any)=>{
-      if(!rule.ok(this.itemConfig.value)){
-        this.itemConfig.error = rule.msg
-      }
-    })
+    // 数据变更后，检验是否符合 rules，不符合时将错误写入
+    this.valid(newVal, this.formConfig)
   }
 
 
@@ -87,6 +76,25 @@
       }
     }
   }) itemConfig!: ItemConf
+  @Prop({
+    type: Object,
+    default: () => {
+      return {}
+    }
+  }) formConfig!: FormConf
+
+  valid(value: any, formConfig: FormConf = {}){
+    let flag = true
+    this.itemConfig.rules && this.itemConfig.rules.forEach((rule: any)=>{
+      if(!rule.ok(value, formConfig)){
+        this.itemConfig.error = rule.msg
+        flag = false
+      }
+    })
+    if(flag) {
+      this.itemConfig.error = ''
+    }
+  }
 }
 </script>
 <style lang="less">
@@ -97,9 +105,11 @@
   padding: 4px;
   margin: 8px;
   .label-part {
-    background-color: aquamarine;
+    background-color: #baccd9;
     flex: 3;
+    padding-top: 8px;
     text-align: right;
+    border-radius: 8px 0 0 px;
     .hint-wrapper {
       display: inline-block;
       width: 16px;
@@ -129,7 +139,7 @@
   }
 
   .input-part {
-    background-color: sandybrown;
+    // background-color: sandybrown;
     flex: 7;
     display: flex;
     flex-direction: column;
@@ -147,8 +157,5 @@
       font-size: 14px;
     }
   }
-
-  
-
 }
 </style>

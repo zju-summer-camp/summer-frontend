@@ -72,8 +72,19 @@ const accounts = function (options) {
       "message": "用户账号或者密码错误"
     }
   }
-
 }
+
+const register = (options) => {
+  return {
+    "code": 10011 ,//&& 20011,
+    "message": "Signin success.",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+   }
+}
+
+Mock.mock('/register', 'get', (options) => {
+  return register(options)
+})
 
 Mock.mock('/login', 'get', (options) => {
   return login(options)
