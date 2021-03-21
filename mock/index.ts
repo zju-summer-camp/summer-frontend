@@ -94,7 +94,11 @@ const registration = (options) => {
 
 const getRegistrationData = (options) => {
   return {
-    "name": "琼琼子"
+    "name": "琼琼子",
+    "gender": "女",
+    "nation": "汉族",
+    "certificateType": "中华人民共和国居民身份证",
+    "certificateId": "20210314"
    }
 }
 
