@@ -1,19 +1,3 @@
-// 报名表
-// 基本信息：
-// 姓名       证件类型       证件号码       出生日期       民族       性别       政治面貌
-
-// 联系方式：
-// 通讯地址       家庭地址       邮编       电话       邮箱
-
-// 申请意向：
-// 意向学院代码       意向学院名称       意向专业代码       意向专业名称       意向攻读类别   意向导师姓名
-
-// 教育信息：
-// 本科学校       学校类型   本科院系       本科专业       入学时间       预计毕业时间
-// 排名情况：
-// 同年级人数   预计专业排名       前五学期排名       学生备注       外语类型       外语成绩
-// 个人陈述：
-//  研究方向       个人陈述  论文情况
 
 export const options = {
   name: {
@@ -120,138 +104,138 @@ export const options = {
 }
 
 export const nation = [
-  { id: '01', name: '汉族' },
-  { id: '02', name: '蒙古族' },
-  { id: '03', name: '回族' },
-  { id: '04', name: '藏族' },
-  { id: '05', name: '维吾尔族' },
-  { id: '06', name: '苗族' },
-  { id: '07', name: '彝族' },
-  { id: '08', name: '壮族' },
-  { id: '09', name: '布依族' },
-  { id: '10', name: '朝鲜族' },
-  { id: '11', name: '满族' },
-  { id: '12', name: '侗族' },
-  { id: '13', name: '瑶族' },
-  { id: '14', name: '白族' },
-  { id: '15', name: '土家族' },
-  { id: '16', name: '哈尼族' },
-  { id: '17', name: '哈萨克族' },
-  { id: '18', name: '傣族' },
-  { id: '19', name: '黎族' },
-  { id: '20', name: '傈僳族' },
-  { id: '21', name: '佤族' },
-  { id: '22', name: '畲族' },
-  { id: '23', name: '高山族' },
-  { id: '24', name: '拉祜族' },
-  { id: '25', name: '水族' },
-  { id: '26', name: '东乡族' },
-  { id: '27', name: '纳西族' },
-  { id: '28', name: '景颇族' },
-  { id: '29', name: '柯尔克孜族' },
-  { id: '30', name: '土族' },
-  { id: '31', name: '达斡尔族' },
-  { id: '32', name: '仫佬族' },
-  { id: '33', name: '羌族' },
-  { id: '34', name: '布朗族' },
-  { id: '35', name: '撒拉族' },
-  { id: '36', name: '毛难族' },
-  { id: '37', name: '仡佬族' },
-  { id: '38', name: '锡伯族' },
-  { id: '39', name: '阿昌族' },
-  { id: '40', name: '普米族' },
-  { id: '41', name: '塔吉克族' },
-  { id: '42', name: '怒族' },
-  { id: '43', name: '乌孜别克族' },
-  { id: '44', name: '俄罗斯族' },
-  { id: '45', name: '鄂温克族' },
-  { id: '46', name: '崩龙族' },
-  { id: '47', name: '保安族' },
-  { id: '48', name: '裕固族' },
-  { id: '49', name: '京族' },
-  { id: '50', name: '塔塔尔族' },
-  { id: '51', name: '独龙族' },
-  { id: '52', name: '鄂伦春族' },
-  { id: '53', name: '赫哲族' },
-  { id: '54', name: '门巴族' },
-  { id: '55', name: '珞巴族' },
-  { id: '56', name: '基诺族' },
+  { value: '01', name: '汉族' },
+  { value: '02', name: '蒙古族' },
+  { value: '03', name: '回族' },
+  { value: '04', name: '藏族' },
+  { value: '05', name: '维吾尔族' },
+  { value: '06', name: '苗族' },
+  { value: '07', name: '彝族' },
+  { value: '08', name: '壮族' },
+  { value: '09', name: '布依族' },
+  { value: '10', name: '朝鲜族' },
+  { value: '11', name: '满族' },
+  { value: '12', name: '侗族' },
+  { value: '13', name: '瑶族' },
+  { value: '14', name: '白族' },
+  { value: '15', name: '土家族' },
+  { value: '16', name: '哈尼族' },
+  { value: '17', name: '哈萨克族' },
+  { value: '18', name: '傣族' },
+  { value: '19', name: '黎族' },
+  { value: '20', name: '傈僳族' },
+  { value: '21', name: '佤族' },
+  { value: '22', name: '畲族' },
+  { value: '23', name: '高山族' },
+  { value: '24', name: '拉祜族' },
+  { value: '25', name: '水族' },
+  { value: '26', name: '东乡族' },
+  { value: '27', name: '纳西族' },
+  { value: '28', name: '景颇族' },
+  { value: '29', name: '柯尔克孜族' },
+  { value: '30', name: '土族' },
+  { value: '31', name: '达斡尔族' },
+  { value: '32', name: '仫佬族' },
+  { value: '33', name: '羌族' },
+  { value: '34', name: '布朗族' },
+  { value: '35', name: '撒拉族' },
+  { value: '36', name: '毛难族' },
+  { value: '37', name: '仡佬族' },
+  { value: '38', name: '锡伯族' },
+  { value: '39', name: '阿昌族' },
+  { value: '40', name: '普米族' },
+  { value: '41', name: '塔吉克族' },
+  { value: '42', name: '怒族' },
+  { value: '43', name: '乌孜别克族' },
+  { value: '44', name: '俄罗斯族' },
+  { value: '45', name: '鄂温克族' },
+  { value: '46', name: '崩龙族' },
+  { value: '47', name: '保安族' },
+  { value: '48', name: '裕固族' },
+  { value: '49', name: '京族' },
+  { value: '50', name: '塔塔尔族' },
+  { value: '51', name: '独龙族' },
+  { value: '52', name: '鄂伦春族' },
+  { value: '53', name: '赫哲族' },
+  { value: '54', name: '门巴族' },
+  { value: '55', name: '珞巴族' },
+  { value: '56', name: '基诺族' },
 ]
 
 export const certificateType = [
   {
-    id: '1',
+    value: '1',
     name: '中华人民共和国居民身份证',
   },
   {
-    id: '2',
+    value: '2',
     name: '军人证件',
   },
   {
-    id: '3',
+    value: '3',
     name: '港澳台身份证件',
   },
   {
-    id: '4',
+    value: '4',
     name: '华侨身份证',
   },
   {
-    id: '5',
+    value: '5',
     name: '外籍护照',
   },
 ]
 
 export const policalStatus = [
   {
-    id: '1',
+    value: '1',
     name: '中共党员',
   },
   {
-    id: '2',
+    value: '2',
     name: '中共预备党员',
   },
   {
-    id: '3',
+    value: '3',
     name: '共青团员',
   },
   {
-    id: '4',
+    value: '4',
     name: '民革会员',
   },
   {
-    id: '5',
+    value: '5',
     name: '民盟盟员',
   },
   {
-    id: '6',
+    value: '6',
     name: '民建会员',
   },
   {
-    id: '7',
+    value: '7',
     name: '民进会员',
   },
   {
-    id: '8',
+    value: '8',
     name: '农工党党员',
   },
   {
-    id: '9',
+    value: '9',
     name: '致公党党员',
   },
   {
-    id: '10',
+    value: '10',
     name: '九三学社社员',
   },
   {
-    id: '11',
+    value: '11',
     name: '台盟盟员',
   },
   {
-    id: '12',
+    value: '12',
     name: '无党派民主人士',
   },
   {
-    id: '13',
+    value: '13',
     name: '群众',
   },
 ]

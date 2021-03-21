@@ -52,6 +52,18 @@
           :maxlength="itemConfig.maxlength || 500"
         />
         <component v-if="itemConfig.type === 'component'" :is="itemConfig.component" :itemConfig="itemConfig" :formConfig="formConfig"></component>
+
+        <el-radio-group v-model="itemConfig.value" v-if="itemConfig.type === 'radio'" class="radio-wrapper">
+          <el-radio  v-for="option in itemConfig.options" :label="option.name" :key="option.value"></el-radio>
+        </el-radio-group>
+
+        <el-select v-model="itemConfig.value" :placeholder="'请选择'+itemConfig.label" v-if="itemConfig.type === 'select'">
+            <el-option
+              v-for="option in itemConfig.options"
+              :value="option.value"
+              :label="option.name"
+              :key="option.value"></el-option>
+          </el-select>
       </div>
       <div class="error-wrapper" v-if="itemConfig.error">{{itemConfig.error}}</div>
     </div>
@@ -184,6 +196,9 @@
         }
 
       }
+    }
+    .radio-wrapper {
+      margin-top: 8px;
     }
     .error-wrapper {
       color: red;
