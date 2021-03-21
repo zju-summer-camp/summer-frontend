@@ -430,7 +430,8 @@ export default class Registration extends Vue {
       birthday: {
         label: '出生日期',
         placeholder: '请输入',
-        type: 'input',
+        type: 'component',
+        component: ()=> import('@/components/DateSelect.vue'),
         required: true,
         value: '',
         error: '',
@@ -704,7 +705,8 @@ export default class Registration extends Vue {
       enrollmentTime: {
         label: '入学时间',
         placeholder: '请输入',
-        type: 'input',
+        type: 'component',
+        component: ()=> import('@/components/DateSelect.vue'),
         required: true,
         value: '',
         error: '',
@@ -720,7 +722,8 @@ export default class Registration extends Vue {
       graduationTime: {
         label: '毕业时间',
         placeholder: '请输入',
-        type: 'input',
+        type: 'component',
+        component: ()=> import('@/components/DateSelect.vue'),
         required: true,
         value: '',
         error: '',
@@ -847,13 +850,13 @@ export default class Registration extends Vue {
     buttons: {
       submit: {
         name: 'submit',
-        text: '注册',
+        text: '申请',
         type: 'submit',
-        url: '/register',
+        url: '/registration',
         success: (resp: any)=>{
           if(resp.data && resp.data.code === 10011){
             // 登录成功
-            (this as any).$message('注册成功')
+            (this as any).$message('申请信息已提交')
             this.$store.commit('showRegister', false)
           }
          

@@ -82,6 +82,18 @@ const register = (options) => {
    }
 }
 
+const registration = (options) => {
+  return {
+    "code": 10011 ,//&& 20011,
+    "message": "Signin success.",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+   }
+}
+
+Mock.mock('/registration', 'get', (options) => {
+  return registration(options)
+})
+
 Mock.mock('/register', 'get', (options) => {
   return register(options)
 })
