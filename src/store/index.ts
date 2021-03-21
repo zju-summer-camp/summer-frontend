@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: sessionStorage.getItem('state') ? JSON.parse(sessionStorage.getItem('state') as string):{
     showLoginModal: true,
     showRegisterModal: false,
+    showRegistrationForm: false,
+    registrationFormType: 'newForm',
     login: {
       token: ''
     },
@@ -33,7 +35,14 @@ export default new Vuex.Store({
     },
     reviseAccount(state, payload) {
       state.accounts = payload
+    },
+    showRegistration(state, payload) {
+      state.showRegistrationForm = payload
+    },
+    reviseType(state, payload){
+      state.registrationFormType = payload
     }
+    
   },
   actions: {
   },

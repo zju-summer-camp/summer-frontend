@@ -82,6 +82,8 @@ const register = (options) => {
    }
 }
 
+
+
 const registration = (options) => {
   return {
     "code": 10011 ,//&& 20011,
@@ -89,6 +91,16 @@ const registration = (options) => {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
    }
 }
+
+const getRegistrationData = (options) => {
+  return {
+    "name": "琼琼子"
+   }
+}
+
+Mock.mock('/getRegistrationData', 'get', (options) => {
+  return getRegistrationData(options)
+})
 
 Mock.mock('/registration', 'get', (options) => {
   return registration(options)

@@ -1,592 +1,80 @@
 <template>
   <div class="registration-wrapper">
-    <div class="form-wrapper">
-      <dq-form :formConfig="formConfig"></dq-form>
+    <div class="buttons-wrapper"  v-if="!showRegistrationForm">
+      <div class="entrance" @click="queryForm">查询报名表</div>
+      <div class="entrance" @click="signUp">开始报名</div>
+    </div>
+
+    <div class="form-wrapper" v-if="showRegistrationForm">
+      <registration-form :type="type"></registration-form>
     </div>
   </div>
 </template>
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
-import {
-  nation,
-  certificateType,
-  policalStatus,
-} from '@/const/registration.ts'
-import axios from 'axios'
-import DqForm from '@/components/DqForm.vue'
+import RegistrationForm from '@/components/RegistrationForm.vue'
 
 
 @Component({
   components: {
-    DqForm
+    RegistrationForm
   }
 })
 export default class Registration extends Vue {
   name = 'Registration'
-  formConfig = {
-    width: '100%',
-    items: {
-      name: {
-        label: '姓名',
-        placeholder: '请输入姓名',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      gender: {
-        label: '性别',
-        placeholder: '请输入',
-        type: 'radio',
-        required: true,
-        value: '',
-        error: '',
-        options: [
-          {
-            name: '男',
-            value: 1
-          },
-          {
-            name: '女',
-            value: 2
-          }
-        ],
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      nation: {
-        label: '民族',
-        placeholder: '请输入',
-        type: 'select',
-        options: nation,
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      certificateType: {
-        label: '身份证件类型',
-        placeholder: '请输入',
-        type: 'select',
-        options: certificateType,
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      certificateId: {
-        label: '证件号码',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      birthday: {
-        label: '出生日期',
-        placeholder: '请输入',
-        type: 'component',
-        component: ()=> import('@/components/DateSelect.vue'),
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      policalStatus: {
-        label: '用户昵称',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      correspondenceAddress: {
-        label: '通讯地址',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      homeAddress: {
-        label: '家庭地址',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      postalCode: {
-        label: '邮政编码',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      telephoneNumber: {
-        label: '电话号码',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      email: {
-        label: '电子邮箱',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      intentionalCollegeCode: {
-        label: '意向学院代码',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      intentionalCollegeName: {
-        label: '意向学院名称',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      intentionalMajorCode: {
-        label: '意向专业代码',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      intentionalMajorName: {
-        label: '意向专业名称',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      intentionalStudyCategory: {
-        label: '意向攻读类型',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      intentionalTutorName: {
-        label: '意向导师姓名',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      undergraduateSchool: {
-        hint: '请输入本科毕业院校全称',
-        label: '毕业院校',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      schoolType: {
-        hint: '是985 211之类的吗，还是综合性大学、文理学院balabala',
-        label: '学校类型',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      department: {
-        label: '本科院系',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      major: {
-        label: '本科专业',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      enrollmentTime: {
-        label: '入学时间',
-        placeholder: '请输入',
-        type: 'component',
-        component: ()=> import('@/components/DateSelect.vue'),
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      graduationTime: {
-        label: '毕业时间',
-        placeholder: '请输入',
-        type: 'component',
-        component: ()=> import('@/components/DateSelect.vue'),
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      thesis: {
-        label: '论文情况',
-        placeholder: '请输入',
-        type: 'textarea',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      gradeNumber: {
-        label: '同年级人数',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      ranking: {
-        label: '预计专业排名',
-        placeholder: '请输入',
-        type: 'input',
-        value: '',
-        error: '',
-        rules: [
+  get type() {
+    return this.$store.state.registrationFormType
+  }
+  // type 为 getForm（获取已填写的报名表） 和 newForm（创建新的报名表）
+  get showRegistrationForm() {
+    return this.$store.state.showRegistrationForm
+  }
+  set showRegistrationForm(value) {
+    this.$store.commit('showRegistration', value)
+  }
 
-        ]
-      },
-      fiveSemesterRanking: {
-        label: '前五学期排名',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-        ]
-      },
-      remarks: {
-        label: '这是什么',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-        ]
-      },
-      foreignLanguageType: {
-        hint: '请填写主要掌握的一门外语类型',
-        label: '外语类型',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-        ]
-      },
-      foreignLanguageGrades: {
-        hint: '与填写得外语类型对应的外语成绩',
-        label: '外语成绩',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-      },
-      researchDirection: {
-        label: '研究方向',
-        placeholder: '请输入',
-        type: 'textarea',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-        ]
-      },
-      personalStatement: {
-        label: '个人陈述',
-        placeholder: '请输入',
-        type: 'textarea',
-        rows: 7,
-        maxlength: 1000,
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-    },
-    buttons: {
-      reset: {
-        name: 'reset',
-        type: 'reset',
-        text: '重置',
-      },
-      submit: {
-        name: 'submit',
-        text: '申请',
-        type: 'submit',
-        url: '/registration',
-        success: (resp: any)=>{
-          if(resp.data && resp.data.code === 10011){
-            // 登录成功
-            (this as any).$message('申请信息已提交')
-            this.$store.commit('showRegister', false)
-          }
-         
-        },
-        fail: (error: any) => {
-          (this as any).$message('未知错误，请重试')
-          console.log('login fail', error)
-        }
-      },
-      // cancel: {
-      //   name: 'cancel',
-      //   type:  'function',
-      //   text: '取消',
-      //   func: ()=>{
-      //     this.$store.commit('showRegister', false)
-      //   }
-      // }
-    }
+  queryForm() {
+    this.$store.commit('reviseType', 'getForm')
+    this.$store.commit('showRegistration', true)
+  }
+  signUp() {
+    this.$store.commit('reviseType', 'newForm')
+    this.$store.commit('showRegistration', true)
   }
 }
 </script>
 
 <style lang="less">
 .registration-wrapper {
-  width: 70%;
-  margin: 30px auto;
-  padding: 10px;
-  text-align: left;
-  .form-wrapper {
-    padding: 10px;
-  }
-  .el-select {
+    position: relative;
+    height: 100%;
     width: 100%;
+  .buttons-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .entrance {
+      width: 200px;
+      height: 160px;
+      border: 1px solid #2486b9;
+      border-radius: 4px;
+      margin: 10px;
+      text-align: middle;
+      line-height: 160px;
+      color: #2486b9;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      &:hover {
+        box-shadow: 0 0 3px #2486b9;
+      }
+    }
   }
 }
 </style>

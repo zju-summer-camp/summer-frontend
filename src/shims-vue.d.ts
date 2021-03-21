@@ -18,3 +18,11 @@ interface ItemConf {
 interface FormConf {
   [propName: string]: any;
 }
+
+interface RegiFormData {
+  [propName: string]: any;
+}
+
+interface Items {
+  [propName: string]: ItemConf
+}

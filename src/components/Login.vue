@@ -21,6 +21,8 @@
 import { Component, Vue } from 'vue-property-decorator'
 import axios from 'axios'
 import DqForm from '@/components/DqForm.vue'
+import { Message } from 'element-ui';
+
 
 
 @Component({
@@ -105,7 +107,10 @@ export default class Login extends Vue {
           if(resp.data && resp.data.code === 10011){
             // 登录成功
             this.$store.commit('showLogin', false);
-          (this as any).$message('登录成功')
+          Message({
+            message: '登录成功',
+            duration: 500,
+          })
           this.$store.commit('reviseLogin', resp.data)
           axios({
             url: '/accounts',
