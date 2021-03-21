@@ -32,6 +32,7 @@
           :placeholder="itemConfig.placeholder"
           v-model="itemConfig.value"
           :class="{'error-input': itemConfig.error}"
+          @blur="blurValid(itemConfig.value, formConfig)"
         />
         <el-input
           v-if="itemConfig.type === 'password'"
@@ -39,6 +40,16 @@
           :placeholder="itemConfig.placeholder"
           v-model="itemConfig.value"
           :class="{'error-input': itemConfig.error}"
+        />
+        <el-input
+          v-if="itemConfig.type === 'textarea'"
+          type="textarea"
+          :placeholder="itemConfig.placeholder"
+          v-model="itemConfig.value"
+          :class="{'error-input': itemConfig.error}"
+          :rows="itemConfig.rows || 4"
+          show-word-limit
+          :maxlength="itemConfig.maxlength || 500"
         />
         <component v-if="itemConfig.type === 'component'" :is="itemConfig.component" :itemConfig="itemConfig" :formConfig="formConfig"></component>
       </div>
@@ -56,12 +67,17 @@
   })
   export default class FormItem extends Vue{
 
-  @Watch('itemConfig.value')
-  @Debounce(500)
-  onValueChange(newVal: any){
-    // 数据变更后，检验是否符合 rules，不符合时将错误写入
-    this.valid(newVal, this.formConfig)
-  }
+  // 实时监听+debouce的方法，在数据重置时，最后一项会写入error
+  // 实时监听不加debounce耗费性能过多
+  // @Watch('itemConfig.value')
+  // onValueChange(newVal: any){
+  //   // 数据变更后，检验是否符合 rules，不符合时将错误写入
+  //   this.valid(newVal, this.formConfig)
+  //   // 如果该项为 required, 清空后写入默认错误
+  //   if(this.itemConfig.required && ! newVal){
+  //     this.itemConfig.error = '请输入' + this.itemConfig.label
+  //   }
+  // }
 
 
   @Prop({
@@ -86,6 +102,7 @@
   valid(value: any, formConfig: FormConf = {}){
     let flag = true
     this.itemConfig.rules && this.itemConfig.rules.forEach((rule: any)=>{
+      console.log('遍历rules', value)
       if(!rule.ok(value, formConfig)){
         this.itemConfig.error = rule.msg
         flag = false
@@ -94,6 +111,20 @@
     if(flag) {
       this.itemConfig.error = ''
     }
+    this.requiredValid(this.itemConfig)
+  }
+
+
+  // 校验必填项是否为空
+  requiredValid(itemConfig: ItemConf){
+    if(itemConfig.required && !itemConfig.value){
+      itemConfig.error = '请输入' + itemConfig.label
+    }
+  }
+
+  // 失焦时校验
+  blurValid(value: any, formConfig: FormConf = {}){
+    this.valid(value, formConfig)
   }
 }
 </script>
@@ -101,15 +132,16 @@
 .dq-form-item-wrapper {
   display: flex;
   flex-direction: row;
-  background-color: antiquewhite;
+  // background-color: antiquewhite;
   padding: 4px;
   margin: 8px;
   .label-part {
-    background-color: #baccd9;
+    // background-color: #baccd9;
     flex: 3;
     padding-top: 8px;
     text-align: right;
-    border-radius: 8px 0 0 px;
+    border-radius: 8px 0 0 8px;
+    background-color:  rgba(208, 223, 230, 0.5);
     .hint-wrapper {
       display: inline-block;
       width: 16px;
@@ -121,19 +153,19 @@
     }
 
     .label {
-      font-size: 16px;
+      font-size: 14px;
 
     }
 
     .required {
       display: inline-block;
-      width: 6px;
-      height: 6px;
+      width: 4px;
+      height:4px;
       margin: 4px;
       vertical-align: middle;
       border-radius: 50%;
       &.red {
-        background-color: red;
+        background-color: #F56C6C;
       }
     }
   }
@@ -147,9 +179,10 @@
     .input-wrapper {
       align-self: stretch;
       .error-input {
-        input {
+        textarea, input {
           border-color: red;
         }
+
       }
     }
     .error-wrapper {

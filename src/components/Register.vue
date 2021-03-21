@@ -24,7 +24,7 @@ export default class Register extends Vue {
   name = 'Register'
 
   formConfig = {
-    width: 500,
+    width: '500px',
     items: {
       phoneNumber: {
         hint: '请输入境内电话号码',

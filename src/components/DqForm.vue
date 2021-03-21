@@ -1,5 +1,5 @@
 <template>
-  <div class="dq-form-wrapper" :style="{'width': formConfig.width? formConfig.width+'px': 'auto'}">
+  <div class="dq-form-wrapper" :style="{'width': formConfig.width? formConfig.width : 'auto'}">
     <dq-form-item v-for="(value, key) in formConfig.items" :key="key" :itemConfig="value" :formConfig="formConfig"></dq-form-item>
     <div class="form-buttons-wrapper">
       <el-button  @click="clickBtn(value)" v-for="(value) in formConfig.buttons" :key="value.name">{{value.text}}</el-button>
@@ -45,7 +45,17 @@
           flag = false
         }
       })
+      flag = this.requiredValid(itemConfig) && flag
       return flag
+    }
+
+    // 校验必填项是否为空
+    requiredValid(itemConfig: ItemConf){
+      if(itemConfig.required && !itemConfig.value){
+        itemConfig.error = '请输入' + itemConfig.label
+        return false
+      }
+      return true
     }
 
     // 获取表单数据
@@ -93,7 +103,7 @@
       console.log('items', items)
       for(const key in items){
         items[key].value = ''  // value的初始值都是 string 吗，能否区分不同类型？
-        items[key].error = ''
+          items[key].error = ''
       }
     }
     
