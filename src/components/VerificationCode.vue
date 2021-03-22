@@ -11,7 +11,8 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import {get} from 'lodash'
+// import {get} from 'lodash'
+import { validKey }from '@/utils/form/validKey.ts'
 
 @Component({
 })
@@ -37,12 +38,9 @@ export default class VerificationCode extends Vue {
     console.log("in component", this.itemConfig)
   }
 
-  sendVerificationCode(){
-    const fn = get(this.formConfig, 'items.phoneNumber.ok')
-    const val = get(this.formConfig, 'items.phoneNumber.value')
-    console.log('val', val)
-    if(fn && fn(val, this.formConfig)) {
-      console.log('发送短信验证码')
+  sendVerificationCode(){    
+    if(validKey(this.formConfig.items.phoneNumber, this.formConfig)) {
+      alert('短信验证码发送成功，请注意查收')
     } else {
       alert('请输入正确的电话号码')
     }

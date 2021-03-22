@@ -10,6 +10,8 @@
   import { Component, Vue, Prop } from 'vue-property-decorator'
   import DqFormItem from '@/components/DqFormItem.vue'
   import axios from 'axios'
+  import { validKey }from '@/utils/form/validKey.ts'
+
 
   @Component({
     components: {
@@ -30,32 +32,9 @@
     validKeys(keys: string[]){
       let flag = true
       for(const key of keys){
-        flag = this.validKey(this.formConfig.items[key], this.formConfig) && flag
+        flag = validKey(this.formConfig.items[key], this.formConfig) && flag
       }
       return flag
-    }
-
-
-    // 传入配置，校验该项数据正确性，若错误，写入配置项的 error 中
-    validKey(itemConfig: ItemConf, formConfig: FormConf){
-      let flag = true
-      itemConfig && itemConfig.rules && itemConfig.rules.forEach((rule: any)=>{
-        if(!rule.ok(itemConfig.value, formConfig)){
-          itemConfig.error = rule.msg
-          flag = false
-        }
-      })
-      flag = this.requiredValid(itemConfig) && flag
-      return flag
-    }
-
-    // 校验必填项是否为空
-    requiredValid(itemConfig: ItemConf){
-      if(itemConfig.required && !itemConfig.value){
-        itemConfig.error = '请输入' + itemConfig.label
-        return false
-      }
-      return true
     }
 
     // 获取表单数据

@@ -34,17 +34,13 @@ export default class Register extends Vue {
         value: '',
         submitkey: 'phoneNumber',
         error: '',
+        required: true,
         rules: [
           {
             ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入电话号码'
-          },{
-            ok: (value: any) => {
               const reg = /^1[0-9]{10}$/
               console.log(reg.test(value))
-              return reg.test(value) ? true: true
+              return reg.test(value) ? true: false
             },
             msg: '请输入格式正确的手机号'
           }
@@ -58,62 +54,40 @@ export default class Register extends Vue {
         value: '',
         submitkey: 'verificationCode',
         error: '',
+        required: true,
         rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入手机验证码'
-          }
         ]
       },
       name: {
         label: '用户昵称',
         placeholder: '请输入用户昵称',
+        required: true,
         type: 'input',
         value: '',
         error: '',
         rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入用户昵称'
-          }
         ]
       },
       password1: {
         label: '密码',
-        required: false,
+        required: true,
         name: 'dandan',
         type: 'password',
         placeholder: '请输入密码',
         value: '',
         error: '',
         rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入密码'
-          }
         ]
       },
       password2: {
         label: '确认密码',
-        required: false,
+        required: true,
         name: 'dandan',
         type: 'password',
         placeholder: '请重复密码',
         value: '',
         error: '',
         rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入密码'
-          },
           {
             ok: (value: any, formConfig: FormConf) => {
               return value === formConfig.items.password1.value ? true : false
