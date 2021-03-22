@@ -9,6 +9,7 @@ export default new Vuex.Store({
     showRegisterModal: false,
     showRegistrationForm: false,
     registrationFormType: 'newForm',
+    showQueryModal: false,
     login: {
       token: ''
     },
@@ -41,6 +42,9 @@ export default new Vuex.Store({
     },
     reviseType(state, payload){
       state.registrationFormType = payload
+    },
+    showQuery(state, payload){
+      state.showQueryModal = payload
     }
     
   },

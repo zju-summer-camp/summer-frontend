@@ -12,23 +12,94 @@
     </div>
 
     <div class="form-wrapper" v-if="showRegistrationForm">
-      <registration-form :type="type"></registration-form>
+      <registration-form :type="type" :queryItems="queryItems"></registration-form>
     </div>
+
+    <el-dialog
+      title="查询报名表"
+      :visible.sync="showQueryModal"
+      width="30%">
+      <dq-form :formConfig="formConfig"></dq-form>
+    </el-dialog>
+
   </div>
 </template>
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
 import RegistrationForm from '@/components/RegistrationForm.vue'
+import DqForm from '@/components/DqForm.vue'
+import axios from 'axios'
+import { Message } from 'element-ui';
 
 
 @Component({
   components: {
-    RegistrationForm
+    RegistrationForm,
+    DqForm
   }
 })
 export default class Registration extends Vue {
   name = 'Registration'
+  get showQueryModal() {
+    return this.$store.state.showQueryModal
+  }
+
+  set showQueryModal(value){
+    this.$store.commit('showQuery', value)
+  }
+
+  queryItems: any = {}
+  formConfig = {
+    width: '100%',
+    items: {
+      phoneNumber: {
+        hint: '请输入与报名表关联的身份证号码',
+        label: '身份证号码',
+        placeholder: '请输入身份证号码',
+        type: 'input',
+        value: '',
+        required: true,
+        submitkey: 'accountId',
+        error: '',
+        rules: [
+        ]
+      },
+    },
+    buttons: {
+      cancel: {
+        name: 'cancel',
+        type:  'function',
+        text: '取消',
+        func: ()=>{
+          this.$store.commit('showQuery', false)
+        }
+      },
+      submit: {
+        name: 'submit',
+        text: '查询',
+        type: 'submit',
+        url: '/getRegistrationData',
+        success: (resp: any)=>{
+          Object.keys(resp.data).forEach((key)=>{
+             this.queryItems[key] = resp.data[key]
+          })
+          console.log('in querItems', resp.data)
+          // 获取账户信息成功
+          this.$store.commit('showQuery', false)
+          this.$store.commit('reviseType', 'getForm')
+          this.$store.commit('showRegistration', true)
+
+        },
+        fail: (error: any) => {
+          (this as any).$message('未知错误，请重试')
+          console.log('login fail', error)
+        }
+      }
+    }
+
+  }
+
   get type() {
     return this.$store.state.registrationFormType
   }
@@ -41,8 +112,8 @@ export default class Registration extends Vue {
   }
 
   queryForm() {
-    this.$store.commit('reviseType', 'getForm')
-    this.$store.commit('showRegistration', true)
+    this.showQueryModal = true
+    
   }
   signUp() {
     this.$store.commit('reviseType', 'newForm')
@@ -87,7 +158,7 @@ export default class Registration extends Vue {
       .text {
         font-size: 30px;
         color: #fff;
-        padding: 50px;
+        padding: 65px 0 45px 0;
         font-family: 'dq-font';
         letter-spacing: 0.2em;
       }
@@ -116,7 +187,7 @@ export default class Registration extends Vue {
           font-family: 'dq-font';
           font-size: 26px;
           font-weight: 400;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.1em;
           cursor: pointer;
           &:hover {
             box-shadow: 0 0 4px #fff;

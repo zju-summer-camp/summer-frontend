@@ -576,28 +576,33 @@ export default class RegistrationForm extends Vue {
   }
 
   
+  // @Prop({
+  //   type: String,
+  //   default: ''
+  // }) type !: string
+
   @Prop({
-    type: String,
-    default: ''
-  }) type !: string
+    type: Object,
+    default: null
+  }) queryItems !: object
 
   mounted() {
-    if(this.type === 'getForm'){
-      this.formConfig.buttons.submit.text = '更新'
-      this.getRegistrationData()
+    console.log('this.queryItems',this.queryItems)
+    if(this.queryItems){
+      this.writeDataToItems(this.queryItems, this.formConfig.items)
     }
   }
-  getRegistrationData() {
-    axios({
-      url: '/getRegistrationData',
-      data: {
-        accountId: ''
-      }
-    }).then(resp => {
-      console.log(resp)
-      this.writeDataToItems(resp.data, this.formConfig.items)
-    })
-  }
+  // getRegistrationData() {
+  //   axios({
+  //     url: '/getRegistrationData',
+  //     data: {
+  //       accountId: ''
+  //     }
+  //   }).then(resp => {
+  //     console.log(resp)
+  //     this.writeDataToItems(resp.data, this.formConfig.items)
+  //   })
+  // }
 
   writeDataToItems(data: RegiFormData = {}, items: Items = {}){
     for(const key in data){
