@@ -2,7 +2,7 @@
   <div class="dq-form-wrapper" :style="{'width': formConfig.width? formConfig.width : 'auto'}">
     <dq-form-item v-for="(value, key) in formConfig.items" :key="key" :itemConfig="value" :formConfig="formConfig"></dq-form-item>
     <div class="form-buttons-wrapper">
-      <el-button  @click="clickBtn(value)" v-for="(value) in formConfig.buttons" :key="value.name">{{value.text}}</el-button>
+      <el-button  @click="clickBtn(value)" v-for="(value) in formConfig.buttons" :key="value.name" :disabled="value.disabled">{{value.text}}</el-button>
     </div>
   </div>
 </template>

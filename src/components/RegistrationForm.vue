@@ -2,6 +2,9 @@
   <!-- 学生报名表组件 -->
   <div class="registration-form-wrapper">
     <div class="form-wrapper">
+      <div class="title">
+        浙江大学 {{new Date().getFullYear()}}年夏令营申请表
+      </div>
       <dq-form :formConfig="formConfig"></dq-form>
     </div>
   </div>
@@ -16,6 +19,7 @@ import {
 } from '@/const/registration.ts'
 import axios from 'axios'
 import DqForm from '@/components/DqForm.vue'
+import { reset } from '@/utils/form/reset.ts'
 
 
 @Component({
@@ -29,6 +33,7 @@ export default class RegistrationForm extends Vue {
     width: '100%',
     items: {
       name: {
+        title: '基本信息',
         label: '姓名',
         placeholder: '请输入姓名',
         type: 'input',
@@ -87,11 +92,27 @@ export default class RegistrationForm extends Vue {
           }
         ]
       },
-      certificateType: {
-        label: '身份证件类型',
+      // certificateType: {
+      //   label: '身份证件类型',
+      //   placeholder: '请输入',
+      //   type: 'select',
+      //   options: certificateType,
+      //   required: true,
+      //   value: '',
+      //   error: '',
+      //   rules: [
+      //     {
+      //       ok: (value: any) => {
+      //         return value? true: false
+      //       },
+      //       msg: '请输入'
+      //     }
+      //   ]
+      // },
+      certificateId: {
+        label: '身份证号',
         placeholder: '请输入',
-        type: 'select',
-        options: certificateType,
+        type: 'input',
         required: true,
         value: '',
         error: '',
@@ -104,11 +125,12 @@ export default class RegistrationForm extends Vue {
           }
         ]
       },
-      certificateId: {
-        label: '证件号码',
+      policalStatus: {
+        label: '政治面貌',
         placeholder: '请输入',
-        type: 'input',
+        type: 'select',
         required: true,
+        options: policalStatus,
         value: '',
         error: '',
         rules: [
@@ -137,24 +159,20 @@ export default class RegistrationForm extends Vue {
           }
         ]
       },
-      policalStatus: {
-        label: '用户昵称',
-        placeholder: '请输入',
-        type: 'input',
+      photo: {
+        label: '个人照片',
+        hint: '上传清晰的个人免冠正面照',
+        type: 'component',
+        component: ()=> import('@/components/Upload.vue'),
         required: true,
         value: '',
         error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
+        separator: true,
+        rules: []
       },
       correspondenceAddress: {
         label: '通讯地址',
+        title: '联系方式',
         placeholder: '请输入',
         type: 'input',
         required: true,
@@ -224,22 +242,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      intentionalCollegeCode: {
-        label: '意向学院代码',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
+        separator: true,
         rules: [
           {
             ok: (value: any) => {
@@ -250,23 +253,8 @@ export default class RegistrationForm extends Vue {
         ]
       },
       intentionalCollegeName: {
-        label: '意向学院名称',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      intentionalMajorCode: {
-        label: '意向专业代码',
+        label: '意向学院',
+        title:'申请项目',
         placeholder: '请输入',
         type: 'input',
         required: true,
@@ -282,7 +270,7 @@ export default class RegistrationForm extends Vue {
         ]
       },
       intentionalMajorName: {
-        label: '意向专业名称',
+        label: '意向专业',
         placeholder: '请输入',
         type: 'input',
         required: true,
@@ -320,6 +308,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        separator: true,
         rules: [
           {
             ok: (value: any) => {
@@ -330,43 +319,11 @@ export default class RegistrationForm extends Vue {
         ]
       },
       undergraduateSchool: {
-        hint: '请输入本科毕业院校全称',
-        label: '毕业院校',
-        placeholder: '请输入',
+        hint: '请输入本科学校及院系',
+        label: '本科学校及院系',
+        placeholder: '请输入本科学校及院系',
         type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      schoolType: {
-        hint: '是985 211之类的吗，还是综合性大学、文理学院balabala',
-        label: '学校类型',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      department: {
-        label: '本科院系',
-        placeholder: '请输入',
-        type: 'input',
+        title: '本科成绩',
         required: true,
         value: '',
         error: '',
@@ -429,68 +386,6 @@ export default class RegistrationForm extends Vue {
           }
         ]
       },
-      thesis: {
-        label: '论文情况',
-        placeholder: '请输入',
-        type: 'textarea',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      gradeNumber: {
-        label: '同年级人数',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
-        ]
-      },
-      ranking: {
-        label: '预计专业排名',
-        placeholder: '请输入',
-        type: 'input',
-        value: '',
-        error: '',
-        rules: [
-
-        ]
-      },
-      fiveSemesterRanking: {
-        label: '前五学期排名',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-        ]
-      },
-      remarks: {
-        label: '这是什么',
-        placeholder: '请输入',
-        type: 'input',
-        required: true,
-        value: '',
-        error: '',
-        rules: [
-        ]
-      },
       foreignLanguageType: {
         hint: '请填写主要掌握的一门外语类型',
         label: '外语类型',
@@ -511,21 +406,56 @@ export default class RegistrationForm extends Vue {
         value: '',
         error: '',
       },
-      researchDirection: {
-        label: '研究方向',
+      gradeNumber: {
+        label: '所学专业的同年级人数',
         placeholder: '请输入',
-        type: 'textarea',
+        type: 'input',
         required: true,
         value: '',
         error: '',
         rules: [
+          {
+            ok: (value: any) => {
+              return value? true: false
+            },
+            msg: '请输入'
+          }
+        ]
+      },
+      ranking: {
+        label: '预计专业排名',
+        placeholder: '请输入',
+        type: 'input',
+        required: true,
+        value: '',
+        error: '',
+        rules: [],
+        separator: true
+      }, 
+      thesis: {
+        label: '发表论文及其他研究成果情况',
+        placeholder: '请输入',
+        title: '研究成果',
+        type: 'textarea',
+        required: true,
+        rows: 10,
+        maxlength: 1000,
+        value: '',
+        error: '',
+        rules: [
+          {
+            ok: (value: any) => {
+              return value? true: false
+            },
+            msg: '请输入'
+          }
         ]
       },
       personalStatement: {
-        label: '个人陈述',
-        placeholder: '请输入',
+        label: '限制1000字以内',
+        placeholder: '请输入申请人个人陈述',
         type: 'textarea',
-        rows: 7,
+        rows: 20,
         maxlength: 1000,
         required: true,
         value: '',
@@ -539,18 +469,29 @@ export default class RegistrationForm extends Vue {
           }
         ]
       },
+      researchDirection: {
+        label: '申请备注',
+        placeholder: '请输入申请备注',
+        type: 'textarea',
+        value: '',
+        error: '',
+        rules: [
+        ]
+      },
     },
     buttons: {
       reset: {
         name: 'reset',
         type: 'reset',
         text: '重置',
+        disabled: false,
       },
       submit: {
         name: 'submit',
         text: '申请',
         type: 'submit',
         url: '/registration',
+        disabled: false,
         success: (resp: any)=>{
           if(resp.data && resp.data.code === 10011){
             // 登录成功
@@ -566,6 +507,7 @@ export default class RegistrationForm extends Vue {
       },
       cancel: {
         name: 'cancel',
+        disabled: false,
         type:  'function',
         text: '返回',
         func: ()=>{
@@ -576,10 +518,10 @@ export default class RegistrationForm extends Vue {
   }
 
   
-  // @Prop({
-  //   type: String,
-  //   default: ''
-  // }) type !: string
+  @Prop({
+    type: String,
+    default: ''
+  }) type !: string
 
   @Prop({
     type: Object,
@@ -587,9 +529,13 @@ export default class RegistrationForm extends Vue {
   }) queryItems !: object
 
   mounted() {
-    console.log('this.queryItems',this.queryItems)
     if(this.queryItems){
       this.writeDataToItems(this.queryItems, this.formConfig.items)
+    }
+    if(this.type === 'getForm'){
+      reset(this.formConfig.items)
+      this.formConfig.buttons.submit.disabled = true
+      this.formConfig.buttons.reset.disabled = true
     }
   }
   // getRegistrationData() {
@@ -621,8 +567,21 @@ export default class RegistrationForm extends Vue {
   margin: 30px auto;
   padding: 10px;
   text-align: left;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  box-shadow:   0 0 3px #dcfde6; 
   .form-wrapper {
     padding: 10px;
+    
+    .title {
+      margin-bottom: 30px;
+      font-size: 24px;
+      line-height: 80px;
+      text-align: center;
+      font-weight: 600;
+      border-bottom: #dcdfe6 solid 1px;
+      
+    }
   }
   .el-select {
     width: 100%;

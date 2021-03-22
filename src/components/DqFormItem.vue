@@ -1,7 +1,8 @@
 <template>
   <div class="dq-form-item-wrapper">
     <!-- 表单的基本项 -->
-
+    <div class="title-wrapper" v-if="itemConfig.title">{{itemConfig.title}}</div>
+  <div class="content">
     <div class="label-part">
       <!-- hint: 对该项填写内容的提示说明，只支持纯文本 -->
       <div class="hint-wrapper">
@@ -57,7 +58,7 @@
           <el-radio  v-for="option in itemConfig.options" :label="option.name" :key="option.value"></el-radio>
         </el-radio-group>
 
-        <el-select v-model="itemConfig.value" :placeholder="'请选择'+itemConfig.label" v-if="itemConfig.type === 'select'">
+        <el-select v-model="itemConfig.value" :placeholder="'请选择'+itemConfig.label" v-if="itemConfig.type === 'select'" :class="{'error-input': itemConfig.error}">
             <el-option
               v-for="option in itemConfig.options"
               :value="option.value"
@@ -67,6 +68,11 @@
       </div>
       <div class="error-wrapper" v-if="itemConfig.error">{{itemConfig.error}}</div>
     </div>
+  </div>
+
+  <div class="separator" v-if="itemConfig.separator">
+  </div>
+
 
   </div>
 </template>
@@ -142,68 +148,83 @@
 </script>
 <style lang="less">
 .dq-form-item-wrapper {
-  display: flex;
-  flex-direction: row;
-  // background-color: antiquewhite;
-  padding: 4px;
-  margin: 8px;
-  .label-part {
-    // background-color: #baccd9;
-    flex: 3;
-    padding-top: 8px;
-    text-align: right;
-    border-radius: 8px 0 0 8px;
-    background-color:  rgba(208, 223, 230, 0.5);
-    .hint-wrapper {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      margin: 0 8px;
-      .icon-color {
-        color: #2775b6;
+  .title-wrapper {
+    margin: 20px auto;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+
+  }
+
+  .content {
+      display: flex;
+      flex-direction: row;
+      // background-color: antiquewhite;
+      padding: 4px;
+      margin: 8px;
+    .label-part {
+      // background-color: #baccd9;
+      flex: 3;
+      padding-top: 8px;
+      text-align: right;
+      border-radius: 8px 0 0 8px;
+      background-color:  rgba(208, 223, 230, 0.5);
+      .hint-wrapper {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin: 0 8px;
+        .icon-color {
+          color: #2775b6;
+        }
+      }
+
+      .label {
+        font-size: 14px;
+
+      }
+
+      .required {
+        display: inline-block;
+        width: 4px;
+        height:4px;
+        margin: 4px;
+        vertical-align: middle;
+        border-radius: 50%;
+        &.red {
+          background-color: #F56C6C;
+        }
       }
     }
 
-    .label {
-      font-size: 14px;
+    .input-part {
+      // background-color: sandybrown;
+      flex: 7;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      .input-wrapper {
+        align-self: stretch;
+        .error-input {
+          textarea, input {
+            border-color: red;
+          }
 
-    }
-
-    .required {
-      display: inline-block;
-      width: 4px;
-      height:4px;
-      margin: 4px;
-      vertical-align: middle;
-      border-radius: 50%;
-      &.red {
-        background-color: #F56C6C;
+        }
+      }
+      .radio-wrapper {
+        margin-top: 8px;
+      }
+      .error-wrapper {
+        color: red;
+        font-size: 14px;
       }
     }
   }
 
-  .input-part {
-    // background-color: sandybrown;
-    flex: 7;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    .input-wrapper {
-      align-self: stretch;
-      .error-input {
-        textarea, input {
-          border-color: red;
-        }
-
-      }
-    }
-    .radio-wrapper {
-      margin-top: 8px;
-    }
-    .error-wrapper {
-      color: red;
-      font-size: 14px;
-    }
+  .separator {
+    border-top: 2px  dashed #dcdfe6;
+    margin: 20px;
   }
 }
 </style>

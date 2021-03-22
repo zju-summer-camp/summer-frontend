@@ -94,13 +94,22 @@ const registration = (options) => {
 
 const getRegistrationData = (options) => {
   console.log('in getRegistrationData',options)
-  return {
-    "name": "琼琼子",
-    "gender": "女",
-    "nation": "汉族",
-    "certificateType": "中华人民共和国居民身份证",
-    "certificateId": "20210314"
-   }
+  const { accountId } = JSON.parse(options.body)
+  if(accountId === '1111'){
+    return {
+      "name": "琼琼子",
+      "gender": "女",
+      "nation": "汉族",
+      "certificateType": "中华人民共和国居民身份证",
+      "certificateId": "20210314"
+     }
+  }
+  else {
+    return {
+      "code": 302
+    }
+  }
+
 }
 
 Mock.mock('/getRegistrationData', 'get', (options) => {

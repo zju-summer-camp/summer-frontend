@@ -19,6 +19,7 @@
       title="查询报名表"
       :visible.sync="showQueryModal"
       width="30%">
+      <span>hint：身份证号码： 1111</span>
       <dq-form :formConfig="formConfig"></dq-form>
     </el-dialog>
 
@@ -81,14 +82,20 @@ export default class Registration extends Vue {
         type: 'submit',
         url: '/getRegistrationData',
         success: (resp: any)=>{
-          Object.keys(resp.data).forEach((key)=>{
-             this.queryItems[key] = resp.data[key]
-          })
-          console.log('in querItems', resp.data)
-          // 获取账户信息成功
-          this.$store.commit('showQuery', false)
-          this.$store.commit('reviseType', 'getForm')
-          this.$store.commit('showRegistration', true)
+          if(resp.data.code===302){
+            // 粗糙地模拟一下失败的情况
+            Message('您输入的信息有误，请重试')
+          }else{
+            Object.keys(resp.data).forEach((key)=>{
+              this.queryItems[key] = resp.data[key]
+            })
+            console.log('in querItems', resp.data)
+            // 获取账户信息成功
+            this.$store.commit('showQuery', false)
+            this.$store.commit('reviseType', 'getForm')
+            this.$store.commit('showRegistration', true)
+          }
+
 
         },
         fail: (error: any) => {
@@ -177,15 +184,15 @@ export default class Registration extends Vue {
         .entrance {
           background-color: rgba(20, 74, 116, 0.8);
           width: 200px;
-          height: 100px;
+          height: 80px;
           border: 1px solid #dcdfe6;
           border-radius: 8px;
           margin: 40px;
           text-align: middle;
-          line-height: 100px;
+          line-height: 80px;
           color: #fff;
           font-family: 'dq-font';
-          font-size: 26px;
+          font-size: 22px;
           font-weight: 400;
           letter-spacing: 0.1em;
           cursor: pointer;
