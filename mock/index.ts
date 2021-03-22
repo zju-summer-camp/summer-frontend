@@ -93,6 +93,7 @@ const registration = (options) => {
 }
 
 const getRegistrationData = (options) => {
+  console.log('in getRegistrationData',options)
   return {
     "name": "琼琼子",
     "gender": "女",

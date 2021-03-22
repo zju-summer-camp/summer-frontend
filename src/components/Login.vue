@@ -111,7 +111,9 @@ export default class Login extends Vue {
             message: '登录成功',
             duration: 500,
           })
+          console.log('login data', resp.data)
           this.$store.commit('reviseLogin', resp.data)
+          localStorage.setItem('X-Summer-Camp-Auth-Token', resp.data.token)
           axios({
             url: '/accounts',
             data: {
@@ -120,6 +122,7 @@ export default class Login extends Vue {
           }).then((resp)=>{
             console.log(resp)
             this.$store.commit('reviseAccount', resp.data)
+            
           })
           }else if(resp.data && resp.data.code === 20011){
             (this as any).$message('账号或密码错误，请重试')

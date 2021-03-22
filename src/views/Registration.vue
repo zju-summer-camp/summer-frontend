@@ -42,13 +42,17 @@ export default class Registration extends Vue {
     this.$store.commit('reviseType', 'newForm')
     this.$store.commit('showRegistration', true)
   }
+
+  destroyed() {
+    this.$store.commit('showRegistration', false)
+  }
 }
 </script>
 
 <style lang="less">
 .registration-wrapper {
     position: relative;
-    height: 100%;
+    height: 80%;
     width: 100%;
   .buttons-wrapper {
     position: absolute;
