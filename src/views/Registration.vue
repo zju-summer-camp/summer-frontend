@@ -106,20 +106,20 @@ export default class Registration extends Vue {
         .entrance {
           background-color: rgba(20, 74, 116, 0.8);
           width: 200px;
-          height: 130px;
-          border-bottom: 1px solid #dcdfe6;
+          height: 100px;
+          border: 1px solid #dcdfe6;
           border-radius: 8px;
           margin: 40px;
           text-align: middle;
-          line-height: 130px;
+          line-height: 100px;
           color: #fff;
           font-family: 'dq-font';
           font-size: 26px;
-          font-weight: 600;
+          font-weight: 400;
           letter-spacing: 0.2em;
           cursor: pointer;
           &:hover {
-            box-shadow: 0 0 3px #fff;
+            box-shadow: 0 0 4px #fff;
           }
         }
       }
