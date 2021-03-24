@@ -532,8 +532,10 @@ export default class RegistrationForm extends Vue {
     if(this.queryItems){
       this.writeDataToItems(this.queryItems, this.formConfig.items)
     }
-    if(this.type === 'getForm'){
+    if(this.type === 'newForm'){
       reset(this.formConfig.items)
+    }
+    if(this.type === 'getForm'){
       this.formConfig.buttons.submit.disabled = true
       this.formConfig.buttons.reset.disabled = true
     }

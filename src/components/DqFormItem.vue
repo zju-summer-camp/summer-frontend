@@ -223,7 +223,7 @@
   }
 
   .separator {
-    border-top: 2px  dashed #dcdfe6;
+    border-top: 1px  dashed #dcdfe6;
     margin: 20px;
   }
 }
