@@ -18,7 +18,7 @@
     <el-dialog
       title="查询报名表"
       :visible.sync="showQueryModal"
-      width="30%">
+      width="40%">
       <span>hint：身份证号码： 1111</span>
       <dq-form :formConfig="formConfig"></dq-form>
     </el-dialog>
@@ -182,22 +182,22 @@ export default class Registration extends Vue {
         margin: auto;
         border-radius: 4px;
         .entrance {
-          background-color: rgba(20, 74, 116, 0.8);
+          background-color: rgba(20, 74, 116, 1);
           width: 200px;
-          height: 80px;
-          border: 1px solid #dcdfe6;
+          height: 70px;
           border-radius: 8px;
           margin: 40px;
           text-align: middle;
-          line-height: 80px;
+          line-height: 70px;
           color: #fff;
           font-family: 'dq-font';
-          font-size: 22px;
+          font-size: 20px;
           font-weight: 400;
           letter-spacing: 0.1em;
           cursor: pointer;
           &:hover {
             box-shadow: 0 0 4px #fff;
+            background-color: rgba(20, 74, 116, 0.8);
           }
         }
       }

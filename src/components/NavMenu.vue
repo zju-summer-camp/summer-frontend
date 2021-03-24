@@ -14,7 +14,7 @@
     </div>
     <div class="user-info-wrapper" v-if="logined">
       <span class="user-text">
-        {{ userInfo.phoneNumber}}-{{userInfo.name}}
+       用户： {{ userInfo.phoneNumber}}
       </span>
       <span @click="logOut" class="link-text">退出</span>    
     </div>
@@ -131,9 +131,12 @@
   display: flex;
   border-bottom: 1px solid #dcdfe6;
   align-items: center;
+  .user-info-wrapper{
+    margin: 0 24px;
+  }
   .user-text {
     color: #2d2e36;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
   }
 

@@ -199,7 +199,7 @@
 
     .input-part {
       // background-color: sandybrown;
-      flex: 7;
+      flex: 9;
       display: flex;
       flex-direction: column;
       align-items: start;

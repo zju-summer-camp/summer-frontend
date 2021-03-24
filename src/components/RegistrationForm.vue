@@ -30,7 +30,7 @@ import { reset } from '@/utils/form/reset.ts'
 export default class RegistrationForm extends Vue {
   name = 'registration-form'
   formConfig = {
-    width: '100%',
+    width: '90%',
     items: {
       name: {
         title: '基本信息',
