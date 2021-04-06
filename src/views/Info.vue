@@ -77,6 +77,17 @@
         :current-page.sync="currentPage">
       </el-pagination>
     </div>
+    <div class="drawer-wrapper">
+      <el-drawer
+        :title="details.title.name"
+        :visible.sync="drawer"
+        direction="rtl"
+        size="70%">
+        <div class="drawer-content">
+          {{details.title}}
+        </div>
+      </el-drawer>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -96,6 +107,14 @@ export default class Info extends Vue {
     academy: '',
   }
 
+  // 抽屉中的内容展示
+
+  drawer = false
+
+  details = {
+    title: ''
+  }
+
   getProjectList() {
     axios({
       url: '/projectlist',
@@ -112,6 +131,9 @@ export default class Info extends Vue {
   // 跳转到项目详情页
   projectDetail(index: number){
     console.log(this.tableData[index])
+    this.details.title = this.tableData[index]
+    // 可能需要调用接口查询报名表详情，目前先使用表格中的数据
+    this.drawer = true
   }
 
   pageChange(){

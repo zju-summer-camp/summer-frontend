@@ -1,5 +1,5 @@
 <template>
-  <!-- 学生报名表列表 -->
+  <!-- 管理后台-学生报名表列表 -->
   <div class="forms-wrapper">
         <div class="title-wrapper">
       <!-- <div class="title">
@@ -90,7 +90,7 @@
           <template slot-scope="scope">
             <div class="operation-wrapper">
               <el-button
-                @click.native.prevent="projectDetail(scope.$index,scope)"
+                @click.native.prevent="formDetail(scope.$index,scope)"
                 type="text"
                 size="small">
                 详情
@@ -135,7 +135,10 @@
         direction="rtl"
         size="70%">
         <div class="drawer-content">
-          {{details.title}}
+          <div class="form-content">
+              <registration-form-detail :queryItems="queryItems"></registration-form-detail>
+          </div>
+
           <div class="operations">
             <el-tooltip class="item" effect="dark" content="导出当前报名表" placement="top">
               <el-button
@@ -153,8 +156,14 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import axios from 'axios'
+import RegistrationFormDetail from '@/components/RegistrationFormDetail.vue'
 
-@Component
+
+@Component({
+  components: {
+    RegistrationFormDetail
+  }
+})
 export default class Forms extends Vue {
   tableData= []
   currentPage = 1
@@ -172,6 +181,8 @@ export default class Forms extends Vue {
     title: ''
   }
 
+  queryItems: any = {}
+
   getProjectList() {
     axios({
       url: '/formslist',
@@ -185,11 +196,25 @@ export default class Forms extends Vue {
     })
   }
 
-  // 跳转到项目详情页
-  projectDetail(index: number, scope: any){
+  // 跳转到报名报详情页
+  formDetail(index: number, scope: any){
     this.details.title = this.tableData[index]
-    // 可能需要调用接口查询报名表详情，目前先使用表格中的数据
-    this.drawer = true
+    axios({
+      url: '/getRegistrationData',
+      data: {
+        formID: '4399',
+        accountId:'1111'
+      }
+    })
+    .then((resp: any)=>{
+      console.log('报名表详情中拿到的数据', resp)
+      Object.keys(resp.data).forEach((key)=>{
+        this.queryItems[key] = resp.data[key]
+        this.drawer = true
+      })
+    })
+
+   
   }
   // 修改报名表状态
   changeStatus(index: number, scope: any){
@@ -275,10 +300,18 @@ export default class Forms extends Vue {
       color: #FFFFFF;
     }
   }
-  .drawer-wrapper {
-    .drawer-content {
-      .operations{
-        margin: 10px;
+  .el-drawer {
+    overflow: auto;
+    padding: 10px;
+    .drawer-wrapper {
+      .drawer-content {
+        .operations{
+          padding : 20px;
+        }
+        .form-content {
+border: 5px solid saddlebrown;          width: 100%;
+        }
+
       }
     }
   }
