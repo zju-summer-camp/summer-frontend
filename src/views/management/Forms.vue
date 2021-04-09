@@ -83,6 +83,15 @@
           label="入学时间"
           width="150">
         </el-table-column>
+
+        <el-table-column
+          label="状态"
+          width="100">
+          <template slot-scope="scope">
+            <div>{{statusOptions[scope.row.status] && statusOptions[scope.row.status].name}}</div>
+          </template>
+          
+        </el-table-column>
       
         <el-table-column
           label="操作"
@@ -96,23 +105,22 @@
                 详情
               </el-button>
 
-              <el-tooltip class="item" effect="dark" content="导出当前报名表" placement="top">
                 <el-button
                   @click.native.prevent="exportCurrent(scope.$index,scope)"
                   type="text"
                   size="small">
                   导出
                 </el-button>
-              </el-tooltip>
-              <el-tooltip class="item" effect="dark" :content="scope.row.passed ? '撤销，取消学生进入夏令营资格':'通过，学生获得进入夏令营资格'" placement="top">
+
+              
+              <!-- <el-tooltip class="item" effect="dark" content="修改学生报名表状态" placement="top"> -->
                 <el-button
                   @click.native.prevent="changeStatus(scope.$index,scope)"
                   type="text"
                   size="small">
-                  {{scope.row.passed ? '撤销':'通过'}}
+                  修改状态
                 </el-button>
-              </el-tooltip>
-              
+              <!-- </el-tooltip> -->
             </div>
           </template>
         </el-table-column>
@@ -128,6 +136,8 @@
         :current-page.sync="currentPage">
       </el-pagination>
     </div>
+
+    <!-- 侧弹窗 -->
     <div class="drawer-wrapper">
       <el-drawer
         :title="details.title.name"
@@ -138,7 +148,6 @@
           <div class="form-content">
               <registration-form-detail :queryItems="queryItems"></registration-form-detail>
           </div>
-
           <div class="operations">
             <el-tooltip class="item" effect="dark" content="导出当前报名表" placement="top">
               <el-button
@@ -151,17 +160,43 @@
         </div>
       </el-drawer>
     </div>
+
+    <!-- 修改状态提示框 -->
+    <el-dialog
+      title="修改状态"
+      :visible.sync="showReviseStatus"
+      width="40%"
+      :before-close="handleClose">
+      <div >
+        <div>当前正在修改 {{reviseStatusInfo.name}} 的报名表</div>
+      
+        <dq-form :formConfig="formConfig"></dq-form>
+
+         
+      </div>
+      <div>
+
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="showReviseStatus = false">取 消</el-button>
+        <el-button type="primary" @click="showReviseStatus = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import axios from 'axios'
 import RegistrationFormDetail from '@/components/RegistrationFormDetail.vue'
+import DqForm from '@/components/DqForm.vue'
+
 
 
 @Component({
   components: {
-    RegistrationFormDetail
+    RegistrationFormDetail,
+    DqForm
   }
 })
 export default class Forms extends Vue {
@@ -181,7 +216,53 @@ export default class Forms extends Vue {
     title: ''
   }
 
+  statusOptions = [
+    {
+      name: '待定',
+      value: 0
+    },
+    {
+      name: '通过',
+      value: 1
+    },
+    {
+      name: '拒绝',
+      value: 2
+    }
+  ]
+
   queryItems: any = {}
+
+  showReviseStatus = false
+  reviseStatusInfo = {}
+
+  
+  formConfig = {
+    width: '360px',
+    items: {
+      status: {
+        hint: '修改状态',
+        label: '状态',
+        placeholder: '请选择状态',
+        type: 'select',
+        options: this.statusOptions,
+        value: '',
+        submitkey: 'phoneNumber',
+        error: '',
+        required: true,
+        rules: [
+          {
+            ok: (value: any) => {
+              const reg = /^1[0-9]{10}$/
+              console.log(reg.test(value))
+              return reg.test(value) ? true: false
+            },
+            msg: '请输入格式正确的手机号'
+          }
+        ]
+      },
+    }
+  }
 
   getProjectList() {
     axios({
@@ -218,7 +299,14 @@ export default class Forms extends Vue {
   }
   // 修改报名表状态
   changeStatus(index: number, scope: any){
-    console.log(scope, index)
+    this.reviseStatusInfo = this.tableData[index]
+    this.showReviseStatus = true
+  }
+
+  handleClose(){
+    console.log('关闭修改状态弹窗')
+    // 发送修改数据请求
+    // 刷新报名表
   }
 
   pageChange(){
@@ -300,10 +388,16 @@ export default class Forms extends Vue {
       color: #FFFFFF;
     }
   }
+
+  .el-select {
+    width: 100%;
+  }
+
   .el-drawer {
     overflow: auto;
     padding: 10px;
     .drawer-wrapper {
+
       .drawer-content {
         .operations{
           padding : 20px;
@@ -315,5 +409,6 @@ border: 5px solid saddlebrown;          width: 100%;
       }
     }
   }
+  
 }
 </style>
