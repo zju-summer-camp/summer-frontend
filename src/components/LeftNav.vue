@@ -1,15 +1,23 @@
 <template>
   <div class="left-nav-wrapper">
-    <el-menu :default-active="activeIndex" class="el-menu-vertical-demo" @select="handleSelect"  :collapse="true">
+    <el-menu 
+      :default-active="activeIndex"    
+      class="el-menu-vertical-demo"
+      background-color="#baccd9" 
+      @select="handleSelect"
+      :collapse="false">
       <el-menu-item index="forms">
         <i class="el-icon-document"></i>
+        学生报名
       </el-menu-item>
       <el-menu-item index="statistics">
         <i class="el-icon-s-data"></i>
+         数据统计
       </el-menu-item>
       <el-submenu index="upload">
         <template slot="title">
           <i class="el-icon-s-order"></i>
+          项目资讯
         </template>
         <el-menu-item index="upload">上传资讯</el-menu-item>
         <el-menu-item index="articles">资讯管理</el-menu-item>
@@ -75,13 +83,13 @@ export default class LeftNav extends Vue {
 </script>
 
 <style lang="less">
-.left-nav-wrapper{ 
+.left-nav-wrapper{
   .el-menu {
     border-right: none;
   }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
-    min-height: 400px;
+    //min-height: 400px;
   }
 }
 </style>

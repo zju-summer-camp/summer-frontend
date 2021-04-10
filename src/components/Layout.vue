@@ -1,7 +1,11 @@
 <template>
   <div class="layout-wrapper">
-    <nav-menu></nav-menu>
-    <router-view class="view-wrapper"/>
+    <div class="nav-menu-wrapper">
+      <nav-menu></nav-menu>
+    </div>
+    <div class="view-wrapper">
+       <router-view/>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -18,12 +22,26 @@ export default class Layout extends Vue {
 </script>
 <style lang="less">
 .layout-wrapper{
-    height: 100%;
   width: 100%;
-.view-wrapper {
   height: 100%;
-  width: 100%;
-}
+  position: relative;
+  .view-wrapper {
+    position: absolute;
+    top: 70px;
+    bottom: 0px;
+    left:0;
+    right: 0;
+    overflow: scroll;
+  }
+  .nav-menu-wrapper {
+    width: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    z-index: 100;
+    background-color: white;
+  }
 }
 
 </style>

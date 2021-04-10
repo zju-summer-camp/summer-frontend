@@ -140,7 +140,7 @@ export default class Registration extends Vue {
 }
 .registration-wrapper {
     position: relative;
-    height: 80%;
+    height: 100%;
     width: 100%;
     .background-wrapper {
       height: 100%;

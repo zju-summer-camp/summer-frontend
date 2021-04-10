@@ -123,7 +123,7 @@
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="showReviseStatus = false">取 消</el-button>
-        <el-button type="primary" @click="showReviseStatus = false">确 定</el-button>
+        <el-button type="primary" @click="showReviseStatus = false">修 改</el-button>
       </span>
     </el-dialog>
   </div>

@@ -2,7 +2,7 @@
   <!-- 上传资讯，管理员及教师权限 -->
   <div class="upload-wrapper">
     upload
-    
+    <div></div>
 
   </div>
 </template>
