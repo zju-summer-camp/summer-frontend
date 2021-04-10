@@ -12,7 +12,8 @@ const getProjectList = function (options) {
       tutorTeam: Random.cname(),
       academy: '计算机科学与技术学院',
       overview: Random.cparagraph(), // Random.cparagraph(min, max) 随机生成一个中文段落，段落里的句子个数默认3-7个
-      deadline: Random.date() // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd；
+      deadline: Random.date(), // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd；
+      status: Math.round(Math.random()),
     }
     projectList.push(projectInfo)
   }

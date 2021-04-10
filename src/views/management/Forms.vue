@@ -1,11 +1,12 @@
 <template>
   <!-- 管理后台-学生报名表列表 -->
   <div class="forms-wrapper">
-        <div class="title-wrapper">
+      <div class="title-wrapper">
       <!-- <div class="title">
         学生报名表
       </div> -->
-      <div class="export-wrapper">
+        <div class="title">管理学生报名表</div>
+        <div class="export-wrapper">
         <el-tooltip class="item" effect="dark" content="批量导出已勾选报名表" placement="top">
           <el-button
             @click.native.prevent="exportBatch"
@@ -90,7 +91,6 @@
           <template slot-scope="scope">
             <div>{{statusOptions[scope.row.status] && statusOptions[scope.row.status].name}}</div>
           </template>
-          
         </el-table-column>
       
         <el-table-column
@@ -165,7 +165,7 @@
     <el-dialog
       title="修改状态"
       :visible.sync="showReviseStatus"
-      width="40%"
+      width="30%"
       :before-close="handleClose">
       <div >
         <div>当前正在修改 {{reviseStatusInfo.name}} 的报名表</div>
@@ -238,7 +238,7 @@ export default class Forms extends Vue {
 
   
   formConfig = {
-    width: '360px',
+    width: '100%',
     items: {
       status: {
         hint: '修改状态',
@@ -353,12 +353,13 @@ export default class Forms extends Vue {
 </script>
 <style lang="less">
 .forms-wrapper {
+  width: 100%;
   .filter-wrapper {
     margin: 20px auto 20px auto;
   }
   .table-wrapper{
     width: 90%;
-    margin: 20px auto;
+    //margin: 20px auto;
     .operation-wrapper {
       .el-button--text {
         color: #409eff;
@@ -367,8 +368,13 @@ export default class Forms extends Vue {
   }
   .title-wrapper {
     width: 90%;
-    height: 40px;
+    //height: 40px;
     margin: 30px auto 20px auto;
+    .title {
+      margin: 30px;
+      font-size: 18px;
+      font-weight: 500;
+    }
     // .title {
     //   height: 60px;
     //   float: left;
