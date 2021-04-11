@@ -45,6 +45,7 @@ export default class Upload extends Vue {
     width: 200px;
     bottom: 0;
     top: 0;
+
   }
   .content-wrapper {
     // border: 3px solid seagreen;

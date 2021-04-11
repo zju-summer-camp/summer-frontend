@@ -22,12 +22,14 @@ export default class Layout extends Vue {
 </script>
 <style lang="less">
 .layout-wrapper{
+  padding: 0;
+  margin: 0;
   width: 100%;
   height: 100%;
   position: relative;
   .view-wrapper {
     position: absolute;
-    top: 70px;
+    top: 63px;
     bottom: 0px;
     left:0;
     right: 0;
@@ -41,6 +43,7 @@ export default class Layout extends Vue {
     right:0;
     z-index: 100;
     background-color: white;
+        height: 62px;
   }
 }
 
