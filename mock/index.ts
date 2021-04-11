@@ -111,8 +111,21 @@ const getRegistrationData = (options) => {
       "code": 302
     }
   }
-
 }
+
+const upload = (options) => {
+  return {
+    "code": 10011 ,//&& 20011,
+    "message": "Signin success.",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+   }
+}
+
+
+Mock.mock('/upload', 'get', (options) => {
+  return upload(options)
+})
+
 
 Mock.mock('/getRegistrationData', 'get', (options) => {
   return getRegistrationData(options)
