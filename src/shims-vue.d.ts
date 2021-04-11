@@ -26,3 +26,7 @@ interface RegiFormData {
 interface Items {
   [propName: string]: ItemConf
 }
+
+interface Window {
+  [propName: string]: any;
+}

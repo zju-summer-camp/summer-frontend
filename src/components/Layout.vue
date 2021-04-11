@@ -41,7 +41,6 @@ export default class Layout extends Vue {
     top:0;
     left:0;
     right:0;
-    z-index: 100;
     background-color: white;
         height: 62px;
   }
