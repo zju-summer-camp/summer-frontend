@@ -2,10 +2,6 @@
   <!-- 管理后台-学生报名表列表 -->
   <div class="forms-wrapper">
       <div class="title-wrapper">
-      <!-- <div class="title">
-        学生报名表
-      </div> -->
-        <div class="title">管理学生报名表</div>
         <div class="export-wrapper">
         <el-tooltip class="item" effect="dark" content="批量导出已勾选报名表" placement="top">
           <el-button
@@ -354,12 +350,13 @@ export default class Forms extends Vue {
 <style lang="less">
 .forms-wrapper {
   width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
   .filter-wrapper {
-    margin: 20px auto 20px auto;
+    margin-bottom: 20px;
   }
   .table-wrapper{
-    width: 90%;
-    //margin: 20px auto;
+    width: 100%;
     .operation-wrapper {
       .el-button--text {
         color: #409eff;
@@ -369,26 +366,12 @@ export default class Forms extends Vue {
   .title-wrapper {
     width: 90%;
     //height: 40px;
-    margin: 30px auto 20px auto;
-    .title {
-      margin: 30px;
-      font-size: 18px;
-      font-weight: 500;
-    }
-    // .title {
-    //   height: 60px;
-    //   float: left;
-    //   font-weight: 600;
-    //   font-size: 20px;
-    // }
-    // .export-wrapper {
-    //   height: 60px;
-    //   float: left;
-    // }
+    margin: 10px auto;
   }
   
 
   .pagination-wrapper {
+    margin: 20px;
     .el-pagination.is-background .el-pager li:not(.disabled).active {
       background-color: #409eff;
       color: #FFFFFF;

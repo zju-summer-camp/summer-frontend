@@ -1,7 +1,6 @@
 <template>
   <!-- 上传资讯，管理员及教师权限 -->
   <div class="articles-wrapper">
-    <div class="title">项目资讯管理</div>
     <div class="filter-wrapper">
       <el-form :inline="true" :model="filters" class="demo-form-inline">
         <el-form-item label="导师团队">
@@ -253,14 +252,15 @@ export default class Articles extends Vue {
 </script>
 <style lang="less">
 .articles-wrapper {
+  padding: 20px;
     .el-select {
-    width: 100%;
-  }
-  .filter-wrapper {
-    margin: 30px auto 10px auto;
-  }
+      width: 100%;
+    }
+    .filter-wrapper {
+      margin: 20px auto;
+    }
   .table-wrapper{
-    width: 90%;
+    width: 100%;
     margin: 20px auto;
     .operation-wrapper {
       .el-button--text {
@@ -270,6 +270,7 @@ export default class Articles extends Vue {
   }
 
   .pagination-wrapper {
+    margin: 20px;
     .el-pagination.is-background .el-pager li:not(.disabled).active {
       background-color: #409eff;
       color: #FFFFFF;
