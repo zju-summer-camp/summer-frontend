@@ -1,11 +1,11 @@
 <template>
   <div class="editor-wrapper">
-    <editor :init="initConfig"></editor>
+    <editor :init="initConfig" :itemConfig="itemConfig" :formConfig="formConfig"></editor>
   </div>
 </template>
 <script lang="ts">
 
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import Editor from '@/components/Editors/index.ts'
 
 @Component({
@@ -14,6 +14,19 @@ import Editor from '@/components/Editors/index.ts'
   }
 })
 export default class Upload extends Vue {
+  @Prop({
+    type: Object,
+    default: () => {
+      return {}
+    }
+  }) itemConfig !: ItemConf
+
+  @Prop({
+    type: Object,
+    default: () => {
+      return {}
+    }
+  }) formConfig !: FormConf
   initConfig = {
     language:'zh_CN',
     plugins: 'print preview searchreplace autolink directionality visualchars fullscreen image link media template code table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount imagetools textpattern paste emoticons',

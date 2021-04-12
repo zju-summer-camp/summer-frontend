@@ -12,7 +12,7 @@ import { CreateElement, Vue } from 'vue/types/vue';
 import { ScriptLoader } from '../ScriptLoader';
 import { getTinymce } from '../TinyMCE';
 import { initEditor, isTextarea, mergePlugins, uuid, isNullOrUndefined } from '../Utils';
-import { editorProps, IPropTypes } from './EditorPropTypes';
+import { editorProps, PropTypes } from './EditorPropTypes';
 
 declare module 'vue/types/vue' {
   interface Vue {
@@ -25,8 +25,8 @@ declare module 'vue/types/vue' {
   }
 }
 
-export interface IEditor extends Vue {
-  $props: Partial<IPropTypes>;
+export interface Editor extends Vue {
+  $props: Partial<PropTypes>;
 }
 
 const renderInline = (h: CreateElement, id: string, tagName?: string) => {
@@ -42,7 +42,7 @@ const renderIframe = (h: CreateElement, id: string) => {
   });
 };
 
-const initialise = (ctx: IEditor) => () => {
+const initialise = (ctx: Editor) => () => {
   const finalInit = {
     ...ctx.$props.init,
     readonly: ctx.$props.disabled,
@@ -68,7 +68,7 @@ const initialise = (ctx: IEditor) => () => {
   getTinymce().init(finalInit);
 };
 
-export const Editor: ThisTypedComponentOptionsWithRecordProps<Vue, {}, {}, {}, IPropTypes> = {
+export const Editor: ThisTypedComponentOptionsWithRecordProps<Vue, {}, {}, {}, PropTypes> = {
   props: editorProps,
   created() {
     this.elementId = this.$props.id || uuid('tiny-vue');
@@ -82,7 +82,7 @@ export const Editor: ThisTypedComponentOptionsWithRecordProps<Vue, {}, {}, {}, I
   },
   mounted() {
     this.element = this.$el;
-
+    console.log('this.formConfig', this.formConfig)
     if (getTinymce() !== null) {
       initialise(this)();
     } else if (this.element && this.element.ownerDocument) {

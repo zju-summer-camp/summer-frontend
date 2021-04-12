@@ -10,18 +10,31 @@
         <i class="el-icon-document"></i>
         学生报名
       </el-menu-item>
-      <el-menu-item index="statistics">
-        <i class="el-icon-s-data"></i>
-         数据统计
+      <el-menu-item index="upload">
+        <i class="el-icon-s-order"></i>
+        上传资讯
       </el-menu-item>
-      <el-submenu index="upload">
+      <el-menu-item index="articles">
+        <i class="el-icon-s-data"></i>
+        资讯管理
+      </el-menu-item>
+
+      
+
+      <!-- <el-submenu index="upload">
         <template slot="title">
           <i class="el-icon-s-order"></i>
           项目资讯
         </template>
         <el-menu-item index="upload">上传资讯</el-menu-item>
         <el-menu-item index="articles">资讯管理</el-menu-item>
-      </el-submenu>
+      </el-submenu> -->
+
+      <!-- <el-menu-item index="statistics">
+        <i class="el-icon-s-data"></i>
+         数据统计
+      </el-menu-item> -->
+
     </el-menu>
   </div>
 </template>
@@ -37,10 +50,10 @@ export default class LeftNav extends Vue {
         window.location.hash = '#/management/forms'
         break
       }
-      case 'statistics': {
-        window.location.hash = '#/management/statistics'
-        break
-      }
+      // case 'statistics': {
+      //   window.location.hash = '#/management/statistics'
+      //   break
+      // }
       case 'upload': {
         window.location.hash = '#/management/upload'
         break

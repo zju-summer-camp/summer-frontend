@@ -8,7 +8,7 @@
 
 export type CopyProps<T> = { [P in keyof T]: any };
 
-export interface IPropTypes {
+export interface PropTypes {
   apiKey: string;
   cloudChannel: string;
   id: string;
@@ -23,9 +23,11 @@ export interface IPropTypes {
   value: string;
   disabled: boolean;
   tinymceScriptSrc: string;
+  itemConf: ItemConf;
+  formConfig: FormConf;
 }
 
-export const editorProps: CopyProps<IPropTypes> = {
+export const editorProps: CopyProps<PropTypes> = {
   apiKey: String,
   cloudChannel: String,
   id: String,
@@ -43,4 +45,10 @@ export const editorProps: CopyProps<IPropTypes> = {
     type: String,
     validator: (prop: string) => prop === 'html' || prop === 'text'
   },
+  itemConf: {
+    type: Object
+  },
+  formConfig: {
+    type: Object
+  }
 };

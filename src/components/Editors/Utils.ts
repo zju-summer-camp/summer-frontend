@@ -6,7 +6,7 @@
  *
  */
 
-import { IEditor } from './components/Editor';
+import { Editor } from './components/Editor';
 
 const validEvents = [
   'onActivate',
@@ -90,7 +90,7 @@ const bindHandlers = (initEvent: Event, listeners: any, editor: any): void => {
     });
 };
 
-const bindModelHandlers = (ctx: IEditor, editor: any) => {
+const bindModelHandlers = (ctx: Editor, editor: any) => {
   const modelEvents = ctx.$props.modelEvents ? ctx.$props.modelEvents : null;
   const normalizedEvents = Array.isArray(modelEvents) ? modelEvents.join(' ') : modelEvents;
 
@@ -99,7 +99,7 @@ const bindModelHandlers = (ctx: IEditor, editor: any) => {
   });
 };
 
-const initEditor = (initEvent: Event, ctx: IEditor, editor: any) => {
+const initEditor = (initEvent: Event, ctx: Editor, editor: any) => {
   const value = ctx.$props.value ? ctx.$props.value : '';
   const initialValue = ctx.$props.initialValue ? ctx.$props.initialValue : '';
 
