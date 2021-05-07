@@ -54,7 +54,8 @@
     sendAxios( config: any){
       axios({
         url: config.url,
-        data: this.getData()
+        data: this.getData(),
+        method: 'post'
       }).then((resp)=>{
         config.success(resp)
       }).catch((error)=>{

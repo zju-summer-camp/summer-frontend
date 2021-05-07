@@ -49,7 +49,7 @@ const login = function (options) {
     return {
       "code": 10011 ,//&& 20011,
       "message": "Signin success.",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+      "token": "23333"
      }
   } else {
     return {
@@ -80,7 +80,7 @@ const register = (options) => {
   return {
     "code": 10011 ,//&& 20011,
     "message": "Signin success.",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+    "token": "23333"
    }
 }
 
@@ -90,7 +90,7 @@ const registration = (options) => {
   return {
     "code": 10011 ,//&& 20011,
     "message": "Signin success.",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+    "token": "23333"
    }
 }
 
@@ -117,7 +117,7 @@ const upload = (options) => {
   return {
     "code": 10011 ,//&& 20011,
     "message": "Signin success.",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+    "token": "23333"
    }
 }
 

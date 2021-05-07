@@ -21,8 +21,8 @@
 import { Component, Vue } from 'vue-property-decorator'
 import axios from 'axios'
 import DqForm from '@/components/DqForm.vue'
-import { Message } from 'element-ui';
-
+import { Message } from 'element-ui'
+import { Apis } from '@/api/index.ts'
 
 
 @Component({
@@ -101,7 +101,7 @@ export default class Login extends Vue {
         name: 'submit',
         text: '登录',
         type: 'submit',
-        url: '/login',
+        url: Apis.login,
         success: (resp: any)=>{
           console.log(resp)
           if(resp.data && resp.data.code === 10011){
