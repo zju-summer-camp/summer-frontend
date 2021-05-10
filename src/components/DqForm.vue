@@ -55,7 +55,7 @@
       axios({
         url: config.url,
         data: this.getData(),
-        method: 'post'
+        method: config.method || 'post'
       }).then((resp)=>{
         config.success(resp)
       }).catch((error)=>{

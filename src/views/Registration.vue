@@ -81,6 +81,7 @@ export default class Registration extends Vue {
         text: '查询',
         type: 'submit',
         url: '/getRegistrationData',
+        method: 'get',
         success: (resp: any)=>{
           if(resp.data.code===302){
             // 粗糙地模拟一下失败的情况
