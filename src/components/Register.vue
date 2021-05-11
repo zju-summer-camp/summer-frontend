@@ -14,6 +14,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import DqForm from '@/components/DqForm.vue'
+import { Apis } from '@/api/index.ts'
 
 @Component({
   components: {
@@ -102,7 +103,7 @@ export default class Register extends Vue {
         name: 'submit',
         text: '注册',
         type: 'submit',
-        url: '/register',
+        url: Apis.signup,
         success: (resp: any)=>{
           if(resp.data && resp.data.code === 10011){
             // 登录成功

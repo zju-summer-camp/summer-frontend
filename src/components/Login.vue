@@ -101,10 +101,10 @@ export default class Login extends Vue {
         name: 'submit',
         text: '登录',
         type: 'submit',
-        url: Apis.login,
+        url: Apis.signin,
         success: (resp: any)=>{
-          console.log(resp)
-          if(resp.data && resp.data.code === 10011){
+          console.log("signin",resp)
+          if(resp.data && resp.data.Code === 10000){
             // 登录成功
             this.$store.commit('showLogin', false);
           Message({
@@ -113,7 +113,7 @@ export default class Login extends Vue {
           })
           console.log('login data', resp.data)
           this.$store.commit('reviseLogin', resp.data)
-          localStorage.setItem('X-Summer-Camp-Auth-Token', resp.data.token)
+          localStorage.setItem('X-Summer-Camp-Auth-Token', resp.data.Token)
           axios({
             url: '/accounts',
             data: {
