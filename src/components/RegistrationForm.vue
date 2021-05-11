@@ -20,7 +20,7 @@ import {
 import axios from 'axios'
 import DqForm from '@/components/DqForm.vue'
 import { reset } from '@/utils/form/reset.ts'
-
+import { Apis } from '@/api/index.ts'
 
 @Component({
   components: {
@@ -40,6 +40,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'Name',
         rules: [
           {
             ok: (value: any) => {
@@ -56,6 +57,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'Gneder',
         options: [
           {
             name: '男',
@@ -83,6 +85,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'Ethnicity',
         rules: [
           {
             ok: (value: any) => {
@@ -116,6 +119,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'IDNumber',
         rules: [
           {
             ok: (value: any) => {
@@ -150,6 +154,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'Birthday',
         rules: [
           {
             ok: (value: any) => {
@@ -490,7 +495,7 @@ export default class RegistrationForm extends Vue {
         name: 'submit',
         text: '申请',
         type: 'submit',
-        url: '/registration',
+        url: Apis.submitappform || '/registration',
         disabled: false,
         success: (resp: any)=>{
           if(resp.data && resp.data.code === 10011){
@@ -498,6 +503,7 @@ export default class RegistrationForm extends Vue {
             (this as any).$message('申请信息已提交')
             this.$store.commit('showRegister', false)
           }
+          console.log('提交了数据')
          
         },
         fail: (error: any) => {

@@ -52,15 +52,33 @@
     }
 
     sendAxios( config: any){
-      axios({
-        url: config.url,
-        data: this.getData(),
-        method: config.method || 'post'
-      }).then((resp)=>{
-        config.success(resp)
-      }).catch((error)=>{
-        config.fail(error)
-      })
+      // get 方法
+      if(config.method === 'get'){
+        axios.get( config.url, {
+          params: this.getData()
+        }).then((resp)=>{
+          config.success(resp)
+        }).catch((error)=>{
+          config.fail(error)
+        })
+      } else {
+        // 默认使用 post 方法
+        // 兜底呢？
+        axios({
+          url: config.url,
+          data: this.getData(),
+          method: 'post'
+        }).then((resp)=>{
+          config.success(resp)
+        }).catch((error)=>{
+          config.fail(error)
+        })
+      }
+      
+
+
+
+
     }
 
     clickBtn(buttonConfig: any){

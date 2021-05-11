@@ -14,7 +14,7 @@
     </div>
     <div class="user-info-wrapper" v-if="logined">
       <span class="user-text">
-       用户： {{ userInfo.phoneNumber}}
+       用户： {{ userInfo.phone }}
       </span>
       <span @click="logOut" class="link-text">退出</span>    
     </div>
@@ -55,7 +55,7 @@
   }
 
   get logined (){
-    return this.$store.state.accounts.accountId
+    return this.$store.state.accounts.phone
   }
   get userInfo() {
     return this.$store.state.accounts

@@ -114,14 +114,15 @@ export default class Login extends Vue {
           console.log('login data', resp.data)
           this.$store.commit('reviseLogin', resp.data)
           localStorage.setItem('X-Summer-Camp-Auth-Token', resp.data.Token)
+          console.log('登录成功')
           axios({
-            url: '/accounts',
+            url: Apis.accountstatus || '/accounts',
             data: {
               accountId: this.$store.state.accountId
             }
           }).then((resp)=>{
-            console.log(resp)
-            this.$store.commit('reviseAccount', resp.data)
+            console.log('in reviseAccount', resp)
+            this.$store.commit('reviseAccount', resp.data && resp.data.Data)
             
           })
           }else if(resp.data && resp.data.code === 20011){

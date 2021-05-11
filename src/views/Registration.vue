@@ -32,6 +32,7 @@ import RegistrationForm from '@/components/RegistrationForm.vue'
 import DqForm from '@/components/DqForm.vue'
 import axios from 'axios'
 import { Message } from 'element-ui';
+import { Apis } from '@/api/index.ts'
 
 
 @Component({
@@ -61,7 +62,7 @@ export default class Registration extends Vue {
         type: 'input',
         value: '',
         required: true,
-        submitkey: 'accountId',
+        submitkey: 'IDNumber',
         error: '',
         rules: [
         ]
@@ -80,7 +81,7 @@ export default class Registration extends Vue {
         name: 'submit',
         text: '查询',
         type: 'submit',
-        url: '/getRegistrationData',
+        url: Apis.queryappform || '/getRegistrationData',
         method: 'get',
         success: (resp: any)=>{
           if(resp.data.code===302){

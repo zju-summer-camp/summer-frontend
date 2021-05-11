@@ -17,7 +17,8 @@ export default new Vuex.Store({
     accounts: {
       accountId: '',
       phoneNumber: '',
-      name: ''
+      name: '',
+      phone: ''
     }
   },
   mutations: {
@@ -29,13 +30,14 @@ export default new Vuex.Store({
     },
     reviseAccountId(state, payload) {
       state.accountId = payload
+      
     },
     reviseLogin(state, payload) {
       console.log('login', payload)
       state.login = payload
     },
     reviseAccount(state, payload) {
-      state.accounts = payload
+      state.accounts = payload      
     },
     showRegistration(state, payload) {
       state.showRegistrationForm = payload
