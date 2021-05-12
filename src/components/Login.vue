@@ -8,9 +8,6 @@
     :close-on-click-modal="false"
     :show-close="false">
     <div class="login-content">
-      <span>
-        hint: 账号：1111， 密码：1111
-      </span>
       <div>没有账号? <span @click="showRegister" class="link-text">去注册</span></div>
       <dq-form :formConfig="formConfig"></dq-form>
     </div>

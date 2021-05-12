@@ -2,6 +2,7 @@
   <!-- 学生报名表组件 -->
   <div class="registration-form-wrapper">
     <div class="form-wrapper">
+     
       <div class="title">
         浙江大学 {{new Date().getFullYear()}}年夏令营申请表
       </div>
@@ -50,6 +51,23 @@ export default class RegistrationForm extends Vue {
           }
         ]
       },
+      nickname: {
+        label: '昵称',
+        placeholder: '请输入昵称',
+        type: 'input',
+        required: true,
+        value: '',
+        error: '',
+        submitkey: 'NickName',
+        rules: [
+          {
+            ok: (value: any) => {
+              return value? true: false
+            },
+            msg: '请输入'
+          }
+        ]
+      },
       gender: {
         label: '性别',
         placeholder: '请输入',
@@ -57,7 +75,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
-        submitkey: 'Gneder',
+        submitkey: 'Gender',
         options: [
           {
             name: '男',
@@ -95,23 +113,24 @@ export default class RegistrationForm extends Vue {
           }
         ]
       },
-      // certificateType: {
-      //   label: '身份证件类型',
-      //   placeholder: '请输入',
-      //   type: 'select',
-      //   options: certificateType,
-      //   required: true,
-      //   value: '',
-      //   error: '',
-      //   rules: [
-      //     {
-      //       ok: (value: any) => {
-      //         return value? true: false
-      //       },
-      //       msg: '请输入'
-      //     }
-      //   ]
-      // },
+      certificateType: {
+        label: '身份证件类型',
+        placeholder: '请输入',
+        type: 'select',
+        options: certificateType,
+        required: true,
+        value: '',
+        error: '',
+        submitkey: 'IDType',
+        rules: [
+          {
+            ok: (value: any) => {
+              return value? true: false
+            },
+            msg: '请输入'
+          }
+        ]
+      },
       certificateId: {
         label: '身份证号',
         placeholder: '请输入',
@@ -137,6 +156,7 @@ export default class RegistrationForm extends Vue {
         options: policalStatus,
         value: '',
         error: '',
+        submitkey: 'PoliticalStatus',
         rules: [
           {
             ok: (value: any) => {
@@ -170,9 +190,10 @@ export default class RegistrationForm extends Vue {
         type: 'component',
         component: ()=> import('@/components/Upload.vue'),
         required: true,
-        value: '',
+        value: new ArrayBuffer(8),
         error: '',
         separator: true,
+        submitkey: 'Photo',
         rules: []
       },
       correspondenceAddress: {
@@ -183,6 +204,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'CorrespondAddress',
         rules: [
           {
             ok: (value: any) => {
@@ -199,6 +221,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'FamilyAddress',
         rules: [
           {
             ok: (value: any) => {
@@ -215,6 +238,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'PostalCode',
         rules: [
           {
             ok: (value: any) => {
@@ -231,6 +255,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'TelephoneNumber',
         rules: [
           {
             ok: (value: any) => {
@@ -248,6 +273,7 @@ export default class RegistrationForm extends Vue {
         value: '',
         error: '',
         separator: true,
+        submitkey: 'Email',
         rules: [
           {
             ok: (value: any) => {
@@ -265,6 +291,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'IntentionalCollegeName',
         rules: [
           {
             ok: (value: any) => {
@@ -281,6 +308,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'StudyDirection',
         rules: [
           {
             ok: (value: any) => {
@@ -297,6 +325,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'IntentionalStudyCategory',
         rules: [
           {
             ok: (value: any) => {
@@ -314,6 +343,7 @@ export default class RegistrationForm extends Vue {
         value: '',
         error: '',
         separator: true,
+        submitkey: 'IntentionalTutorName',
         rules: [
           {
             ok: (value: any) => {
@@ -332,6 +362,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'UnderGraduateSchool',
         rules: [
           {
             ok: (value: any) => {
@@ -348,6 +379,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'Major',
         rules: [
           {
             ok: (value: any) => {
@@ -365,6 +397,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'EnrollmentTime',
         rules: [
           {
             ok: (value: any) => {
@@ -382,6 +415,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'GraduationTime',
         rules: [
           {
             ok: (value: any) => {
@@ -399,6 +433,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'SecondLanguageType',
         rules: [
         ]
       },
@@ -410,6 +445,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'SecondLanguageGrade'
       },
       gradeNumber: {
         label: '所学专业的同年级人数',
@@ -418,6 +454,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'GradeNumber',
         rules: [
           {
             ok: (value: any) => {
@@ -435,6 +472,7 @@ export default class RegistrationForm extends Vue {
         value: '',
         error: '',
         rules: [],
+        submitkey: 'Ranking',
         separator: true
       }, 
       thesis: {
@@ -447,6 +485,7 @@ export default class RegistrationForm extends Vue {
         maxlength: 1000,
         value: '',
         error: '',
+        submitkey: 'Thesis',
         rules: [
           {
             ok: (value: any) => {
@@ -465,6 +504,7 @@ export default class RegistrationForm extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'PersonalIntroduction',
         rules: [
           {
             ok: (value: any) => {
@@ -474,15 +514,16 @@ export default class RegistrationForm extends Vue {
           }
         ]
       },
-      researchDirection: {
-        label: '申请备注',
-        placeholder: '请输入申请备注',
-        type: 'textarea',
-        value: '',
-        error: '',
-        rules: [
-        ]
-      },
+      // researchDirection: {
+      //   label: '申请备注',
+      //   placeholder: '请输入申请备注',
+      //   type: 'textarea',
+      //   value: '',
+      //   error: '',
+      //   submitkey: 'researchDirection',
+      //   rules: [
+      //   ]
+      // },
     },
     buttons: {
       reset: {
@@ -495,6 +536,7 @@ export default class RegistrationForm extends Vue {
         name: 'submit',
         text: '申请',
         type: 'submit',
+        body: 'form',
         url: Apis.submitappform || '/registration',
         disabled: false,
         success: (resp: any)=>{

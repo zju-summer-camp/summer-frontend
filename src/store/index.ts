@@ -23,6 +23,7 @@ export default new Vuex.Store({
   },
   mutations: {
     showLogin(state, payload) {
+      localStorage.setItem("X-Summer-Camp-Auth-Token","")
       state.showLoginModal = payload
     },
     showRegister(state, payload) {
@@ -33,7 +34,6 @@ export default new Vuex.Store({
       
     },
     reviseLogin(state, payload) {
-      console.log('login', payload)
       state.login = payload
     },
     reviseAccount(state, payload) {

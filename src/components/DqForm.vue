@@ -52,6 +52,7 @@
     }
 
     sendAxios( config: any){
+      // 这部分代码需要整理下，更好地实现发送请求的配置化功能
       // get 方法
       if(config.method === 'get'){
         axios.get( config.url, {
@@ -61,7 +62,42 @@
         }).catch((error)=>{
           config.fail(error)
         })
-      } else {
+      } 
+      else if(config.body === 'form'){
+         axios({
+          url: config.url,
+          data: this.getData(),
+          method: 'post',
+            transformRequest: [
+            function (data) {
+              // let ret = ''
+              // for (const it in data) {
+              //     ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+              // }
+              // ret = ret.substring(0, ret.lastIndexOf('&'));
+              
+              // console.log("in transformRequest",ret)
+              // return ret
+              console.log('data',data)
+              const tmp = new FormData();
+              for (const key in data) {
+                  tmp.append(key, data[key])
+              }
+              // 尝试一下第二种方式
+              return tmp
+            }
+          ],
+          // headers: {
+          //   'Content-Type': 'application/x-www-form-urlencoded'
+          //   // 'Content-Type': 'multipart/form-data' 
+          // }
+        }).then((resp)=>{
+          config.success(resp)
+        }).catch((error)=>{
+          config.fail(error)
+        })
+      }
+      else{
         // 默认使用 post 方法
         // 兜底呢？
         axios({
@@ -83,7 +119,8 @@
 
     clickBtn(buttonConfig: any){
       if(buttonConfig.type === 'submit'){
-        if(!this.validKeys(this.keys)) return
+        // 非常暂时地去除校验
+        // if(!this.validKeys(this.keys)) return
         this.sendAxios(buttonConfig)
       }
       else if(buttonConfig.type === 'reset'){

@@ -19,7 +19,6 @@
       title="查询报名表"
       :visible.sync="showQueryModal"
       width="40%">
-      <span>hint：身份证号码： 1111</span>
       <dq-form :formConfig="formConfig"></dq-form>
     </el-dialog>
 

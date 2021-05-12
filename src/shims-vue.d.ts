@@ -30,3 +30,7 @@ interface Items {
 interface Window {
   [propName: string]: any;
 }
+
+interface HTMLElement {
+  [propName: string]: any;
+}
