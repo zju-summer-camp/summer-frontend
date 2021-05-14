@@ -14,15 +14,14 @@
     </div>
     <div class="user-info-wrapper" v-if="logined">
       <span class="user-text">
-       用户： {{ userInfo.phone }}
+       用户： {{ userInfo.phone }} {{ userInfo?.Roles?.name}}
       </span>
       <span @click="logOut" class="link-text">退出</span>    
     </div>
-    <div class="buttons-wrapper" v-else>
-      <!-- 按钮不会被点击，只是摆设hh -->
+    <!-- <div class="buttons-wrapper" v-else>
       <el-button  @click="showLogin">登录</el-button>
       <el-button  @click="showRegister">注册</el-button>
-    </div>
+    </div> -->
     <!-- 登录与注册modal框 -->
     <login></login>
     <register></register>

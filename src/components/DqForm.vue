@@ -118,18 +118,23 @@
     }
 
     clickBtn(buttonConfig: any){
-      if(buttonConfig.type === 'submit'){
-        // 非常暂时地去除校验
-        // if(!this.validKeys(this.keys)) return
-        this.sendAxios(buttonConfig)
-      }
-      else if(buttonConfig.type === 'reset'){
-        this.reset()
-      }else if(buttonConfig.type === 'function'){
-        buttonConfig.func()
-      }
-      else{
-        alert('功能开发中 ')
+      const data = this.getData()
+      if(buttonConfig.func){
+        buttonConfig.func(data)
+      } else {
+        if(buttonConfig.type === 'submit'){
+          // 非常暂时地去除校验
+          // if(!this.validKeys(this.keys)) return
+          this.sendAxios(buttonConfig)
+        }
+        else if(buttonConfig.type === 'reset'){
+          this.reset()
+        }else if(buttonConfig.type === 'function'){
+          buttonConfig.func()
+        }
+        else{
+          alert('功能开发中 ')
+        }
       }
     }
 

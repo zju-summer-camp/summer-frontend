@@ -97,43 +97,42 @@ export default class Login extends Vue {
       submit: {
         name: 'submit',
         text: '登录',
-        type: 'submit',
-        url: Apis.signin,
-        success: (resp: any)=>{
-          console.log("signin",resp)
-          if(resp.data && resp.data.Code === 10000){
-            // 登录成功
-            this.$store.commit('showLogin', false);
-          Message({
-            message: '登录成功',
-            duration: 500,
-          })
-          console.log('login data', resp.data)
-          this.$store.commit('reviseLogin', resp.data)
-          localStorage.setItem('X-Summer-Camp-Auth-Token', resp.data.Token)
-          console.log('登录成功')
+        func: (data: any)=>{
+          // 登录前清空已有 token
+          localStorage.setItem("X-Summer-Camp-Auth-Token","")
           axios({
-            url: Apis.accountstatus || '/accounts',
-            data: {
-              accountId: this.$store.state.accountId
-            }
+            url: Apis.signin,
+            data: data,
+            method: 'post'
           }).then((resp)=>{
-            console.log('in reviseAccount', resp)
-            this.$store.commit('reviseAccount', resp.data && resp.data.Data)
-            
-          })
-          }else if(resp.data && resp.data.code === 20011){
-            (this as any).$message('账号或密码错误，请重试')
-            console.log('login fail')
-          } else {
+            if(resp.data && resp.data.Code === 10000){
+            // 登录成功
+              this.$store.commit('showLogin', false);
+              Message({
+                message: '登录成功',
+                duration: 500,
+              })
+              this.$store.commit('reviseLogin', resp.data)
+              // 设置 token
+              localStorage.setItem('X-Summer-Camp-Auth-Token', resp.data.Token)
+
+              axios({
+                url: Apis.accountstatus,
+                data: {
+                  accountId: this.$store.state.accountId
+                }
+              }).then((resp)=>{
+                this.$store.commit('reviseAccount', resp.data && resp.data.Data)
+              })
+              }else if(resp.data && resp.data.code === 20011){
+                (this as any).$message('账号或密码错误，请重试')
+              } else {
+                (this as any).$message('未知错误，请重试')
+              }
+          }).catch(()=>{
             (this as any).$message('未知错误，请重试')
-            console.log('login fail')
-          }
+          })
         },
-        fail: (error: any) => {
-          (this as any).$message('未知错误，请重试')
-          console.log('login fail', error)
-        }
       },
       reset: {
         name: 'reset',

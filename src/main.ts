@@ -8,11 +8,10 @@ import axios from 'axios'
 
 axios.interceptors.request.use(
   config => {
-    console.log('in interceptors, what is config', config)
+    // 在请求头中添加 X-Summer-Camp-Auth-Token 请求头
     const token = localStorage.getItem("X-Summer-Camp-Auth-Token")
     if(token){
       config.headers['X-Summer-Camp-Auth-Token'] = token
-      console.log('hello i got token', token)
     }
     return config
   }, 
