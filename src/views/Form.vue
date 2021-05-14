@@ -27,7 +27,7 @@
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
-import AppForm from '@/components/AppForm.vue'
+import AppForm from '@/components/FormContent.vue'
 import DqForm from '@/components/DqForm.vue'
 import axios from 'axios'
 import { Message } from 'element-ui';
@@ -80,28 +80,26 @@ export default class Registration extends Vue {
         name: 'submit',
         text: '查询',
         type: 'submit',
-        url: Apis.queryappform || '/getRegistrationData',
-        method: 'get',
-        success: (resp: any)=>{
-          if(resp.data.code===302){
-            // 粗糙地模拟一下失败的情况
-            Message('您输入的信息有误，请重试')
-          }else{
-            Object.keys(resp.data).forEach((key)=>{
-              this.queryItems[key] = resp.data[key]
-            })
-            console.log('in querItems', resp.data)
-            // 获取账户信息成功
-            this.$store.commit('showQuery', false)
-            this.$store.commit('reviseType', 'getForm')
-            this.$store.commit('showRegistration', true)
-          }
+        func: (data: any)=> {
+          axios.get( Apis.queryappform , {
+            params: data
+          }).then((resp)=>{
+            if(resp.data.code===302){
+              Message('您输入的信息有误，请重试')
+            }else{
+              const data = resp.data && resp.data.Data
+              Object.keys(data).forEach((key)=>{
+                this.queryItems[key] = data[key]
+              })
 
-
-        },
-        fail: (error: any) => {
-          (this as any).$message('未知错误，请重试')
-          console.log('signin fail', error)
+              // 获取报名表信息成功
+              this.$store.commit('showQuery', false)
+              this.$store.commit('reviseType', 'getForm')
+              this.$store.commit('showRegistration', true)
+            }
+          }).catch((error)=>{
+            (this as any).$message('未知错误，请重试')
+          })
         }
       }
     }
@@ -126,6 +124,14 @@ export default class Registration extends Vue {
   signUp() {
     this.$store.commit('reviseType', 'newForm')
     this.$store.commit('showRegistration', true)
+  }
+
+  mounted() {
+    this.$store.commit('showRegistration', false)
+  }
+  
+  beforeDestroy() {
+    this.$store.commit('showRegistration', false)
   }
 
   destroyed() {

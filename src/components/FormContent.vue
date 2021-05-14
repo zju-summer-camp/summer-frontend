@@ -42,6 +42,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'Name',
+        echokey: 'name',
         rules: [
           {
             ok: (value: any) => {
@@ -59,6 +60,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'NickName',
+        echokey:'nick_name',
         rules: [
           {
             ok: (value: any) => {
@@ -76,6 +78,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'Gender',
+        echokey:'gender',
         options: [
           {
             name: '男',
@@ -104,6 +107,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'Ethnicity',
+        echokey:'ethnicity',
         rules: [
           {
             ok: (value: any) => {
@@ -122,6 +126,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'IDType',
+        echokey:'id_type',
         rules: [
           {
             ok: (value: any) => {
@@ -139,6 +144,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'IDNumber',
+        echokey:'id_number',
         rules: [
           {
             ok: (value: any) => {
@@ -157,6 +163,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'PoliticalStatus',
+        echokey:'political_status',
         rules: [
           {
             ok: (value: any) => {
@@ -175,6 +182,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'Birthday',
+        echokey:'birthday',
         rules: [
           {
             ok: (value: any) => {
@@ -194,6 +202,7 @@ export default class AppForm extends Vue {
         error: '',
         separator: true,
         submitkey: 'Photo',
+        echokey:'photo',
         rules: []
       },
       correspondenceAddress: {
@@ -205,6 +214,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'CorrespondAddress',
+        echokey:'correspond_address',
         rules: [
           {
             ok: (value: any) => {
@@ -222,6 +232,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'FamilyAddress',
+        echokey:'family_address',
         rules: [
           {
             ok: (value: any) => {
@@ -239,6 +250,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'PostalCode',
+        echokey:'postal_code',
         rules: [
           {
             ok: (value: any) => {
@@ -256,6 +268,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'TelephoneNumber',
+        echokey:'telephone_number',
         rules: [
           {
             ok: (value: any) => {
@@ -274,6 +287,7 @@ export default class AppForm extends Vue {
         error: '',
         separator: true,
         submitkey: 'Email',
+        echokey:'email',
         rules: [
           {
             ok: (value: any) => {
@@ -292,6 +306,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'IntentionalCollegeName',
+        echokey:'intentional_college_name',
         rules: [
           {
             ok: (value: any) => {
@@ -309,6 +324,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'StudyDirection',
+        echokey:'study_direction',
         rules: [
           {
             ok: (value: any) => {
@@ -326,6 +342,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'IntentionalStudyCategory',
+        echokey:'intentional_study_category',
         rules: [
           {
             ok: (value: any) => {
@@ -344,6 +361,7 @@ export default class AppForm extends Vue {
         error: '',
         separator: true,
         submitkey: 'IntentionalTutorName',
+        echokey:'intentional_tutor_name',
         rules: [
           {
             ok: (value: any) => {
@@ -363,6 +381,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'UnderGraduateSchool',
+        echokey:'under_graduate_school',
         rules: [
           {
             ok: (value: any) => {
@@ -380,6 +399,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'Major',
+        echokey:'major',
         rules: [
           {
             ok: (value: any) => {
@@ -398,6 +418,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'EnrollmentTime',
+        echokey:'enrollment_time',
         rules: [
           {
             ok: (value: any) => {
@@ -416,6 +437,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'GraduationTime',
+        echokey:'GraduationTime',
         rules: [
           {
             ok: (value: any) => {
@@ -434,6 +456,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'SecondLanguageType',
+        echokey:'second_language_type',
         rules: [
         ]
       },
@@ -445,7 +468,8 @@ export default class AppForm extends Vue {
         required: true,
         value: '',
         error: '',
-        submitkey: 'SecondLanguageGrade'
+        submitkey: 'SecondLanguageGrade',
+        echokey:'second_language_grade',
       },
       gradeNumber: {
         label: '所学专业的同年级人数',
@@ -455,6 +479,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'GradeNumber',
+        echokey:'GradeNumber',
         rules: [
           {
             ok: (value: any) => {
@@ -473,6 +498,7 @@ export default class AppForm extends Vue {
         error: '',
         rules: [],
         submitkey: 'Ranking',
+        echokey:'ranking',
         separator: true
       }, 
       thesis: {
@@ -486,6 +512,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'Thesis',
+        echokey:'thesis',
         rules: [
           {
             ok: (value: any) => {
@@ -505,6 +532,7 @@ export default class AppForm extends Vue {
         value: '',
         error: '',
         submitkey: 'PersonalIntroduction',
+        echokey:'personal_introduction',
         rules: [
           {
             ok: (value: any) => {
@@ -535,6 +563,7 @@ export default class AppForm extends Vue {
       submit: {
         name: 'submit',
         text: '申请',
+        type: 'submit',
         disabled: false,
         func: (data: any)=> {
           axios({
@@ -553,11 +582,14 @@ export default class AppForm extends Vue {
               ],
 
           }).then((resp)=>{
-            if(resp.data && resp.data.code === 10011){
-            // 登录成功
-            (this as any).$message('申请信息已提交')
-            this.$store.commit('showSignup', false)
-          }
+            console.log(resp)
+            if(resp && resp.data && resp.data.Code){
+              const code = resp.data.Code
+              if(code === 10000){
+                alert('报名成功')
+                this.$store.commit('showRegistration', false)
+              }
+            }
           }).catch((error)=>{
              (this as any).$message('未知错误，请重试')
           })
@@ -598,23 +630,18 @@ export default class AppForm extends Vue {
       this.formConfig.buttons.reset.disabled = true
     }
   }
-  // getRegistrationData() {
-  //   axios({
-  //     url: '/getRegistrationData',
-  //     data: {
-  //       accountId: ''
-  //     }
-  //   }).then(resp => {
-  //     console.log(resp)
-  //     this.writeDataToItems(resp.data, this.formConfig.items)
-  //   })
-  // }
 
-  writeDataToItems(data: RegiFormData = {}, items: Items = {}){
-    for(const key in data){
-      const item = items[key]
-      if(item){
-        item.value = data[key]
+  writeDataToItems(data: RegiFormData = {}, formconfig: Items = {}){
+    // 将数据写入表单配置中
+    for(const key in formconfig){
+      const itemConfig = formconfig[key]
+      if(itemConfig){
+        const echokey = itemConfig.echokey
+        if(echokey){
+          itemConfig.value = data[echokey]
+        }else{
+          itemConfig.value = data[key]
+        }
       }
     }
   }

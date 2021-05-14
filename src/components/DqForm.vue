@@ -76,11 +76,6 @@
           config.fail(error)
         })
       }
-      
-
-
-
-
     }
 
     clickBtn(buttonConfig: any){

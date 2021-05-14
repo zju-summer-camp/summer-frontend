@@ -31,7 +31,7 @@ const routes: Array<RouteConfig> = [
       },
       {
         path: 'forms',
-        component: () => import('../views/management/Forms.vue')
+        component: () => import('../views/management/FormList.vue')
       },
       {
         path: 'upload',

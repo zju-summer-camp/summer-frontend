@@ -12,6 +12,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import DqForm from '@/components/DqForm.vue'
 import InfoEditor from '@/components/InfoEditor.vue'
+import axios from 'axios'
 
 @Component({
   components: {
@@ -89,17 +90,21 @@ export default class Upload extends Vue {
         name: 'submit',
         text: '上传',
         type: 'submit',
-        url: '/upload',
-        success: (resp: any)=>{
-          if(resp.data && resp.data.code === 10011){
-            // 登录成功
-            (this as any).$message('上传成功')
-          }
+        dunc: (data: any)=> {
+          axios({
+            url: '/upload',
+            data: data,
+            method: 'post'
+          }).then((resp)=>{
+            if(resp.data && resp.data.code === 10011){
+              // 登录成功
+              (this as any).$message('上传成功')
+            }
+          }).catch((error)=>{
+            (this as any).$message('未知错误，请重试')
+            console.log('upload fail', error)
+          })
         },
-        fail: (error: any) => {
-          (this as any).$message('未知错误，请重试')
-          console.log('upload fail', error)
-        }
       },
       reset: {
         name: 'reset',
