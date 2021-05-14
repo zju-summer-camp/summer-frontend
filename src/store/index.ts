@@ -5,12 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: sessionStorage.getItem('state') ? JSON.parse(sessionStorage.getItem('state') as string):{
-    showLoginModal: true,
-    showRegisterModal: false,
+    showSigninModal: true,
+    showSignupModal: false,
     showRegistrationForm: false,
     registrationFormType: 'newForm',
     showQueryModal: false,
-    login: {
+    signin: {
       token: ''
     },
     accountId: 1,
@@ -22,19 +22,19 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    showLogin(state, payload) {
+    showSignin(state, payload) {
       localStorage.setItem("X-Summer-Camp-Auth-Token","")
-      state.showLoginModal = payload
+      state.showSigninModal = payload
     },
-    showRegister(state, payload) {
-      state.showRegisterModal = payload
+    showSignup(state, payload) {
+      state.showSignupModal = payload
     },
     reviseAccountId(state, payload) {
       state.accountId = payload
       
     },
-    reviseLogin(state, payload) {
-      state.login = payload
+    reviseSignin(state, payload) {
+      state.signin = payload
     },
     reviseAccount(state, payload) {
       state.accounts = payload      

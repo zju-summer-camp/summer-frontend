@@ -9,13 +9,13 @@
 import { uuid } from './Utils';
 
 export type callbackFn = () => void;
-export interface IStateObj {
+export interface StateObj {
   listeners: callbackFn[];
   scriptId: string;
   scriptLoaded: boolean;
 }
 
-const createState = (): IStateObj => {
+const createState = (): StateObj => {
   return {
     listeners: [],
     scriptId: uuid('tiny-script'),
@@ -29,7 +29,7 @@ interface ScriptLoader {
 }
 
 const CreateScriptLoader = (): ScriptLoader => {
-  let state: IStateObj = createState();
+  let state: StateObj = createState();
 
   const injectScriptTag = (scriptId: string, doc: Document, url: string, callback: callbackFn) => {
     const scriptTag = doc.createElement('script');

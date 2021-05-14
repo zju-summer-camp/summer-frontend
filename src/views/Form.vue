@@ -12,7 +12,7 @@
     </div>
 
     <div class="form-wrapper" v-if="showRegistrationForm">
-      <registration-form :type="type" :queryItems="queryItems"></registration-form>
+      <app-form :type="type" :queryItems="queryItems"></app-form>
     </div>
 
     <el-dialog
@@ -27,7 +27,7 @@
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
-import RegistrationForm from '@/components/RegistrationForm.vue'
+import AppForm from '@/components/AppForm.vue'
 import DqForm from '@/components/DqForm.vue'
 import axios from 'axios'
 import { Message } from 'element-ui';
@@ -36,7 +36,7 @@ import { Apis } from '@/api/index.ts'
 
 @Component({
   components: {
-    RegistrationForm,
+    AppForm,
     DqForm
   }
 })
@@ -101,7 +101,7 @@ export default class Registration extends Vue {
         },
         fail: (error: any) => {
           (this as any).$message('未知错误，请重试')
-          console.log('login fail', error)
+          console.log('signin fail', error)
         }
       }
     }

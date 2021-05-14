@@ -42,7 +42,7 @@ const getFormsList = function (options) {
   return projectList
 }
 
-const login = function (options) {
+const signin = function (options) {
   const { phoneNumber, password } = JSON.parse(options.body)
   console.log(phoneNumber,password)
   if (phoneNumber === '1111' && password === '1111') {
@@ -76,7 +76,7 @@ const accounts = function (options) {
   }
 }
 
-const register = (options) => {
+const signup = (options) => {
   return {
     "code": 10011 ,//&& 20011,
     "message": "Signin success.",
@@ -135,12 +135,12 @@ Mock.mock('/registration', 'get', (options) => {
   return registration(options)
 })
 
-Mock.mock('/register', 'get', (options) => {
-  return register(options)
+Mock.mock('/signup', 'get', (options) => {
+  return signup(options)
 })
 
-Mock.mock('/login', 'get', (options) => {
-  return login(options)
+Mock.mock('/signin', 'get', (options) => {
+  return signin(options)
 })
 
 Mock.mock('/formslist', 'get',(options) => {

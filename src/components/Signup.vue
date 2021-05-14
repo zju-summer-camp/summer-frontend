@@ -1,12 +1,12 @@
 <template>
     <el-dialog
       title="注册新账户"
-      :visible.sync="showRegisterModal"
+      :visible.sync="showSignupModal"
       width="30%"
-      class="register-card-wrapper"
+      class="signup-card-wrapper"
       :close-on-press-escape="false"
       :close-on-click-modal="false">
-      <div class="register-content">
+      <div class="signup-content">
         <dq-form :formConfig="formConfig"></dq-form>
       </div>
     </el-dialog>
@@ -15,14 +15,15 @@
 import { Component, Vue } from 'vue-property-decorator'
 import DqForm from '@/components/DqForm.vue'
 import { Apis } from '@/api/index.ts'
+import axios from 'axios'
 
 @Component({
   components: {
     DqForm
   }
 })
-export default class Register extends Vue {
-  name = 'Register'
+export default class Signup extends Vue {
+  name = 'Signup'
 
   formConfig = {
     width: '500px',
@@ -103,20 +104,22 @@ export default class Register extends Vue {
         name: 'submit',
         text: '注册',
         type: 'submit',
-        url: Apis.signup,
-        success: (resp: any)=>{
+        func: (data: any)=>{
+          axios({
+          url: Apis.signup,
+          data: data,
+          method: 'post'
+        }).then((resp)=>{
           if(resp.data && resp.data.code === 10011){
-            // 登录成功
-            this.dontShowRegister();
+            this.dontShowSignup();
             (this as any).$message('注册成功')
-            this.$store.commit('showRegister', false)
+            this.$store.commit('showSignup', false)
           }
-         
-        },
-        fail: (error: any) => {
+        }).catch((error)=>{
           (this as any).$message('未知错误，请重试')
-          console.log('login fail', error)
-        }
+          console.log('signin fail', error)
+        })
+        },
       },
       reset: {
         name: 'reset',
@@ -125,33 +128,32 @@ export default class Register extends Vue {
       },
       cancel: {
         name: 'cancel',
-        type:  'function',
         text: '取消',
         func: ()=>{
-          this.$store.commit('showRegister', false)
+          this.$store.commit('showSignup', false)
         }
       }
     }
   }
 
-  get showRegisterModal(){
-    return this.$store.state.showRegisterModal
+  get showSignupModal(){
+    return this.$store.state.showSignupModal
   }
-  set showRegisterModal(value){
-    this.$store.commit('showRegister', value)
-  }
-
-  showRegister(){
-    this.$store.commit('showRegister', true)
+  set showSignupModal(value){
+    this.$store.commit('showSignup', value)
   }
 
-  dontShowRegister(){
-    this.$store.commit('showRegister', false)
+  showSignup(){
+    this.$store.commit('showSignup', true)
+  }
+
+  dontShowSignup(){
+    this.$store.commit('showSignup', false)
   }
 }
 </script>
 <style lang="less">
-.register-card-wrapper{
+.signup-card-wrapper{
   .el-dialog {
     min-width: 540px;
   }

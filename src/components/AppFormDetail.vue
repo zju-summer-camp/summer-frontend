@@ -16,7 +16,7 @@ import {
   nation,
   certificateType,
   policalStatus,
-} from '@/const/registration.ts'
+} from '@/const/Form.ts'
 import axios from 'axios'
 import DqForm from '@/components/DqForm.vue'
 import { reset } from '@/utils/form/reset.ts'
@@ -27,7 +27,7 @@ import { reset } from '@/utils/form/reset.ts'
     DqForm
   }
 })
-export default class RegistrationForm extends Vue {
+export default class AppFormDetail extends Vue {
   name = 'registration-form'
   formConfig = {
     width: '100%',

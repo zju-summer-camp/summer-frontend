@@ -12,31 +12,31 @@
         <el-menu-item index="4">管理后台</el-menu-item>
       </el-menu>
     </div>
-    <div class="user-info-wrapper" v-if="logined">
+    <div class="user-info-wrapper" v-if="signined">
       <span class="user-text">
-       用户： {{ userInfo.phone }} {{ userInfo?.Roles?.name}}
+       用户： {{ userInfo.phone }} {{ userInfo.Roles.name}}
       </span>
       <span @click="logOut" class="link-text">退出</span>    
     </div>
     <!-- <div class="buttons-wrapper" v-else>
-      <el-button  @click="showLogin">登录</el-button>
-      <el-button  @click="showRegister">注册</el-button>
+      <el-button  @click="showSignin">登录</el-button>
+      <el-button  @click="showSignup">注册</el-button>
     </div> -->
     <!-- 登录与注册modal框 -->
-    <login></login>
-    <register></register>
+    <signin></signin>
+    <signup></signup>
   </div>
 </template>
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
-  import Login from '@/components/Login.vue'
-  import Register from '@/components/Register.vue'
+  import Signin from '@/components/Signin.vue'
+  import Signup from '@/components/Signup.vue'
 
   @Component({
     components: {
-      Login,
-      Register
+      Signin,
+      Signup
     }
   })
   export default class NavMenu extends Vue{
@@ -44,16 +44,16 @@
   activeIndex = '1'
 
   // 登录
-  showLogin(){
-    this.$store.commit('showLogin', true)
+  showSignin(){
+    this.$store.commit('showSignin', true)
   }
 
   // 注册
-  showRegister(){
-    this.$store.commit('showRegister', true)
+  showSignup(){
+    this.$store.commit('showSignup', true)
   }
 
-  get logined (){
+  get signined (){
     return this.$store.state.accounts.phone
   }
   get userInfo() {
@@ -63,7 +63,7 @@
 
   logOut(){
     this.$store.commit('reviseAccount', {})
-    this.showLogin()
+    this.showSignin()
   }
 
     handleSelect(key: string, keyPath: string) {

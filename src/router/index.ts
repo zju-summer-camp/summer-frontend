@@ -13,7 +13,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/regis',
     name: 'Registration',
-    component: () => import('../views/Registration.vue')
+    component: () => import('../views/Form.vue')
   },
   {
     path: '/info',

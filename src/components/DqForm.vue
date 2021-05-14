@@ -63,40 +63,6 @@
           config.fail(error)
         })
       } 
-      else if(config.body === 'form'){
-         axios({
-          url: config.url,
-          data: this.getData(),
-          method: 'post',
-            transformRequest: [
-            function (data) {
-              // let ret = ''
-              // for (const it in data) {
-              //     ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-              // }
-              // ret = ret.substring(0, ret.lastIndexOf('&'));
-              
-              // console.log("in transformRequest",ret)
-              // return ret
-              console.log('data',data)
-              const tmp = new FormData();
-              for (const key in data) {
-                  tmp.append(key, data[key])
-              }
-              // 尝试一下第二种方式
-              return tmp
-            }
-          ],
-          // headers: {
-          //   'Content-Type': 'application/x-www-form-urlencoded'
-          //   // 'Content-Type': 'multipart/form-data' 
-          // }
-        }).then((resp)=>{
-          config.success(resp)
-        }).catch((error)=>{
-          config.fail(error)
-        })
-      }
       else{
         // 默认使用 post 方法
         // 兜底呢？
@@ -119,22 +85,21 @@
 
     clickBtn(buttonConfig: any){
       const data = this.getData()
+
+      // 校验表单项
+      if(buttonConfig.type === 'submit'){
+        console.log('校验表单填写项是否正确...')
+        if(!this.validKeys(this.keys)) return
+        console.log('校验通过')
+      }
+      // 调用用户传入的函数
       if(buttonConfig.func){
         buttonConfig.func(data)
-      } else {
-        if(buttonConfig.type === 'submit'){
-          // 非常暂时地去除校验
-          // if(!this.validKeys(this.keys)) return
-          this.sendAxios(buttonConfig)
-        }
-        else if(buttonConfig.type === 'reset'){
-          this.reset()
-        }else if(buttonConfig.type === 'function'){
-          buttonConfig.func()
-        }
-        else{
-          alert('功能开发中 ')
-        }
+      }
+
+      // 情况表单项
+      if(buttonConfig.type === 'reset'){
+        this.reset()
       }
     }
 

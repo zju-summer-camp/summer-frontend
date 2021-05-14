@@ -1,14 +1,14 @@
 <template>
   <el-dialog
     title="请登录后使用"
-    :visible.sync="showLoginModal"
+    :visible.sync="showSigninModal"
     width="30%"
-    class="login-card-wrapper"
+    class="signin-card-wrapper"
     :close-on-press-escape="false"
     :close-on-click-modal="false"
     :show-close="false">
-    <div class="login-content">
-      <div>没有账号? <span @click="showRegister" class="link-text">去注册</span></div>
+    <div class="signin-content">
+      <div>没有账号? <span @click="showSignup" class="link-text">去注册</span></div>
       <dq-form :formConfig="formConfig"></dq-form>
     </div>
 
@@ -27,25 +27,25 @@ import { Apis } from '@/api/index.ts'
     DqForm
   }
 })
-export default class Login extends Vue {
-  name = 'Login'
+export default class Signin extends Vue {
+  name = 'Signin'
 
-  get showLoginModal(){
-    return this.$store.state.showLoginModal
+  get showSigninModal(){
+    return this.$store.state.showSigninModal
   }
-  set showLoginModal(value){
-    this.$store.commit('showRegister', value)
-  }
-
-  showRegister(){
-    this.$store.commit('showRegister', true)
+  set showSigninModal(value){
+    this.$store.commit('showSignup', value)
   }
 
-  showLogin(){
-    this.$store.commit('showLogin', true)
+  showSignup(){
+    this.$store.commit('showSignup', true)
   }
-  dontShowLogin(){
-    this.$store.commit('showLogin', false)
+
+  showSignin(){
+    this.$store.commit('showSignin', true)
+  }
+  dontShowSignin(){
+    this.$store.commit('showSignin', false)
   }
 
   formConfig = {
@@ -97,6 +97,7 @@ export default class Login extends Vue {
       submit: {
         name: 'submit',
         text: '登录',
+        type: 'submit',
         func: (data: any)=>{
           // 登录前清空已有 token
           localStorage.setItem("X-Summer-Camp-Auth-Token","")
@@ -107,12 +108,12 @@ export default class Login extends Vue {
           }).then((resp)=>{
             if(resp.data && resp.data.Code === 10000){
             // 登录成功
-              this.$store.commit('showLogin', false);
+              this.$store.commit('showSignin', false);
               Message({
                 message: '登录成功',
                 duration: 500,
               })
-              this.$store.commit('reviseLogin', resp.data)
+              this.$store.commit('reviseSignin', resp.data)
               // 设置 token
               localStorage.setItem('X-Summer-Camp-Auth-Token', resp.data.Token)
 
@@ -145,7 +146,7 @@ export default class Login extends Vue {
 }
 </script>
 <style lang="less">
-.login-card-wrapper{
+.signin-card-wrapper{
   .el-dialog {
     min-width: 540px;
   }

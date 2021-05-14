@@ -17,7 +17,7 @@ import {
   nation,
   certificateType,
   policalStatus,
-} from '@/const/registration.ts'
+} from '@/const/Form.ts'
 import axios from 'axios'
 import DqForm from '@/components/DqForm.vue'
 import { reset } from '@/utils/form/reset.ts'
@@ -28,7 +28,7 @@ import { Apis } from '@/api/index.ts'
     DqForm
   }
 })
-export default class RegistrationForm extends Vue {
+export default class AppForm extends Vue {
   name = 'registration-form'
   formConfig = {
     width: '90%',
@@ -535,23 +535,33 @@ export default class RegistrationForm extends Vue {
       submit: {
         name: 'submit',
         text: '申请',
-        type: 'submit',
-        body: 'form',
-        url: Apis.submitappform || '/registration',
         disabled: false,
-        success: (resp: any)=>{
-          if(resp.data && resp.data.code === 10011){
+        func: (data: any)=> {
+          axios({
+            url: Apis.submitappform,
+            data: data,
+            method: 'post',
+              transformRequest: [
+                function (data) {
+                  // 将数据转化为 formdata
+                  const tmp = new FormData();
+                  for (const key in data) {
+                      tmp.append(key, data[key])
+                  }
+                  return tmp
+                }
+              ],
+
+          }).then((resp)=>{
+            if(resp.data && resp.data.code === 10011){
             // 登录成功
             (this as any).$message('申请信息已提交')
-            this.$store.commit('showRegister', false)
+            this.$store.commit('showSignup', false)
           }
-          console.log('提交了数据')
-         
+          }).catch((error)=>{
+             (this as any).$message('未知错误，请重试')
+          })
         },
-        fail: (error: any) => {
-          (this as any).$message('未知错误，请重试')
-          console.log('login fail', error)
-        }
       },
       cancel: {
         name: 'cancel',
