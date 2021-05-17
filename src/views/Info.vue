@@ -27,7 +27,7 @@
           width="160">
         </el-table-column>
         <el-table-column
-          prop="tutorTeam"
+          prop="team"
           label="导师团队"
           width="160">
         </el-table-column>
@@ -37,8 +37,8 @@
           width="140">
         </el-table-column>
         <el-table-column
-          prop="overview"
           label="项目简介">
+          prop="detail"
         </el-table-column>
         <el-table-column
           prop="deadline"
@@ -79,12 +79,12 @@
     </div>
     <div class="drawer-wrapper">
       <el-drawer
-        :title="details.title.name"
+        title="项目详情"
         :visible.sync="drawer"
         direction="rtl"
         size="70%">
         <div class="drawer-content">
-          {{details.title}}
+          <div v-html="details"></div>
         </div>
       </el-drawer>
     </div>
@@ -94,6 +94,9 @@
 
 import { Component, Vue } from 'vue-property-decorator'
 import axios from 'axios'
+import { Apis } from '@/api/index.ts'
+import { getDecodedContent } from '@/components//Editors/getEncodeData.ts'
+
 @Component({
 
 })
@@ -111,28 +114,27 @@ export default class Info extends Vue {
 
   drawer = false
 
-  details = {
-    title: ''
-  }
+  details = ''
 
   getProjectList() {
-    axios({
-      url: '/projectlist',
-      data: {
-        page: 1,
-        pagination: 10
+    axios.get(Apis.searchproject, {
+      params: {
+        limit: 10
       }
-    })
-    .then((resp)=>{
-      this.tableData = resp.data
+    }).then((resp: any)=>{
+
+      const table = resp.data.Data
+      
+      this.tableData = resp.data.Data
+
     })
   }
 
   // 跳转到项目详情页
   projectDetail(index: number){
-    console.log(this.tableData[index])
-    this.details.title = this.tableData[index]
-    // 可能需要调用接口查询报名表详情，目前先使用表格中的数据
+    const rowData = this.tableData[index]
+    const decodedData = getDecodedContent((rowData as any).detail)
+    this.details = decodedData
     this.drawer = true
   }
 
@@ -177,4 +179,15 @@ export default class Info extends Vue {
     }
   }
 }
+
+
+  .el-drawer {
+    overflow: auto;
+    padding: 40px;
+    .drawer-content {
+      text-align: left;
+    }
+  }
+
+
 </style>
