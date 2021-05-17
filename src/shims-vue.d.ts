@@ -4,6 +4,10 @@ declare module '*.vue' {
 }
 declare module 'lodash'
 
+interface Vue {
+  [propName: string]: any;
+}
+
 
 interface ItemConf {
   hint?: string;

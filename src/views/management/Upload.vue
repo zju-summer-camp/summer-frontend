@@ -13,6 +13,8 @@ import { Component, Vue } from 'vue-property-decorator'
 import DqForm from '@/components/DqForm.vue'
 import InfoEditor from '@/components/InfoEditor.vue'
 import axios from 'axios'
+import { getEncodedContent } from '@/components/Editors/getEncodeData.ts'
+import { Apis } from '@/api/index.ts'
 
 @Component({
   components: {
@@ -30,7 +32,7 @@ export default class Upload extends Vue {
         placeholder: '请输入项目名称',
         type: 'input',
         value: '',
-        submitkey: 'project_name',
+        submitkey: 'Name',
         error: '',
         required: true,
         rules: [
@@ -44,6 +46,7 @@ export default class Upload extends Vue {
         required: true,
         value: '',
         error: '',
+        submitkey: 'Deadline',
         rules: [
         ]
       },
@@ -54,6 +57,7 @@ export default class Upload extends Vue {
         type: 'input',
         value: '',
         error: '',
+        submitkey: 'Team',
         rules: [
         ]
       },
@@ -64,6 +68,7 @@ export default class Upload extends Vue {
         type: 'input',
         value: '',
         error: '',
+        submitkey: 'Academy',
         rules: [
         ]
       },
@@ -73,15 +78,11 @@ export default class Upload extends Vue {
         type: 'component',
         component: ()=> import('@/components/InfoEditor.vue'),
         required: true,
+        ref:'infoEditor',
         value: '',
+        submitkey: 'Detail',
         error: '',
         rules: [
-          {
-            ok: (value: any) => {
-              return value? true: false
-            },
-            msg: '请输入'
-          }
         ]
       }
     },
@@ -90,9 +91,13 @@ export default class Upload extends Vue {
         name: 'submit',
         text: '上传',
         type: 'submit',
-        dunc: (data: any)=> {
+        func: (data: any)=> {
+          // 对内容进行 base64 编码
+          data.Detail = getEncodedContent(data.Detail)
+          console.log('data.content',data.Deatil)
+          console.log('data encoded', getEncodedContent(data.Detail))
           axios({
-            url: '/upload',
+            url: Apis.createproject,
             data: data,
             method: 'post'
           }).then((resp)=>{

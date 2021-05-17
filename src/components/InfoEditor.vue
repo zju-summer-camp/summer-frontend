@@ -1,6 +1,6 @@
 <template>
   <div class="editor-wrapper">
-    <editor :init="initConfig" :itemConfig="itemConfig" :formConfig="formConfig"></editor>
+    <editor :init="initConfig" :itemConfig="itemConfig" :formConfig="formConfig" v-model="itemConfig.value"></editor>
   </div>
 </template>
 <script lang="ts">

@@ -2,7 +2,7 @@
   <div class="nav-menu-wrapper">
     <div class="logo-wrapper">
       <img src="../assets/zju_logo.png">
-      <span class="title">浙江大学夏令营</span>
+      <span class="title">浙江大学夏令营-test</span>
     </div>
     <div class="nav-wrapper">
       <el-menu :default-active="activeIndex"  mode="horizontal" @select="handleSelect">

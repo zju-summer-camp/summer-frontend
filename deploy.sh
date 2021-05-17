@@ -7,7 +7,7 @@ npm run build
 cd dist
 
 touch README.md
-echo "#### Address： https://zju-summer-camp.github.io/summer-frontend/#/" >> README.md
+echo "#### Address： https://zju-summer-camp.github.io/summer-frontend/#????????/" >> README.md
 git init
 git add -A
 git commit -m 'feat: deploy'

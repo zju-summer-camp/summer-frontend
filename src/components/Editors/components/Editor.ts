@@ -78,7 +78,7 @@ export const Editor: ThisTypedComponentOptionsWithRecordProps<Vue, {}, {}, {}, P
   watch: {
     disabled() {
       (this as any).editor.setMode(this.disabled ? 'readonly' : 'design');
-    }
+    },
   },
   mounted() {
     this.element = this.$el;

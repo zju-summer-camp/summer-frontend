@@ -4,4 +4,5 @@ export const Apis = {
     queryappform: 'http://47.110.71.157:2334/v1/accounts/appform', // 查询报名表
     submitappform: 'http://47.110.71.157:2334/v1/accounts/appform',
     accountstatus: 'http://47.110.71.157:2334/v1/accounts/status', //获取账户信息
+    createproject: 'http://47.110.71.157:2334/v1/projects', // 创建新项目
 }
