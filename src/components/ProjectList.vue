@@ -39,8 +39,6 @@
         <project-management :tableData="tableData" v-if="type === 'management'"/>
         <project-signup :tableData="tableData" v-else/>
       </div>
-      
-
     </div>
     
 
@@ -106,6 +104,8 @@ export default class Info extends Vue {
         text: '查询',
         func: (data: any)=> {
           this.getProjectList()
+          this.print()
+          console.log('this1',this)
         }
       }
     }
@@ -123,6 +123,10 @@ export default class Info extends Vue {
   drawer = false
 
   details = ''
+
+  print(){
+    console.log('能否调用this')
+  }
 
   getProjectList() {
     axios.get(Apis.searchproject, {

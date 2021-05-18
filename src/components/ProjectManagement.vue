@@ -6,19 +6,11 @@
       <el-table
         :data="tableData"
         border>
-        <!-- <el-table-column
-          label="状态"
-          width="100">
-          <template slot-scope="scope">
-            <div>未发布</div>
-          </template>
-        </el-table-column> -->
-
         <el-table-column
           label="状态"
           width="100">
-          <template>
-            <div>未发布</div>
+          <template slot-scope="scope">
+            <div>{{ tableData[scope.$index].published ? statusOptions[0].name : statusOptions[1].name }}</div>
           </template>
         </el-table-column>
 
@@ -73,13 +65,6 @@
         <div>当前正在修改 {{reviseStatusInfo.name }} 项目状态</div>
         <dq-form :formConfig="formConfig"></dq-form>
       </div>
-      <div>
-
-      </div>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="showReviseStatus = false">取 消</el-button>
-        <el-button type="primary" @click="showReviseStatus = false">修 改</el-button>
-      </span>
     </el-dialog>
   </div>
 </template>
@@ -87,7 +72,8 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { getDecodedContent } from '@/components//Editors/getEncodeData.ts'
 import DqForm from '@/components/DqForm.vue'
-
+import axios from 'axios'
+import { Apis } from '@/api/index.ts'
 
 @Component({
   components: {
@@ -106,16 +92,22 @@ export default class ProjectManagement extends Vue{
 
   drawer = false
   showReviseStatus = false
-  reviseStatusInfo = {}
+  reviseStatusInfo: any = {
+    id: ''
+  }
+
+  getID() {
+    return this.reviseStatusInfo.id
+  }
   
   statusOptions = [
     {
       name: '未发布',
-      value: 0
+      value: 1
     },
     {
       name: '已发布',
-      value: 1
+      value: 2
     }
   ]
 
@@ -123,39 +115,56 @@ export default class ProjectManagement extends Vue{
   formConfig = {
     width: '100%',
     items: {
-      status: {
-        hint: '修改状态',
+      published: {
         label: '状态',
         placeholder: '请选择状态',
         type: 'select',
         options: this.statusOptions,
         value: '',
-        submitkey: 'phoneNumber',
+        submitkey: 'Published',
         error: '',
         required: true,
         rules: [
-          {
-            ok: (value: any) => {
-              const reg = /^1[0-9]{10}$/
-              console.log(reg.test(value))
-              return reg.test(value) ? true: false
-            },
-            msg: '请输入格式正确的手机号'
-          }
         ]
       },
+    },
+    buttons: {
+      submit: {
+        type: 'submit',
+        text: '修改',
+        func: (data: any) => {
+          data['ID'] = this.getID()
+          data['Published'] = data['Published'] === this.statusOptions[0].value ? false : true
+          axios({
+            url: Apis.publishment,
+            method: 'post',
+            data: data
+          }).then((resp)=>{
+            console.log(resp)
+            alert('修改成功')
+            // 刷新界面 todo
+            this.handleClose()
+          }).catch((error)=>{
+            alert('修改失败，请重试')
+          })
+        },
+      },
+      cancel: {
+        text: '取消',
+        func: (data: any)=>{
+          this.handleClose()
+        }
+      }
     }
   }
   
     // 修改报名表状态
   changeStatus(index: number, scope: any){
-  
     this.reviseStatusInfo = this.tableData[index]
     this.showReviseStatus = true
   }
 
-
-    // 跳转到项目详情页
+  // 跳转到项目详情页
   projectDetail(index: number){
     const rowData = this.tableData[index]
     const decodedData = getDecodedContent((rowData as any).detail)
@@ -164,14 +173,7 @@ export default class ProjectManagement extends Vue{
   }
 
   handleClose(){
-    console.log('关闭修改状态弹窗')
     this.showReviseStatus = false
-    // 发送修改数据请求
-    // 刷新报名表
-  }
-
-  mounted() {
-    console.log('挂载时拿到的数据', this.tableData)
   }
 }
 </script>
