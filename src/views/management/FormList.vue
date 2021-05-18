@@ -1,6 +1,9 @@
 <template>
   <!-- 管理后台-学生报名表列表 -->
   <div class="forms-wrapper">
+
+
+    
       <div class="title-wrapper">
         <div class="export-wrapper">
         <el-tooltip class="item" effect="dark" content="批量导出已勾选报名表" placement="top">
