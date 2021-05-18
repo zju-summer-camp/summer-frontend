@@ -297,9 +297,17 @@ export default class AppForm extends Vue {
           }
         ]
       },
+      projectid: {
+        label: '申请项目',
+        title:'申请项目',
+        type: 'input',
+        required: true,
+        value: '',
+        error: '',
+      },
       intentionalCollegeName: {
         label: '意向学院',
-        title:'申请项目',
+        
         placeholder: '请输入',
         type: 'input',
         required: true,

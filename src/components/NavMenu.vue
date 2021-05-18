@@ -18,10 +18,10 @@
       </span>
       <span @click="logOut" class="link-text">退出</span>    
     </div>
-    <!-- <div class="buttons-wrapper" v-else>
+    <div class="buttons-wrapper" v-if="!userInfo.phone">
       <el-button  @click="showSignin">登录</el-button>
       <el-button  @click="showSignup">注册</el-button>
-    </div> -->
+    </div>
     <!-- 登录与注册modal框 -->
     <signin></signin>
     <signup></signup>

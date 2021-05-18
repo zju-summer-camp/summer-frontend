@@ -1,21 +1,11 @@
 <template>
   <div class="info-wrapper">
     <div class="filter-wrapper">
-      <el-form :inline="true" :model="filters" class="demo-form-inline">
-        <el-form-item label="导师团队">
-          <el-select v-model="filters.tutorTeam" placeholder="请选择导师团队">
-            <el-option label="abaaba" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="所属院系">
-          <el-select v-model="filters.academy" placeholder="请选择所属院系">
-            <el-option label="计算机科学与技术学院" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button  @click="getProjectList">查询</el-button>
-        </el-form-item>
-      </el-form>
+
+      <!-- 使用 dq-filter 改造这个筛选框 -->
+          <div class="filter-wrapper">
+        <dq-filter :filterConfig="filterConfig"></dq-filter>
+    </div>
     </div>
     <div class="table-wrapper">
       <el-table
@@ -71,10 +61,11 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000"
+        :total="10"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page.sync="currentPage">
+        :current-page.sync="pagination.current"
+        :page-size="pagination.size">
       </el-pagination>
     </div>
     <div class="drawer-wrapper">
@@ -96,18 +87,49 @@ import { Component, Vue } from 'vue-property-decorator'
 import axios from 'axios'
 import { Apis } from '@/api/index.ts'
 import { getDecodedContent } from '@/components//Editors/getEncodeData.ts'
+import DqFilter from '@/components/DqFilter.vue'
 
 @Component({
-
+  components: {
+    DqFilter
+  }
 })
 
 export default class Info extends Vue {
-  tableData= []
-  currentPage = 1
 
-  filters = {
-    tutorTeam: '',
-    academy: '',
+  filterConfig = {
+    width: '80%',
+    items: {
+      team: {
+        label: '导师团队',
+        placeholder: '请输入导师团队',
+        type: 'input',
+        value: '',
+        submitkey: 'team',
+      },
+      academy: {
+        label: '所属学院',
+        placeholder: '请输入所属学院',
+        type: 'input',
+        value: '',
+        submitkey: 'academy',
+      },
+    },
+    buttons: {
+      submit: {
+        text: '查询',
+        func: (data: any)=> {
+          console.log('提交数据', data)
+          this.getProjectList()
+        }
+      }
+    }
+  }
+  tableData= []
+
+  pagination = {
+    current: 1,
+    size: 3
   }
 
   // 抽屉中的内容展示
@@ -119,7 +141,10 @@ export default class Info extends Vue {
   getProjectList() {
     axios.get(Apis.searchproject, {
       params: {
-        limit: 10
+        team: this.filterConfig.items.team.value,
+        academy: this.filterConfig.items.academy.value,
+        page: this.pagination.current,
+        limit: this.pagination.size
       }
     }).then((resp: any)=>{
 
@@ -139,7 +164,7 @@ export default class Info extends Vue {
   }
 
   pageChange(){
-    console.log("sss", this.currentPage)
+    console.log("sss", this.pagination.current)
   }
 
   handleSizeChange(val: number) {
@@ -148,7 +173,7 @@ export default class Info extends Vue {
 
   handleCurrentChange(val: number) {
     console.log(`当前页: ${val}`);
-    this.currentPage = val
+    this.pagination.current = val
     this.getProjectList()
   }
 
