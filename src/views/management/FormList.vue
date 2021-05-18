@@ -1,9 +1,6 @@
 <template>
   <!-- 管理后台-学生报名表列表 -->
   <div class="forms-wrapper">
-
-
-    
       <div class="title-wrapper">
         <div class="export-wrapper">
         <el-tooltip class="item" effect="dark" content="批量导出已勾选报名表" placement="top">
@@ -21,7 +18,7 @@
       </div>
     </div>
     <div class="filter-wrapper">
-      <el-form :inline="true" :model="filters">
+      <!-- <el-form :inline="true" :model="filters">
         <el-form-item label="本科院校">
           <el-select v-model="filters.undergraduateSchool" placeholder="请选择本科院校">
             <el-option label="abaaba" value="shanghai"></el-option>
@@ -40,7 +37,10 @@
         <el-form-item>
           <el-button  @click="getProjectList">筛选</el-button>
         </el-form-item>
-      </el-form>
+      </el-form> -->
+      <dq-filter :filterConfig="filterConfig"></dq-filter>
+
+
     </div>
 
     
@@ -189,13 +189,15 @@ import { Component, Vue } from 'vue-property-decorator'
 import axios from 'axios'
 import RegistrationFormDetail from '@/components/AppFormDetail.vue'
 import DqForm from '@/components/DqForm.vue'
+import DqFilter from '@/components/DqFilter.vue'
 
 
 
 @Component({
   components: {
     RegistrationFormDetail,
-    DqForm
+    DqForm,
+    DqFilter
   }
 })
 export default class Forms extends Vue {
@@ -203,12 +205,12 @@ export default class Forms extends Vue {
   currentPage = 1
   multipleSelection = []
 
-  filters = {
-    undergraduateSchool: '',
-    department: '',
-    intentionalCollegeCode: '',
-    intentionalTutorName: '',
-  }
+  // filters = {
+  //   undergraduateSchool: '',
+  //   department: '',
+  //   intentionalCollegeCode: '',
+  //   intentionalTutorName: '',
+  // }
   drawer = false
 
   details = {
@@ -235,7 +237,33 @@ export default class Forms extends Vue {
   showReviseStatus = false
   reviseStatusInfo = {}
 
-  
+    filterConfig = {
+    width: '90%',
+    items: {
+      team: {
+        label: '导师团队',
+        placeholder: '请输入导师团队',
+        type: 'input',
+        value: '',
+        submitkey: 'team',
+      },
+      academy: {
+        label: '所属学院',
+        placeholder: '请输入所属学院',
+        type: 'input',
+        value: '',
+        submitkey: 'academy',
+      },
+    },
+    buttons: {
+      submit: {
+        text: '查询',
+        func: (data: any)=> {
+          this.getProjectList()
+        }
+      }
+    }
+  }
   formConfig = {
     width: '100%',
     items: {

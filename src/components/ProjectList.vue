@@ -48,7 +48,7 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="10"
+        :total="pagination.total"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page.sync="pagination.current"
@@ -105,7 +105,6 @@ export default class Info extends Vue {
       submit: {
         text: '查询',
         func: (data: any)=> {
-          console.log('提交数据', data)
           this.getProjectList()
         }
       }
@@ -115,7 +114,8 @@ export default class Info extends Vue {
 
   pagination = {
     current: 1,
-    size: 3
+    size: 3,
+    total: 1
   }
 
   // 抽屉中的内容展示
@@ -133,8 +133,10 @@ export default class Info extends Vue {
         limit: this.pagination.size
       }
     }).then((resp: any)=>{
-      const table = resp.data.Data
-      this.tableData = resp.data.Data.projects
+      const data = resp && resp.data && resp.data.Data
+      const projects = data && data.projects
+      this.tableData = projects
+      this.pagination.total = data && data.count || 10
 
     })
   }
