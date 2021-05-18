@@ -19,6 +19,9 @@ export default new Vuex.Store({
       phoneNumber: '',
       name: '',
       phone: ''
+    },
+    signinAccount: {
+
     }
   },
   mutations: {
@@ -34,7 +37,7 @@ export default new Vuex.Store({
       
     },
     reviseSignin(state, payload) {
-      state.signin = payload
+      state.signinAccount = payload
     },
     reviseAccount(state, payload) {
       state.accounts = payload      

@@ -1,10 +1,10 @@
 <template>
   <div class="upload-wrapper">
     <input type="file" name="uploadphoto"  id="uploadphoto" accept="image/*" @change="getFile" class="upload">
-    <div class="display-wrapper" v-if="file && file.name">
+    <div class="display-wrapper" v-if="file && file.name || itemConfig.value">
       <img
         class="image"
-        :src="file && file.url" alt="??"
+        :src="file && file.url || itemConfig.value" alt="??"
         width="100px"
         height="100px"
       >

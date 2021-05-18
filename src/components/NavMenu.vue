@@ -3,13 +3,14 @@
     <div class="logo-wrapper">
       <img src="../assets/zju_logo.png">
       <span class="title">浙江大学夏令营-test</span>
+      {{roles}}
     </div>
     <div class="nav-wrapper">
       <el-menu :default-active="activeIndex"  mode="horizontal" @select="handleSelect">
         <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">项目资讯</el-menu-item>
-        <el-menu-item index="3">学生报名</el-menu-item>
-        <el-menu-item index="4">管理后台</el-menu-item>
+        <el-menu-item index="2">项目报名</el-menu-item>
+        <el-menu-item index="3">信息填写</el-menu-item>
+        <el-menu-item index="4" v-if="roles[0] && roles[0].name === Roles.LabLeader.value">管理后台</el-menu-item>
       </el-menu>
     </div>
     <div class="user-info-wrapper" v-if="signined">
@@ -32,11 +33,14 @@
   import { Component, Vue } from 'vue-property-decorator';
   import Signin from '@/components/Signin.vue'
   import Signup from '@/components/Signup.vue'
-
+  import { Roles } from '@/const/Roles.ts'
   @Component({
     components: {
       Signin,
       Signup
+    },
+    computed: {
+      
     }
   })
   export default class NavMenu extends Vue{
@@ -60,9 +64,26 @@
     return this.$store.state.accounts
   }
 
+  Roles = Roles
+
+  get roles() {
+    return this.$store.state.signinAccount.Roles || []
+  }
+
+  
+
+  isManager(roles: any) {
+    for(const role of roles){
+      if(role.name === Roles.LabLeader.value){
+        return true
+      }
+    }
+    return false
+  }
 
   logOut(){
     this.$store.commit('reviseAccount', {})
+    this.$store.commit('reviseSignin', {})
     this.showSignin()
   }
 

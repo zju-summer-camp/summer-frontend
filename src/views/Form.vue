@@ -6,8 +6,8 @@
       </div>
       
       <div class="buttons-wrapper"  >
-        <div class="entrance" @click="queryForm">查询报名表</div>
-        <div class="entrance" @click="signUp">开始报名</div>
+        <div class="entrance" @click="queryForm">查询信息表</div>
+        <div class="entrance" @click="signUp">提交信息</div>
       </div>
     </div>
 
@@ -16,7 +16,7 @@
     </div>
 
     <el-dialog
-      title="查询报名表"
+      title="查询信息"
       :visible.sync="showQueryModal"
       width="40%">
       <dq-form :formConfig="formConfig"></dq-form>
@@ -68,14 +68,6 @@ export default class Registration extends Vue {
       },
     },
     buttons: {
-      cancel: {
-        name: 'cancel',
-        type:  'function',
-        text: '取消',
-        func: ()=>{
-          this.$store.commit('showQuery', false)
-        }
-      },
       submit: {
         name: 'submit',
         text: '查询',
@@ -101,7 +93,15 @@ export default class Registration extends Vue {
             (this as any).$message('未知错误，请重试')
           })
         }
-      }
+      },
+      cancel: {
+        name: 'cancel',
+        type:  'function',
+        text: '取消',
+        func: ()=>{
+          this.$store.commit('showQuery', false)
+        }
+      },
     }
 
   }

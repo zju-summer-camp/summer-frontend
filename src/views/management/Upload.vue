@@ -104,10 +104,12 @@ export default class Upload extends Vue {
             if(resp.data && resp.data.code === 10011){
               // 登录成功
               (this as any).$message('上传成功')
+              alert('上传成功，请在“资讯管理”中发布')
             }
           }).catch((error)=>{
             (this as any).$message('未知错误，请重试')
             console.log('upload fail', error)
+            alert('上传失败，请重试')
           })
         },
       },

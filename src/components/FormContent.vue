@@ -570,7 +570,7 @@ export default class AppForm extends Vue {
       },
       submit: {
         name: 'submit',
-        text: '申请',
+        text: '提交',
         type: 'submit',
         disabled: false,
         func: (data: any)=> {
@@ -594,11 +594,12 @@ export default class AppForm extends Vue {
             if(resp && resp.data && resp.data.Code){
               const code = resp.data.Code
               if(code === 10000){
-                alert('报名成功')
+                alert('提交个人信息成功')
                 this.$store.commit('showRegistration', false)
               }
             }
           }).catch((error)=>{
+            alert('提交失败，请重试');
              (this as any).$message('未知错误，请重试')
           })
         },

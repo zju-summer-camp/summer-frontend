@@ -113,7 +113,7 @@ export default class Signin extends Vue {
                 message: '登录成功',
                 duration: 500,
               })
-              this.$store.commit('reviseSignin', resp.data)
+              this.$store.commit('reviseSignin', resp.data.Data)
               // 设置 token
               localStorage.setItem('X-Summer-Camp-Auth-Token', resp.data.Token)
 

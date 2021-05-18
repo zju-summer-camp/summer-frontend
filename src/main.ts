@@ -29,7 +29,7 @@ axios.interceptors.response.use(
   error => {
     console.log('统一拦截错误',error.response.status)
     if(error && error.response && error.response.status === 401){
-      alert('出现401错误，请重新登录')
+      alert('未登录或当前用户无操作权限')
     }
     return Promise.reject(error)
   }
