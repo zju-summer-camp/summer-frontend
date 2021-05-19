@@ -178,7 +178,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import axios from 'axios'
-import RegistrationFormDetail from '@/components/AppFormDetail.vue'
+import RegistrationFormDetail from '@/components/FormContent.vue'
 import DqForm from '@/components/DqForm.vue'
 import DqFilter from '@/components/DqFilter.vue'
 import { Apis } from '@/api/index.ts'
