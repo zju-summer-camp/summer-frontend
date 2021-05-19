@@ -18,32 +18,9 @@
       </div>
     </div>
     <div class="filter-wrapper">
-      <!-- <el-form :inline="true" :model="filters">
-        <el-form-item label="本科院校">
-          <el-select v-model="filters.undergraduateSchool" placeholder="请选择本科院校">
-            <el-option label="abaaba" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="所属院系">
-          <el-select v-model="filters.academy" placeholder="请选择所属院系">
-            <el-option label="计算机科学与技术学院" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="意向导师">
-          <el-select v-model="filters.intentionalTutorName" placeholder="请选择意向导师">
-            <el-option label="计算机科学与技术学院" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button  @click="getFormList">筛选</el-button>
-        </el-form-item>
-      </el-form> -->
       <dq-filter :filterConfig="filterConfig"></dq-filter>
-
-
     </div>
 
-    
     <div class="table-wrapper">
       <el-table
         :data="tableData"
@@ -54,7 +31,26 @@
           width="60"
           :style="{'color':'#fff'}">
         </el-table-column>
+
         <el-table-column
+          prop="account.username"
+          label="用户昵称"
+          width="140">
+        </el-table-column>
+
+        <el-table-column
+          prop="account.phone"
+          label="联系方式"
+          width="140">
+        </el-table-column>
+
+        <el-table-column
+          prop="state"
+          label="状态"
+          width="80">
+        </el-table-column>
+
+        <!-- <el-table-column
           prop="name"
           label="学生姓名"
           width="80">
@@ -90,11 +86,10 @@
           <template slot-scope="scope">
             <div>{{statusOptions[scope.row.status] && statusOptions[scope.row.status].name}}</div>
           </template>
-        </el-table-column>
+        </el-table-column> -->
       
         <el-table-column
-          label="操作"
-          width="150">
+          label="操作">
           <template slot-scope="scope">
             <div class="operation-wrapper">
               <el-button
@@ -103,14 +98,12 @@
                 size="small">
                 详情
               </el-button>
-
-                <el-button
-                  @click.native.prevent="exportCurrent(scope.$index,scope)"
-                  type="text"
-                  size="small">
-                  导出
-                </el-button>
-
+              <el-button
+                @click.native.prevent="exportCurrent(scope.$index,scope)"
+                type="text"
+                size="small">
+                导出
+              </el-button>
               
               <!-- <el-tooltip class="item" effect="dark" content="修改学生报名表状态" placement="top"> -->
                 <el-button
@@ -125,14 +118,16 @@
         </el-table-column>
       </el-table>
     </div>
+    
     <div class="pagination-wrapper">
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000"
+        :total="pagination.total"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page.sync="currentPage">
+        :current-page.sync="pagination.current"
+        :page-size="pagination.size">
       </el-pagination>
     </div>
 
@@ -168,13 +163,9 @@
       :before-close="handleClose">
       <div >
         <div>当前正在修改 {{reviseStatusInfo.name}} 的报名表</div>
-      
         <dq-form :formConfig="formConfig"></dq-form>
-
-         
       </div>
       <div>
-
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="showReviseStatus = false">取 消</el-button>
@@ -244,24 +235,30 @@ export default class Forms extends Vue {
         label: '项目名称',
         placeholder: '请输入项目名称',
         type: 'input',
+        required: true,
+        hint: '请输入完整的项目名称，以查询该项目下学生报名情况',
         value: '',
+        error: ''
       },
       team: {
         label: '导师团队',
         placeholder: '请输入导师团队',
         type: 'input',
         value: '',
+        error: ''
       },
       academy: {
         label: '所属学院',
         placeholder: '请输入所属学院',
         type: 'input',
         value: '',
+        error: ''
      },
     },
     buttons: {
       submit: {
         text: '查询',
+        type: 'submit',
         func: (data: any)=> {
           this.getFormList()
         }
@@ -304,47 +301,45 @@ export default class Forms extends Vue {
   getFormList() {
     axios.get(Apis.queryCandidates, {
       params: {
-        team: this.filterConfig.items.team.value || '',
-        academy: this.filterConfig.items.academy.value || '',
-        name: this.filterConfig.items.name.value || '',
+        team: this.filterConfig.items.team.value,
+        academy: this.filterConfig.items.academy.value,
+        name: this.filterConfig.items.name.value,
         page: this.pagination.current,
         limit: this.pagination.size
       }
     }).then((resp: any)=>{
-      console.log('resp', resp)
-    })
-    axios({
-      url: '/formslist',
-      data: {
-        page: 1,
-        pagination: 10
-      }
-    })
-    .then((resp: any)=>{
-      this.tableData = resp.data || []
+      this.pagination.total = resp.data.Data.count
+      this.tableData = resp.data.Data.accounts || []
     })
   }
 
   // 跳转到报名报详情页
   formDetail(index: number, scope: any){
-    this.details.title = this.tableData[index]
-    axios({
-      url: '/getRegistrationData',
-      data: {
-        formID: '4399',
-        accountId:'1111'
+    axios.get( Apis.queryappform , {
+      params: {
+        ID :(this.tableData[index] as any).account.id
       }
-    })
-    .then((resp: any)=>{
-      console.log('报名表详情中拿到的数据', resp)
-      Object.keys(resp.data).forEach((key)=>{
-        this.queryItems[key] = resp.data[key]
+    }).then((resp: any)=>{
+      Object.keys(resp.data.Data).forEach((key)=>{
+        this.queryItems[key] = resp.data.Data[key]
         this.drawer = true
       })
     })
-
-   
+    // axios({
+    //   url: Apis.queryappform,
+    //   data: {
+    //     ID :(this.tableData[index] as any).account.id
+    //   }
+    // })
+    // .then((resp: any)=>{
+    //   console.log('报名表详情中拿到的数据', resp)
+    //   Object.keys(resp.data).forEach((key)=>{
+    //     this.queryItems[key] = resp.data[key]
+    //     this.drawer = true
+    //   })
+    // })
   }
+
   // 修改报名表状态
   changeStatus(index: number, scope: any){
     this.reviseStatusInfo = this.tableData[index]
@@ -362,23 +357,22 @@ export default class Forms extends Vue {
   }
 
   handleSizeChange(val: number) {
-    console.log(`每页 ${val} 条`);
+    this.getFormList()
   }
 
   handleCurrentChange(val: number) {
-    console.log(`当前页: ${val}`);
     this.currentPage = val
     this.getFormList()
   }
 
   // 导出当前报名表
   exportCurrent() {
-    console.log("exportCurrent")
+    alert("exportCurrent")
   }
 
   // 批量导出已勾选报名表
   exportBatch() {
-    console.log("exportBatch")
+    alert("exportBatch")
     // 调用后端接口，入参为已勾选报名表id列表
   }
 

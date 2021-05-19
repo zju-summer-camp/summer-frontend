@@ -484,11 +484,18 @@ export default class AppFormDetail extends Vue {
     }
   }
 
-  writeDataToItems(data: RegiFormData = {}, items: Items = {}){
-    for(const key in data){
-      const item = items[key]
-      if(item){
-        item.value = data[key]
+
+  writeDataToItems(data: RegiFormData = {}, formconfig: Items = {}){
+    // 将数据写入表单配置中
+    for(const key in formconfig){
+      const itemConfig = formconfig[key]
+      if(itemConfig){
+        const echokey = itemConfig.echokey
+        if(echokey){
+          itemConfig.value = data[echokey]
+        }else{
+          itemConfig.value = data[key]
+        }
       }
     }
   }
