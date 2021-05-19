@@ -31,6 +31,7 @@ export default class AppFormDetail extends Vue {
   name = 'registration-form'
   formConfig = {
     width: '100%',
+    labelWidth: '200px',
     items: {
       name: {
         title: '基本信息',

@@ -2,7 +2,7 @@
   <div class="dq-form-item-wrapper">
     <!-- 表单的基本项 -->
     <div class="title-wrapper" v-if="itemConfig.title">{{itemConfig.title}}</div>
-  <div class="content">
+  <div class="content" :style="{ 'grid-template-columns': formConfig.labelWidth ? formConfig.labelWidth + ' auto' : '200px auto'  }">
     <div class="label-part">
       <!-- hint: 对该项填写内容的提示说明，只支持纯文本 -->
       <div class="hint-wrapper">
@@ -132,7 +132,6 @@
     this.requiredValid(this.itemConfig)
   }
 
-
   // 校验必填项是否为空
   requiredValid(itemConfig: ItemConf){
     if(itemConfig.required && !itemConfig.value){
@@ -155,14 +154,15 @@
     font-weight: 600;
   }
   .content {
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: 200px auto;
+      //flex-direction: row;
       // background-color: antiquewhite;
       padding: 4px;
       margin: 8px;
     .label-part {
       // background-color: #baccd9;
-      flex: 3;
+      //flex: 3;
       padding-top: 8px;
       text-align: right;
       border-radius: 8px 0 0 8px;
@@ -197,7 +197,7 @@
 
     .input-part {
       // background-color: sandybrown;
-      flex: 9;
+      //flex: 9;
       display: flex;
       flex-direction: column;
       align-items: start;

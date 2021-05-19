@@ -32,6 +32,7 @@ export default class AppForm extends Vue {
   name = 'registration-form'
   formConfig = {
     width: '90%',
+    labelWidth: '220px',
     items: {
       name: {
         title: '基本信息',
