@@ -140,7 +140,7 @@
         size="70%">
         <div class="drawer-content">
           <div class="form-content">
-              <registration-form-detail :queryItems="queryItems"></registration-form-detail>
+              <registration-form-detail :queryItems="queryItems" type="drawerForm"></registration-form-detail>
           </div>
           <div class="operations">
             <el-tooltip class="item" effect="dark" content="导出当前报名表" placement="top">

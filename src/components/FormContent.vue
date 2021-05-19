@@ -2,7 +2,6 @@
   <!-- 学生报名表组件 -->
   <div class="registration-form-wrapper">
     <div class="form-wrapper">
-     
       <div class="title">
         浙江大学 {{new Date().getFullYear()}}年夏令营申请表
       </div>
@@ -630,6 +629,11 @@ export default class AppForm extends Vue {
     if(this.type === 'getForm'){
       this.formConfig.buttons.submit.disabled = true
       this.formConfig.buttons.reset.disabled = true
+    }
+    if(this.type === 'drawerForm'){
+      this.formConfig.buttons.submit.disabled = true
+      this.formConfig.buttons.reset.disabled = true
+      this.formConfig.buttons.cancel.disabled = true
     }
   }
 
