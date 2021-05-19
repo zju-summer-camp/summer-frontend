@@ -1,14 +1,14 @@
 <template>
   <div class="nav-menu-wrapper">
     <div class="logo-wrapper">
-      <img src="../assets/zju_logo.png">
-      <span class="title">浙江大学夏令营-test</span>
+      <img src="../assets/logo2.jpg" >
+      <span class="title">夏令营报名系统</span>
     </div>
     <div class="nav-wrapper">
       <el-menu :default-active="activeIndex"  mode="horizontal" @select="handleSelect">
         <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">项目报名</el-menu-item>
         <el-menu-item index="3">信息填写</el-menu-item>
+        <el-menu-item index="2">项目报名</el-menu-item>
         <el-menu-item index="4" v-if="roles[0] && roles[0].name === Roles.LabLeader.value">管理后台</el-menu-item>
       </el-menu>
     </div>
@@ -142,10 +142,6 @@
   }
 </script>
 <style lang="less">
-@font-face {
-  font-family: 'dq-font';
-  src: url(../assets/FangZhenSongTi.ttf)
-}
 .nav-menu-wrapper {
   display: flex;
   border-bottom: 1px solid #dcdfe6;
@@ -171,14 +167,14 @@
     display: flex;
     align-items: center;
     img {
-      width: 40px;
-      height: 40px;
-      padding: 0 20px;
+      width: 170px;
+      height: 60px;
+      padding: 0 0 0 20px;
     }
     .title {
-      font-family: 'dq-font';
       font-size: 20px;
       line-height: 40px;
+      font-weight: 600;
     }
   }
   .nav-wrapper {
