@@ -114,6 +114,7 @@ export default class ProjectManagement extends Vue{
 
   formConfig = {
     width: '100%',
+    labelWidth: '120px',
     items: {
       published: {
         label: '状态',

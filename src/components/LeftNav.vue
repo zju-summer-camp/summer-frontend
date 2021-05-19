@@ -8,7 +8,7 @@
       :collapse="false">
       <el-menu-item index="forms">
         <i class="el-icon-document"></i>
-        学生报名
+        报名管理
       </el-menu-item>
       <el-menu-item index="upload">
         <i class="el-icon-s-order"></i>
@@ -83,7 +83,11 @@ export default class LeftNav extends Vue {
         break
       }
       case '#/management/upload':{
-        this.activeIndex = 'article'
+        this.activeIndex = 'upload'
+        break
+      }
+      case '#/management/articles': {
+        this.activeIndex = 'articles'
         break
       }
       default: {

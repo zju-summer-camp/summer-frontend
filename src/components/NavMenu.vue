@@ -175,6 +175,8 @@
       font-size: 20px;
       line-height: 40px;
       font-weight: 600;
+      letter-spacing: 1px;
+      // color: rgb(0,63,136);
     }
   }
   .nav-wrapper {

@@ -4,6 +4,7 @@
       <!-- <video src="../../assets/yourname.mp4" controls="controls" width="90%" poster="../../assets/zju.jpg"></video> -->
       video
     </div>
+    <div>报名流程指引</div>
   </div>
 </template>
 <script lang="ts">

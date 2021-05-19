@@ -35,7 +35,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button  @click="getProjectList">筛选</el-button>
+          <el-button  @click="getFormList">筛选</el-button>
         </el-form-item>
       </el-form> -->
       <dq-filter :filterConfig="filterConfig"></dq-filter>
@@ -190,7 +190,7 @@ import axios from 'axios'
 import RegistrationFormDetail from '@/components/AppFormDetail.vue'
 import DqForm from '@/components/DqForm.vue'
 import DqFilter from '@/components/DqFilter.vue'
-
+import { Apis } from '@/api/index.ts'
 
 
 @Component({
@@ -237,29 +237,33 @@ export default class Forms extends Vue {
   showReviseStatus = false
   reviseStatusInfo = {}
 
-    filterConfig = {
+  filterConfig = {
     width: '90%',
     items: {
+      name: {
+        label: '项目名称',
+        placeholder: '请输入项目名称',
+        type: 'input',
+        value: '',
+      },
       team: {
         label: '导师团队',
         placeholder: '请输入导师团队',
         type: 'input',
         value: '',
-        submitkey: 'team',
       },
       academy: {
         label: '所属学院',
         placeholder: '请输入所属学院',
         type: 'input',
         value: '',
-        submitkey: 'academy',
-      },
+     },
     },
     buttons: {
       submit: {
         text: '查询',
         func: (data: any)=> {
-          this.getProjectList()
+          this.getFormList()
         }
       }
     }
@@ -291,7 +295,24 @@ export default class Forms extends Vue {
     }
   }
 
-  getProjectList() {
+  pagination = {
+    current: 1,
+    size: 3,
+    total: 1
+  }
+
+  getFormList() {
+    axios.get(Apis.queryCandidates, {
+      params: {
+        team: this.filterConfig.items.team.value || '',
+        academy: this.filterConfig.items.academy.value || '',
+        name: this.filterConfig.items.name.value || '',
+        page: this.pagination.current,
+        limit: this.pagination.size
+      }
+    }).then((resp: any)=>{
+      console.log('resp', resp)
+    })
     axios({
       url: '/formslist',
       data: {
@@ -347,7 +368,7 @@ export default class Forms extends Vue {
   handleCurrentChange(val: number) {
     console.log(`当前页: ${val}`);
     this.currentPage = val
-    this.getProjectList()
+    this.getFormList()
   }
 
   // 导出当前报名表
@@ -374,7 +395,7 @@ export default class Forms extends Vue {
   }
 
   mounted(){
-    this.getProjectList()
+    this.getFormList()
   }
 }
 </script>

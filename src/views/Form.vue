@@ -6,7 +6,7 @@
       </div>
       
       <div class="buttons-wrapper"  >
-        <div class="entrance" @click="queryForm">查询信息表</div>
+        <div class="entrance" @click="queryForm">查询信息</div>
         <div class="entrance" @click="signUp">提交信息</div>
       </div>
     </div>
