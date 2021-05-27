@@ -105,15 +105,15 @@ const initEditor = (initEvent: Event, ctx: Editor, editor: any) => {
 
   editor.setContent(value || (ctx.initialized ? ctx.cache : initialValue));
 
-  // Always bind the value listener in case users use :value instead of v-model
+  // 绑定 value 的监听器，防止用户使用的是 :value 而不是 v-model
   ctx.$watch('value', (val: string, prevVal: string) => {
     if (editor && typeof val === 'string' && val !== prevVal && val !== editor.getContent({ format: ctx.$props.outputFormat })) {
       editor.setContent(val);
     }
   });
 
-  // checks if the v-model shorthand is used (which sets an v-on:input listener) and then binds either
-  // specified the events or defaults to "change keyup" event and emits the editor content on that event
+  // 检查是否使用了 v-model，若是，则绑定 input 事件的监听器，实现数据的双向绑定
+  // 绑定 change 和 keyup 等事件
   if (ctx.$listeners.input) {
     bindModelHandlers(ctx, editor);
   }
@@ -123,7 +123,7 @@ const initEditor = (initEvent: Event, ctx: Editor, editor: any) => {
 };
 
 let unique = 0;
-
+// 为什么要加上uid呢，供多个使用？
 const uuid = (prefix: string): string => {
   const time = Date.now();
   const random = Math.floor(Math.random() * 1000000000);

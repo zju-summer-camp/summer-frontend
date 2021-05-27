@@ -523,7 +523,7 @@ export default class AppForm extends Vue {
         ]
       },
       personalStatement: {
-        label: '限制1000字以内',
+        label: '个人陈述',
         placeholder: '请输入申请人个人陈述',
         type: 'textarea',
         rows: 20,

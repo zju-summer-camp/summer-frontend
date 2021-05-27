@@ -43,6 +43,7 @@ const renderIframe = (h: CreateElement, id: string) => {
 };
 
 const initialise = (ctx: Editor) => () => {
+  // 使用组件 props 初始化参数对象 finalInit
   const finalInit = {
     ...ctx.$props.init,
     readonly: ctx.$props.disabled,
@@ -60,11 +61,13 @@ const initialise = (ctx: Editor) => () => {
     }
   };
 
+  // 针对 textarea 类型的样式输入框做特殊处理
   if (isTextarea(ctx.element)) {
     ctx.element.style.visibility = '';
     ctx.element.style.display = '';
   }
 
+  // 使用 tinyMCE 提供的 init 接口，将普通文本框渲染为富文本编辑器
   getTinymce().init(finalInit);
 };
 
@@ -82,7 +85,6 @@ export const Editor: ThisTypedComponentOptionsWithRecordProps<Vue, {}, {}, {}, P
   },
   mounted() {
     this.element = this.$el;
-    console.log('this.formConfig', this.formConfig)
     if (getTinymce() !== null) {
       initialise(this)();
     } else if (this.element && this.element.ownerDocument) {
@@ -92,7 +94,8 @@ export const Editor: ThisTypedComponentOptionsWithRecordProps<Vue, {}, {}, {}, P
       const scriptSrc = isNullOrUndefined(this.$props.tinymceScriptSrc) ?
         `https://cdn.tiny.cloud/1/${apiKey}/tinymce/${channel}/tinymce.min.js` :
         this.$props.tinymceScriptSrc;
-
+        
+      // 动态插入    <script referrerpolicy="origin" type="application/javascript" id="tiny-script" src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
       ScriptLoader.load(
         this.element.ownerDocument,
         scriptSrc,

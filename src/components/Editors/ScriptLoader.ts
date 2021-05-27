@@ -18,7 +18,7 @@ export interface StateObj {
 const createState = (): StateObj => {
   return {
     listeners: [],
-    scriptId: uuid('tiny-script'),
+    scriptId: 'tiny-script',
     scriptLoaded: false
   };
 };
@@ -31,6 +31,7 @@ interface ScriptLoader {
 const CreateScriptLoader = (): ScriptLoader => {
   let state: StateObj = createState();
 
+  // 注入 script 脚本
   const injectScriptTag = (scriptId: string, doc: Document, url: string, callback: callbackFn) => {
     const scriptTag = doc.createElement('script');
     scriptTag.referrerPolicy = 'origin';
